@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Patient;
+namespace App\Http\Controllers\Patient\Profile;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 use App\Http\Controllers\PopulateSelectController as PopulateSelect;
 use App\Http\Controllers\OTPController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;

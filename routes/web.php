@@ -10,12 +10,15 @@ use App\Http\Controllers\Index\RegistrationController as Registration;
 use App\Http\Controllers\Index\RecoverController as Recover;
 
 // patients controller
-use App\Http\Controllers\Patient\ProfileController as PatientProfileController;
-use App\Http\Controllers\Patient\EmergencyContactController as PatientEmergencyContactController;
-use App\Http\Controllers\Patient\MedicalHistoryController as PatientMedicalHistoryController;
-use App\Http\Controllers\Patient\FamilyDetailsController as PatientFamilyDetailsController;
-use App\Http\Controllers\Patient\DocumentsController  as PatientDocumentsController;
-use App\Http\Controllers\Patient\PasswordController as PatientPasswordController;
+//profile
+use App\Http\Controllers\Patient\Profile\ProfileController as PatientProfileController;
+use App\Http\Controllers\Patient\Profile\EmergencyContactController as PatientEmergencyContactController;
+use App\Http\Controllers\Patient\Profile\MedicalHistoryController as PatientMedicalHistoryController;
+use App\Http\Controllers\Patient\Profile\FamilyDetailsController as PatientFamilyDetailsController;
+use App\Http\Controllers\Patient\Profile\PasswordController as PatientPasswordController;
+// documents
+use App\Http\Controllers\Patient\Document\UploadsController as PatientUploadsController;
+use App\Http\Controllers\Patient\Document\PrescriptionsController as PatientPrescriptionsController;
 // patients controller
 
 Route::post('SendOTP',[OTPController::class, 'compose_mail'])->name('SendOTP');
@@ -63,8 +66,12 @@ Route::prefix('patient')->group(function(){
 
 // documents
 
-    Route::prefix('documents')->group(function(){
-        Route::get('',[PatientDocumentsController::class, 'index'])->name('PatientDocuments');
+    Route::prefix('uploads')->group(function(){
+        Route::get('',[PatientUploadsController::class, 'index'])->name('PatientUploads');
+    });
+
+    Route::prefix('prescriptions')->group(function(){
+        Route::get('',[PatientPrescriptionsController::class, 'index'])->name('PatientPrescriptions');
     });
 // documents
  });

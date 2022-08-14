@@ -27,19 +27,32 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('PatientDocuments') }}" id="sidebar_dashboard">
+            <a class="nav-link collapsed" href="#" id="sidebar_user_documents"  data-bs-target="#document-nav" data-bs-toggle="collapse" >
                 <i class="bi bi-filetype-doc"></i>
                 <span>Documents</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
             </a>
+            <ul id="document-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('PatientUploads') }}">
+                        <i class="bi bi-circle"></i><span>Uploads</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('PatientPrescriptions') }}">
+                        <i class="bi bi-circle"></i><span>Prescription</span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" id="sidebar_user_information"  data-bs-target="#user-nav" data-bs-toggle="collapse" >
+            <a class="nav-link collapsed" href="#" id="sidebar_user_information"  data-bs-target="#profile-nav" data-bs-toggle="collapse" >
                 <i class="bi bi-person"></i>
                 <span>Profile</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <ul id="profile-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('PatientProfile') }}">
                         <i class="bi bi-circle"></i><span>Personal Details</span>

@@ -17,9 +17,7 @@
             <div class="card-body px-4">
 
                 <h5 class="card-title">Uploads</h5>
-                <a href="#" class="btn btn-secondary btn-sm" id="add" style="float: right; margin-top: -2.3rem;"  data-bs-toggle="modal" data-bs-target="#modal">
-                    <i class="bi bi-plus-lg"></i>          
-                </a>
+                
                 <table id="datatable" class="table table-bordered" style="width: 100%;">
                     <thead class="table-light">
                         <th scope="col">ID</th>
@@ -30,10 +28,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Joseph E. Calma</td>
-                            <td>test</td>
-                            <td>test</td>
-                            <td>test</td>
+                            <td>1</td>
+                            <td>Covid Insurance</td>
+                            <td>123123123.pdf</td>
+                            <td>August 15, 2022</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="">
                                     <i class="bi bi-eye"></i> 
@@ -107,6 +105,6 @@
 
 @push('script')
 
-    <!-- main js -->
+    <!-- datatable js -->
     <script src="{{ asset('js/datatable.js') }}"></script>
 @endpush

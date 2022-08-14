@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Patient;
+namespace App\Http\Controllers\Patient\Document;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DocumentsController extends Controller
+class UploadsController extends Controller
 {
     public function index(){
 
