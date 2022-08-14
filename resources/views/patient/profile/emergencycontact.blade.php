@@ -1,7 +1,7 @@
 @extends('layout.patient')
 
 @push('title')
-    <title>Patient Profile</title>
+    <title>Patient Emergency Contact</title>
 @endpush
 
 @section('content')

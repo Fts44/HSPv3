@@ -6,6 +6,7 @@
             <li class="breadcrumb-item"><a href="{{ route('PatientEmergencyContact') }}">Emergency</a></li>
             <li class="breadcrumb-item"><a href="{{ route('PatientMedicalHistory') }}">MedicalHistory</a></li>
             <li class="breadcrumb-item"><a href="{{ route('PatientFamilyDetails') }}">Family</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('PatientPassword') }}">Password</a></li>
         </ol>
     </nav>
 </div>

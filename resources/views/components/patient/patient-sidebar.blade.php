@@ -27,7 +27,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" id="sidebar_dashboard">
+            <a class="nav-link collapsed" href="{{ route('PatientDocuments') }}" id="sidebar_dashboard">
                 <i class="bi bi-filetype-doc"></i>
                 <span>Documents</span>
             </a>
@@ -58,6 +58,11 @@
                 <li>
                     <a href="{{ route('PatientFamilyDetails') }}">
                         <i class="bi bi-circle"></i><span>Family Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('PatientPassword') }}">
+                        <i class="bi bi-circle"></i><span>Update Password</span>
                     </a>
                 </li>
             </ul>

@@ -1,7 +1,7 @@
 @extends('layout.patient')
 
 @push('title')
-    <title>Patient Profile</title>
+    <title>Patient Family Details</title>
 @endpush
 
 @section('content')
@@ -106,46 +106,70 @@
                     <div class="row mb-3">
                         <label for="" class="col-lg-12" style="font-weight: 600;">Family Illness History:</label>
 
-                        <label for="diabetes" class="col-lg-2 mt-1">
-                            <input type="checkbox" name="diabetes" id="diabetes">
-                            Diabetes
+                        <label for="family_illness_history_diabetes" class="col-lg-2 mt-1">
+                            Diabetes:
+                            <select name="family_illness_history_diabetes" id="family_illness_history_diabetes" class="form-select">
+                                <option value="">No</option>
+                                <option value="">Yes</option>
+                            </select>
                         </label>
 
-                        <label for="heart_disease" class="col-lg-2 mt-1">
-                            <input type="checkbox" name="heart_disease" id="heart_disease">
-                            Heart Disease
+                        <label for="family_illness_history_heart_disease" class="col-lg-2 mt-1">
+                            Heart Disease:
+                            <select name="family_illness_history_heart_disease" id="family_illness_history_heart_disease" class="form-select">
+                                <option value="">No</option>
+                                <option value="">Yes</option>
+                            </select>
                         </label>
 
-                        <label for="mental_illness" class="col-lg-2 mt-1">
-                            <input type="checkbox" name="mental_illness" id="mental_illness">
-                            Mental Illness
+                        <label for="family_illness_history_mental" class="col-lg-2 mt-1">
+                            Mental:
+                            <select name="family_illness_history_mental" id="family_illness_history_mental" class="form-select">
+                                <option value="">No</option>
+                                <option value="">Yes</option>
+                            </select>
                         </label>
 
-                        <label for="cancer" class="col-lg-2 mt-1">
-                            <input type="checkbox" name="cancer" id="cancer">
-                            Cancer
+                        <label for="family_illness_history_cancer" class="col-lg-2 mt-1">
+                            Cancer:
+                            <select name="family_illness_history_cancer" id="family_illness_history_cancer" class="form-select">
+                                <option value="">No</option>
+                                <option value="">Yes</option>
+                            </select>
                         </label>
 
                         <label for="" class="col-lg-4"></label>
 
-                        <label for="hypertension" class="col-lg-2 mt-1">
-                            <input type="checkbox" name="hypertension" id="hypertension">
-                            Hypertension
+                        <label for="family_illness_history_hypertension" class="col-lg-2 mt-1">
+                            Hypertension:
+                            <select name="family_illness_history_hypertension" id="family_illness_history_hypertension" class="form-select">
+                                <option value="">No</option>
+                                <option value="">Yes</option>
+                            </select>
                         </label>
 
-                        <label for="kidney_disease" class="col-lg-2 mt-1">
-                            <input type="checkbox" name="kidney_disease" id="kidney_disease">
-                            Kidney Disease
+                        <label for="family_illness_history_kidney_disease" class="col-lg-2 mt-1">
+                            Kidney Disease:
+                            <select name="family_illness_history_kidney_disease" id="family_illness_history_kidney_disease" class="form-select">
+                                <option value="">No</option>
+                                <option value="">Yes</option>
+                            </select>
                         </label>
 
-                        <label for="epilepsy" class="col-lg-2 mt-1">
-                            <input type="checkbox" name="epilepsy" id="epilepsy">
-                            Epilepsy
+                        <label for="family_illness_history_kidney_epilepsy" class="col-lg-2 mt-1">
+                            Epilepsy:
+                            <select name="family_illness_history_kidney_epilepsy" id="family_illness_history_kidney_epilepsy" class="form-select">
+                                <option value="">No</option>
+                                <option value="">Yes</option>
+                            </select>
                         </label>
 
-                        <label for="others" class="col-lg-2 mt-1">
-                            <input type="checkbox" name="others" id="others">
-                            Others
+                        <label for="family_illness_history_others" class="col-lg-2 mt-1">
+                            Others:
+                            <select name="family_illness_history_others" id="family_illness_history_others" class="form-select">
+                                <option value="">No</option>
+                                <option value="">Yes</option>
+                            </select>
                         </label>
                     </div>
 
