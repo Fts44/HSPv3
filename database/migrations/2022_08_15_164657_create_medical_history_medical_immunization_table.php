@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateMedicalHistoryMedicalImmunizationTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('medical_history_medical_immunization', function (Blueprint $table) {
+            $table->id('mhmi_id');
+            $table->boolean('mhmi_bcg');
+            $table->boolean('mhmi_mmr');
+            $table->boolean('mhmi_hepa_a');
+            $table->boolean('mhmi_typhoid');
+            $table->boolean('mhmi_varicella');
+            $table->boolean('mhmi_hepa_b');
+            $table->integer('mhmi_hepa_b_doses');
+            $table->boolean('mhmi_dpt');
+            $table->integer('mhmi_dpt_doses');
+            $table->boolean('mhmi_opv');
+            $table->integer('mhmi_opv_doses');
+            $table->boolean('mhmi_hib');
+            $table->integer('mhmi_hib_doses');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('medical_history_medical_immunization');
+    }
+}

@@ -1,50 +1,82 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// global controllers
+    use App\Http\Controllers\MailerController as MailerController;
+    use App\Http\Controllers\OTPController as OTPController;
 
-use App\Http\Controllers\MailerController as MailerController;
-use App\Http\Controllers\OTPController as OTPController;
+    //index
+    use App\Http\Controllers\Index\LoginController as Login;
+    use App\Http\Controllers\Index\RegistrationController as Registration;
+    use App\Http\Controllers\Index\RecoverController as Recover;
 
-use App\Http\Controllers\Index\LoginController as Login;
-use App\Http\Controllers\Index\RegistrationController as Registration;
-use App\Http\Controllers\Index\RecoverController as Recover;
+    //populate select
+    use App\Http\Controllers\PopulateSelectController as PopulateSelectController;
+// global controllers
 
-// patients controller
-//profile
-use App\Http\Controllers\Patient\Profile\ProfileController as PatientProfileController;
-use App\Http\Controllers\Patient\Profile\EmergencyContactController as PatientEmergencyContactController;
-use App\Http\Controllers\Patient\Profile\MedicalHistoryController as PatientMedicalHistoryController;
-use App\Http\Controllers\Patient\Profile\FamilyDetailsController as PatientFamilyDetailsController;
-use App\Http\Controllers\Patient\Profile\PasswordController as PatientPasswordController;
-// documents
-use App\Http\Controllers\Patient\Document\UploadsController as PatientUploadsController;
-use App\Http\Controllers\Patient\Document\PrescriptionsController as PatientPrescriptionsController;
-// patients controller
+// patients controllers
+    //profile
+    use App\Http\Controllers\Patient\Profile\ProfileController as PatientProfileController;
+    use App\Http\Controllers\Patient\Profile\EmergencyContactController as PatientEmergencyContactController;
+    use App\Http\Controllers\Patient\Profile\MedicalHistoryController as PatientMedicalHistoryController;
+    use App\Http\Controllers\Patient\Profile\FamilyDetailsController as PatientFamilyDetailsController;
+    use App\Http\Controllers\Patient\Profile\PasswordController as PatientPasswordController;
 
-Route::post('SendOTP',[OTPController::class, 'compose_mail'])->name('SendOTP');
-Route::get('logout',[Login::class, 'logout'])->name('Logout');
+    // documents
+    use App\Http\Controllers\Patient\Document\UploadsController as PatientUploadsController;
+    use App\Http\Controllers\Patient\Document\PrescriptionsController as PatientPrescriptionsController;
+// patients controllers
 
+// admin controllers
+
+    use App\Http\Controllers\Admin\User\PatientController as AdminUserPatientController;
+    use App\Http\Controllers\Admin\User\PersonnelController as AdminUserPersonnelController;
+
+    use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+// admin controllers
+
+//global routes
 Route::prefix('')->group(function(){
-    Route::get('',[Login::class, 'index'])->name('Login');
-    Route::post('',[Login::class, 'login'])->name('Login');
+    //remove this send otp and logout before inserting middleware
+    Route::post('SendOTP',[OTPController::class, 'compose_mail'])->name('SendOTP');
+    Route::get('logout',[Login::class, 'logout'])->name('Logout');
+    //login
+    Route::prefix('')->group(function(){
+        Route::get('',[Login::class, 'index'])->name('Login');
+        Route::post('',[Login::class, 'login'])->name('Login');
+    });
+    //registration
+    Route::prefix('registration')->group(function(){
+        Route::get('',[Registration::class, 'index'])->name('Registration');
+        Route::post('',[Registration::class, 'register'])->name('Registration');
+    });
+    //forgot password
+    Route::prefix('recover')->group(function(){
+        Route::get('',[Recover::class, 'index'])->name('Recover');
+        Route::post('',[Recover::class, 'recover'])->name('Recover');
+    });
+
+    //populate
+    Route::prefix('populate')->group(function(){
+        //address
+        Route::get('province',[PopulateSelectController::class, 'province'])->name('GetProvince');
+        Route::get('municipality/{prov_code}', [PopulateSelectController::class, 'municipality'])->name('GetMunicipality');
+        Route::get('barangay/{mun_code}', [PopulateSelectController::class, 'barangay'])->name('GetBarangay');
+        // grade level, department, program
+        Route::get('gradelevel', [PopulateSelectController::class, 'grade_level'])->name('GetGradeLevel');
+        Route::get('department/{gl_id}',[PopulateSelectController::class, 'department'])->name('GetDepartment');
+        Route::get('program/{dept_id}',[PopulateSelectController::class, 'program'])->name('GetProgram');
+    });
 });
+//global routes
 
-Route::prefix('registration')->group(function(){
-    Route::get('',[Registration::class, 'index'])->name('Registration');
-    Route::post('',[Registration::class, 'register'])->name('Registration');
-});
-
-Route::prefix('recover')->group(function(){
-    Route::get('',[Recover::class, 'index'])->name('Recover');
-    Route::post('',[Recover::class, 'recover'])->name('Recover');
-});
-
-
+//patient routes
 Route::prefix('patient')->group(function(){
-// profile
+    // profile
     Route::prefix('')->group(function(){
         Route::get('',[PatientProfileController::class, 'index'])->name('PatientProfile');
-        
+        Route::post('updatepic',[PatientProfileController::class, 'update_pic'])->name('UpdatePic');
+        Route::post('updateprofile', [PatientProfileController::class, 'update_profile'])->name('UpdateProfile');
     });
  
     Route::prefix('emergencycontact')->group(function(){
@@ -62,10 +94,9 @@ Route::prefix('patient')->group(function(){
     Route::prefix('password')->group(function(){
         Route::get('', [PatientPasswordController::class, 'index'])->name('PatientPassword');
     });
-// profile
+    // profile
 
-// documents
-
+    // documents
     Route::prefix('uploads')->group(function(){
         Route::get('',[PatientUploadsController::class, 'index'])->name('PatientUploads');
     });
@@ -73,5 +104,29 @@ Route::prefix('patient')->group(function(){
     Route::prefix('prescriptions')->group(function(){
         Route::get('',[PatientPrescriptionsController::class, 'index'])->name('PatientPrescriptions');
     });
-// documents
- });
+    // documents
+});
+//patient routes
+
+//admin routes
+Route::prefix('admin')->group(function(){
+
+    //dashboard
+    Route::get('', [AdminDashboardController::class, 'index'])->name('AdminDashboard');
+
+    //users
+    Route::prefix('users')->group(function(){
+
+        Route::prefix('patient')->group(function(){
+            Route::get('', [AdminUserPatientController::class, 'index'])->name('AdminUserPatient');
+        });
+        
+        Route::prefix('personnel')->group(function(){
+            Route::get('', [AdminUserPersonnelController::class, 'index'])->name('AdminUserPersonnel');
+        });
+    });
+    //users
+});
+//admin routes
+
+

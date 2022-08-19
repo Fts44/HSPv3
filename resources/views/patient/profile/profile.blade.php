@@ -15,10 +15,10 @@
         <div class="card">
 
             <div class="card-body pt-3">
-                <form action="" method="">
-
+                <form action="{{ route('UpdateProfile') }}" method="POST">
+                    @csrf
                     <div class="row mb-3">
-                        <label class="col-lg-12 text-center" for="profile_pic">
+                        <label class="col-lg-12 text-center">
                             Profile Picture
                             <span class="fr">*</span>
                         </label>
@@ -26,40 +26,55 @@
                             <img id="profile_pic_preview" class="form-control p-1" src="{{ asset('storage/default_avatar.png') }}" alt="Upload image" style="height: 200px; width: 200px;">
                         </div>
                         <div class="col-lg-12 mt-1 d-flex justify-content-center">
-                            <input class="form-control" type="file" name="profile_pic" id="profile_pic" accept=".jpg,.png" style="width: 300px;">
+                            <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal">Update Profile Picture</a>
                         </div>
-                        <label for="" class="col-lg-12 mt-1 text-center">
-                            <span class="text-danger">Test</span>
+                        <label class="col-lg-12 mt-1 text-center">
+                            <span class="text-danger">
+                                @error('profile_picture')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
                     </div>
 
                     <!-- sr-code, personal email, gsuite, otp -->
                     <div class="row mb-3">
 
-                        <label for="sr_code" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             SR-Code:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="sr_code" id="sr_code">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="text" name="sr_code" value="{{ old('sr_code', $user_details->sr_code) }}">
+                            <span class="text-danger">
+                                @error('sr_code')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="email" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Personal Email:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="email" id="email">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="text" name="email" value="{{ old('email', $user_details->email) }}">
+                            <span class="text-danger">
+                                @error('email')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="email" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Gsuite Email:
-                            <input class="form-control" type="text" name="email" id="email">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="text" name="gsuite_email" id="gsuite_email" value="{{ old('gsuite_email', $user_details->gsuite_email) }}" {{ ($user_details->gsuite_email) ? 'disabled' : '' }}>
+                            <span class="text-danger" id="gsuite_email_error">
+                                @error('gsuite_email')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="otp" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1 {{ ($user_details->gsuite_email) ? 'd-none' : '' }}">
                             One Time Pin:
                             <div class="row">
                                 <div class="col-lg-7">
-                                    <input class="form-control" type="number" name="otp" id="otp">
-                                    <span class="text-danger">Test</span>
+                                    <input class="form-control" type="number" name="otp" id="otp" {{ ($user_details->gsuite_email) ? 'disabled' : '' }}">
                                 </div>
                                 <div class="col-lg-5">
                                     <a class="btn btn-secondary btn-sm py-2" id="btn_otp" href="#" style="width: 100%; height: 38px;" id="btn_otp">
@@ -67,7 +82,12 @@
                                         <span class="spinner-border spinner-border-sm d-none" id="lbl_loading" role="status" aria-hidden="true"></span>
                                     </a>
                                 </div>
-                            </div>       
+                            </div> 
+                            <span class="text-danger" id="otp_error">
+                                @error('otp')
+                                    {{ $message }}
+                                @enderror
+                            </span>      
                         </label>
                         
 
@@ -76,27 +96,44 @@
                     <!-- Name -->
                     <div class="row mb-3">
                         
-                        <label for="first_name" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             First Name:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="first_name" id="first_name">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="text" name="first_name" value="{{ old('first_name', $user_details->firstname) }}">
+                            <span class="text-danger">
+                                @error('first_name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="middle_name" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Middle Name:
-                            <input class="form-control" type="text" name="middle_name" id="middle_name">
+                            <input class="form-control" type="text" name="middle_name" value="{{ old('middle_name', $user_details->middlename) }}">
+                            <span class="text-danger">
+                                @error('middle_name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="last_name" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Last Name:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="last_name" id="last_name">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="text" name="last_name" value="{{ old('last_name', $user_details->lastname) }}">
+                            <span class="text-danger">
+                                @error('last_name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="suffix_name" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Suffix Name: (Sr,Jr,I,II,...)
-                            <input class="form-control" type="text" name="suffix_name" id="suffix_name">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="text" name="suffix_name" value="{{ old('suffix_name', $user_details->suffixname) }}">
+                            <span class="text-danger">
+                                @error('suffix_name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
@@ -104,26 +141,45 @@
                     <!-- Gender, Civil Status, Contact -->
                     <div class="row mb-3">
 
-                        <label for="gender" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Gender:<span class="fr">*</span>
-                            <select class="form-select" name="gender" id="gender">
+                            <select class="form-select" name="gender" value="">
                                 <option value="">--- choose ---</option>
+                                <option value="male" {{ (old('gender',$user_details->gender)=='male') ? 'selected' : '' }}>Male</option>
+                                <option value="female" {{ (old('gender',$user_details->gender)=='female') ? 'selected' : '' }}>Female</option>
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('gender')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="civil_status" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Civil Status:<span class="fr">*</span>
-                            <select class="form-select" name="civil_status" id="civil_status">
+                            <select class="form-select" name="civil status">
                                 <option value="">--- choose ---</option>
+                                <option value="single" {{ (old('civil_status',$user_details->civil_status)=='single') ? 'selected' : '' }}>Single</option>
+                                <option value="married" {{ (old('civil_status',$user_details->civil_status)=='married') ? 'selected' : '' }}>Married</option>
+                                <option value="divorced" {{ (old('civil_status',$user_details->civil_status)=='divorced') ? 'selected' : '' }}>Divorced</option>
+                                <option value="separated" {{ (old('civil_status',$user_details->civil_status)=='separated') ? 'selected' : '' }}>Separated</option>
+                                <option value="widowed" {{ (old('civil_status',$user_details->civil_status)=='widowed') ? 'selected' : '' }}>Widowed</option>
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('civil_status')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="contact" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Contact Number:<span class="fr">*</span>
-                            <input class="form-control" type="tel" name="contact" id="contact">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="tel" name="contact" value="{{ old('contact',$user_details->contact) }}">
+                            <span class="text-danger">
+                                @error('contact')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
@@ -131,28 +187,63 @@
                     <!-- Home address -->
                     <div class="row mb-3">
 
-                        <label for="home_prov" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Home Province:<span class="fr">*</span>
-                            <select name="home_prov" id="home_prov" class="form-select">
+                            <select name="home_province" id="home_province" class="form-select">
                                 <option value="">--- choose ---</option>
+                                @foreach($provinces as $province)
+                                    <option value="{{ $province->prov_code }}" {{ (old('home_province', $user_details->home_prov)==$province->prov_code) ? 'selected' : '' }}>{{ $province->prov_name }}</option>
+                                @endforeach
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('home_province')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="home_mun" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Home Municipality:<span class="fr">*</span>
-                            <select name="home_mun" id="home_mun" class="form-select">
+                            <select name="home_municipality" id="home_municipality" class="form-select">
                                 <option value="">--- choose ---</option>
+                        
+                                @if(Session::get('home_municipalities'))
+                                    @foreach(Session::get('home_municipalities') as $mun)
+                                        <option value="{{ $mun->mun_code }}" {{ (old('home_municipality')==$mun->mun_code) ? 'selected' : '' }}>{{ $mun->mun_name }}</option>
+                                    @endforeach
+                                @else
+                                    @foreach($home_municipalities as $mun)
+                                        <option value="{{ $mun->mun_code }}" {{ ($user_details->home_mun==$mun->mun_code) ? 'selected' : '' }}>{{ $mun->mun_name }}</option>
+                                    @endforeach
+                                @endif
+
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('home_municipality')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="home_brgy" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Home Barangay:<span class="fr">*</span>
-                            <select name="home_brgy" id="home_brgy" class="form-select">
+                            <select name="home_barangay" id="home_barangay" class="form-select" value="{{ old('home_barangay') }}">
                                 <option value="">--- choose ---</option>
+                                @if(Session::get('home_barangays'))
+                                    @foreach(Session::get('home_barangays') as $brgy)
+                                        <option value="{{ $brgy->brgy_code }}" {{ (old('home_barangay')==$brgy->brgy_code) ? 'selected' : '' }}>{{ $brgy->brgy_name }}</option>
+                                    @endforeach
+                                @else
+                                    @foreach($home_barangays as $brgy)
+                                        <option value="{{ $brgy->brgy_code }}" {{ ($user_details->home_brgy==$brgy->brgy_code) ? 'selected' : '' }}>{{ $brgy->brgy_name }}</option>
+                                    @endforeach
+                                @endif
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('home_barangay')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
@@ -160,24 +251,39 @@
                     <!-- Religion, Birthdate, Classification -->
                     <div class="row mb-3">
 
-                        <label for="religion" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Religion:<span class="fr">*</span>
-                            <input type="text" class="form-control" name="religion" id="religion">
-                            <span class="text-danger">Test</span>
+                            <input type="text" class="form-control" name="religion" value="{{ old('religion', $user_details->religion) }}">
+                            <span class="text-danger">
+                                @error('religion')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="birthdate" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Birthdate:<span class="fr">*</span>
-                            <input type="date" class="form-control" name="birthdate" id="birthdate">
-                            <span class="text-danger">Test</span>
+                            <input type="date" class="form-control" name="birthdate" value="{{ old('birthdate', $user_details->birthdate) }}">
+                            <span class="text-danger">
+                                @error('birthdate')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="classification" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Classification:<span class="fr">*</span>
-                            <select name="classification" id="classification" class="form-select">
+                            <select name="classification" class="form-select">
                                 <option value="">--- choose ---</option>
+                                <option value="student" {{ (old('classification',$user_details->classification)=='student') ? 'selected' : '' }}>Student</option>
+                                <option value="teacher" {{ (old('classification',$user_details->classification)=='teacher') ? 'selected' : '' }}>Teacher</option>
+                                <option value="school personnel" {{ (old('classification',$user_details->classification)=='school personnel') ? 'selected' : '' }}>School Personnel</option>
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('classification')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
@@ -185,28 +291,61 @@
                     <!-- Birthplace -->
                     <div class="row mb-3">
 
-                        <label for="birth_prov" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Birthplace (Province):<span class="fr">*</span>
-                            <select name="birth_prov" id="birth_prov" class="form-select">
+                            <select name="birthplace_province" id="birthplace_province" class="form-select">
                                 <option value="">--- choose ---</option>
+                                @foreach($provinces as $province)
+                                    <option value="{{ $province->prov_code }}" {{ (old('birthplace_province', $user_details->birth_prov)==$province->prov_code) ? 'selected' : '' }}>{{ $province->prov_name }}</option>
+                                @endforeach
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('birthplace_province')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="birth_mun" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Birthplace (Municipality):<span class="fr">*</span>
-                            <select name="birth_mun" id="birth_mun" class="form-select">
+                            <select name="birthplace_municipality" id="birthplace_municipality" class="form-select" value="{{ old('birthplace_municipality') }}">
                                 <option value="">--- choose ---</option>
+                                @if(Session::get('birthplace_municipalities'))
+                                    @foreach(Session::get('birthplace_municipalities') as $mun)
+                                        <option value="{{ $mun->mun_code }}" {{ (old('birthplace_municipality')==$mun->mun_code) ? 'selected' : '' }}>{{ $mun->mun_name }}</option>
+                                    @endforeach
+                                @else 
+                                @foreach($birthplace_municipalities as $mun)
+                                        <option value="{{ $mun->mun_code }}" {{ ($user_details->birth_mun==$mun->mun_code) ? 'selected' : '' }}>{{ $mun->mun_name }}</option>
+                                    @endforeach
+                                @endif
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('birthplace_municipality')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="birth_brgy" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Birthplace (Barangay):<span class="fr">*</span>
-                            <select name="birth_brgy" id="birth_brgy" class="form-select">
+                            <select name="birthplace_barangay" id="birthplace_barangay" class="form-select" value="{{ old('birthplace_barangay') }}">
                                 <option value="">--- choose ---</option>
+                                @if(Session::get('birthplace_barangays'))
+                                    @foreach(Session::get('birthplace_barangays') as $brgy)
+                                        <option value="{{ $brgy->brgy_code }}" {{ (old('birthplace_barangay')==$brgy->brgy_code) ? 'selected' : '' }}>{{ $brgy->brgy_name }}</option>
+                                    @endforeach
+                                @else
+                                    @foreach($birthplace_barangays as $brgy)
+                                        <option value="{{ $brgy->brgy_code }}" {{ ($user_details->birth_brgy==$brgy->brgy_code) ? 'selected' : '' }}>{{ $brgy->brgy_name }}</option>
+                                    @endforeach
+                                @endif
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('birthplace_barangay')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
@@ -214,28 +353,61 @@
                     <!-- Grade, Department, Program -->
                     <div class="row mb-3">
 
-                        <label for="grade_level" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Grade level:<span class="fr">*</span>
-                            <select name="grade_level" id="grade_level" class="form-select">
+                            <select name="grade_level" id="grade_level" class="form-select" value="{{ old('grade_level') }}">
                                 <option value="">--- choose ---</option>
+                                @foreach($grade_levels as $grade_level)
+                                    <option value="{{ $grade_level->gl_id }}" {{ (old('grade_level',$user_details->gl_id)==$grade_level->gl_id) ? 'selected' : '' }}>{{ ucwords($grade_level->gl_name) }}</option>
+                                @endforeach
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('grade_level')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="department" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Department:<span class="fr">*</span>
-                            <select name="department" id="department" class="form-select">
+                            <select name="department" id="department" class="form-select" value="{{ old('department') }}">
                                 <option value="">--- choose ---</option>
+                                @if(Session::get('departments'))
+                                    @foreach(Session::get('departments') as $dept)
+                                        <option value="{{ $dept->dept_id }}" {{ (old('department')==$dept->dept_id) ? 'selected' : '' }}>{{ ucwords($dept->dept_code) }}</option>
+                                    @endforeach
+                                @else 
+                                    @foreach($departments as $dept)
+                                        <option value="{{ $dept->dept_id }}" {{ ($user_details->dept_id==$dept->dept_id) ? 'selected' : '' }}>{{ ucwords($dept->dept_code) }}</option>
+                                    @endforeach
+                                @endif
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('department')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="program" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Program:<span class="fr">*</span>
                             <select name="program" id="program" class="form-select">
                                 <option value="">--- choose ---</option>
+                                @if(Session::get('programs'))
+                                    @foreach(Session::get('programs') as $prog)
+                                        <option value="{{ $prog->prog_id }}" {{ (old('program')==$prog->prog_id) ? 'selected' : '' }}>{{ ucwords($prog->prog_code) }}</option>
+                                    @endforeach
+                                @else 
+                                    @foreach($programs as $prog)
+                                        <option value="{{ $prog->prog_id }}" {{ ($user_details->prog_id==$prog->prog_id) ? 'selected' : '' }}>{{ ucwords($prog->prog_code) }}</option>
+                                    @endforeach
+                                @endif
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('program')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
@@ -243,28 +415,61 @@
                     <!-- Dormitory address -->
                     <div class="row mb-3">
 
-                        <label for="dorm_prov" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Dormitory (Province):
-                            <select name="dorm_prov" id="dorm_prov" class="form-select">
+                            <select name="dormitory_province" id="dormitory_province" class="form-select">
                                 <option value="">--- choose ---</option>
+                                @foreach($provinces as $province)
+                                    <option value="{{ $province->prov_code }}" {{ (old('dormitory_province',$user_details->dorm_prov)==$province->prov_code) ? 'selected' : '' }}>{{ $province->prov_name }}</option>
+                                @endforeach
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('dormitory_province')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="dorm_mun" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Dormitory (Municipality):
-                            <select name="dorm_mun" id="dorm_mun" class="form-select">
+                            <select name="dormitory_municipality" id="dormitory_municipality" class="form-select" value="{{ old('dormitory_municipality') }}">
                                 <option value="">--- choose ---</option>
+                                @if(Session::get('dormitory_municipalities'))
+                                    @foreach(Session::get('dormitory_municipalities') as $mun)
+                                        <option value="{{ $mun->mun_code }}" {{ (old('dormitory_municipality')==$mun->mun_code) ? 'selected' : '' }}>{{ $mun->mun_name }}</option>
+                                    @endforeach
+                                @else 
+                                    @foreach($dormitory_municipalities as $mun)
+                                        <option value="{{ $mun->mun_code }}" {{ ($user_details->dorm_mun==$mun->mun_code) ? 'selected' : '' }}>{{ $mun->mun_name }}</option>
+                                    @endforeach
+                                @endif
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('dormitory_municipality')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
-                        <label for="dorm_brgy" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             Dormitory (Barangay):
-                            <select name="dorm_brgy" id="dorm_brgy" class="form-select">
+                            <select name="dormitory_barangay" id="dormitory_barangay" class="form-select" value="{{ old('dormitory_barangay') }}">
                                 <option value="">--- choose ---</option>
+                                @if(Session::get('dormitory_barangays'))
+                                    @foreach(Session::get('dormitory_barangays') as $brgy)
+                                        <option value="{{ $brgy->brgy_code }}" {{ (old('dormitory_barangay')==$brgy->brgy_code) ? 'selected' : '' }}>{{ $brgy->brgy_name }}</option>
+                                    @endforeach
+                                @else 
+                                    @foreach($dormitory_barangays as $brgy)
+                                        <option value="{{ $brgy->brgy_code }}" {{ ($user_details->dorm_brgy==$brgy->brgy_code) ? 'selected' : '' }}>{{ $brgy->brgy_name }}</option>
+                                    @endforeach
+                                @endif
                             </select>
-                            <span class="text-danger">Test</span>
+                            <span class="text-danger">
+                                @error('dormitory_barangay')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
@@ -281,57 +486,76 @@
 
     </section>
 
-  </main>
-  <!-- main -->
+</main>
+<!-- main -->
 
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal_title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal_title">Upload New Profile Picture</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('UpdatePic') }}" method="POST" id="form" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body mb-4">
+                        <div class="row">
+                            <div class=" d-flex justify-content-center">
+                                <img id="profile_pic_selected" class="form-control p-1" src="{{ asset('storage/profile_picture/1660669921_profile_pic.png') }}" alt="Upload image" style="height: 200px; width: 200px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <label class="col-form-label col-lg-12 mt-4">Picture:<span class="fr">*</span></label>
+                                <input class="form-control" type="file" name="profile picture" id="profile_pic" accept=".jpg,.png">
+                                <span class="text-danger">
+                                    @error('profile_picture')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-ligth" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="submit_button">Upload</button>
+                    </div>
+                </form>
+            </div>    
+        </div>
+    </div>
 @endsection
 
 @push('script')
-<script src="{{ asset('js/select.js') }}"></script>
-<script src="{{ asset('js/profile.js') }}"></script>
+<script src="{{ asset('js/populate.js') }}"></script>
 <script>
-    @if(old('home_prov'))
-        set_municipality('#home_mun','{{ old("home_mun") }}', '{{ old("home_prov") }}', '#home_brgy');
-        @if(old('home_mun'))
-            set_barangay('#home_brgy','{{ old("home_brgy") }}', '{{ old("home_mun") }}');
-        @endif
-    @endif
-
-    @if(old('birth_prov'))
-        set_municipality('#birth_mun','{{ old("birth_mun") }}', '{{ old("birth_prov") }}', '#birth_brgy');
-        @if(old('birth_mun'))
-            set_barangay('#birth_brgy','{{ old("birth_brgy") }}', '{{ old("birth_mun") }}');
-        @endif
-    @endif
-    
-    @if(old('dorm_mun'))
-        set_municipality('#dorm_mun','{{ old("dorm_mun") }}', '{{ old("dorm_prov") }}', '#dorm_brgy');
-        @if(old('dorm_mun'))
-            set_barangay('#dorm_brgy','{{ old("dorm_brgy") }}', '{{ old("dorm_mun") }}');
-        @endif
-    @endif
-
-    @if(old('emerg_mun'))
-        set_municipality('#emerg_mun','{{ old("emerg_mun") }}', '{{ old("emerg_prov") }}', '#emerg_brgy');
-        @if(old('emerg_mun'))
-            set_barangay('#emerg_brgy','{{ old("emerg_brgy") }}', '{{ old("emerg_mun") }}');
-        @endif
-    @endif
-
-    @if(old('department'))
-        set_program('#program', '{{ old("program") }}', '{{ old("department") }}')
-    @endif
-
     $(document).ready(function(){
-
         @if(session('status'))  
             @php 
-                $status = json_decode(session('status'));                      
+                $status = (object)session('status');                      
             @endphp
             swal('{{$status->title}}','{{$status->message}}','{{$status->icon}}');
         @endif
-
         
+        //profile picture
+        $('#profile_pic').change(function(){
+            let file = $("input[type=file]").get(0).files[0];
+
+            if(file){
+                var reader = new FileReader();
+
+                reader.onload = function(){
+                    $("#profile_pic_selected").attr("src", reader.result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+        //profile picture
+
+
         $('#btn_otp').click(function(e){
             e.preventDefault();
             let gsuite_email = $('#gsuite_email').val();
@@ -371,6 +595,42 @@
                 });
             }          
         });
+
+        //populate select field
+
+            //home
+            $('#home_province').change(function(){
+                set_municipality('#home_municipality', '', $(this).val(), '#home_barangay');
+            });
+            $('#home_municipality').change(function(){
+                set_barangay('#home_barangay', '', $(this).val());
+            });
+
+            //birthplace
+            $('#birthplace_province').change(function(){
+                set_municipality('#birthplace_municipality', '', $(this).val(), '#birthplace_barangay');
+            });
+            $('#birthplace_municipality').change(function(){
+                set_barangay('#birthplace_barangay', '', $(this).val());
+            });
+
+            //dorm
+            $('#dormitory_province').change(function(){
+                set_municipality('#dormitory_municipality', '', $(this).val(), '#dormitory_barangay');
+            });
+            $('#dormitory_municipality').change(function(){
+                set_barangay('#dormitory_barangay', '', $(this).val());
+            });
+
+            //deparment
+            $('#grade_level').change(function(){
+                set_department('#department', '', $(this).val(), '#program');
+            });
+
+            $('#department').change(function(){
+                set_program('#program', '', $(this).val());
+            });
+        //populate select field
     });
 </script>
 @endpush

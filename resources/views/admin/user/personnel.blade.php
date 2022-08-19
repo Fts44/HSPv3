@@ -1,14 +1,14 @@
-@extends('layout.patient')
+@extends('layout.admin')
 
 @push('title')
-    <title>Patient Documents</title>
+    <title>User Patient</title>
 @endpush
 
 @section('content')
 <main id="main" class="main">
 
-    <x-patient.documents-pagetitle></x-patient.documents-pagetitle>
-    <!-- Document Page Title -->
+    <x-admin.user-pagetitle></x-admin.user-pagetitle>
+    <!-- Admin User Page Title -->
 
     <section class="section">
 
@@ -16,7 +16,7 @@
 
             <div class="card-body px-4">
 
-                <h5 class="card-title">Prescription</h5>
+                <h5 class="card-title">test</h5>
                 
                 <table id="datatable" class="table table-bordered" style="width: 100%;">
                     <thead class="table-light">
@@ -33,7 +33,7 @@
                             <td>prescription.pdf</td>
                             <td>August 15, 2022</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="" id="test">
+                                <a class="btn btn-primary btn-sm" href="">
                                     <i class="bi bi-eye"></i> 
                                     View
                                 </a> 

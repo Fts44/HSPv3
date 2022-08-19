@@ -37,3 +37,4 @@ let resize_observer = new ResizeObserver(function() {
 });
 
 resize_observer.observe($("#card-table")[0]);
+
