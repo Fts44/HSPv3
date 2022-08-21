@@ -23,18 +23,11 @@
                             <span class="fr">*</span>
                         </label>
                         <div class="col-lg-12 mt-1 d-flex justify-content-center">
-                            <img id="profile_pic_preview" class="form-control p-1" src="{{ asset('storage/default_avatar.png') }}" alt="Upload image" style="height: 200px; width: 200px;">
+                            <img id="profile_pic_preview" class="form-control p-1" src="{{ ($user_details->profile_pic) ? asset('storage/profile_picture/'.$user_details->profile_pic) : asset('storage/default_avatar.png') }}" alt="Upload image" style="height: 200px; width: 200px;">
                         </div>
                         <div class="col-lg-12 mt-1 d-flex justify-content-center">
                             <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal">Update Profile Picture</a>
                         </div>
-                        <label class="col-lg-12 mt-1 text-center">
-                            <span class="text-danger">
-                                @error('profile_picture')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </label>
                     </div>
 
                     <!-- sr-code, personal email, gsuite, otp -->
@@ -501,14 +494,14 @@
                     <div class="modal-body mb-4">
                         <div class="row">
                             <div class=" d-flex justify-content-center">
-                                <img id="profile_pic_selected" class="form-control p-1" src="{{ asset('storage/profile_picture/1660669921_profile_pic.png') }}" alt="Upload image" style="height: 200px; width: 200px;">
+                                <img id="profile_pic_selected" class="form-control p-1" src="{{ ($user_details->profile_pic) ? asset('storage/profile_picture/'.$user_details->profile_pic) : asset('storage/default_avatar.png') }}" alt="Upload image" style="height: 200px; width: 200px;">
                             </div>
                         </div>
 
                         <div class="row">
                             <div>
                                 <label class="col-form-label col-lg-12 mt-4">Picture:<span class="fr">*</span></label>
-                                <input class="form-control" type="file" name="profile picture" id="profile_pic" accept=".jpg,.png">
+                                <input class="form-control" type="file" name="profile_picture" id="profile_pic" accept=".jpg,.png">
                                 <span class="text-danger">
                                     @error('profile_picture')
                                         {{ $message }}
@@ -534,11 +527,15 @@
     $(document).ready(function(){
         @if(session('status'))  
             @php 
-                $status = (object)session('status');                      
+                $status = (object)session('status');     
             @endphp
             swal('{{$status->title}}','{{$status->message}}','{{$status->icon}}');
         @endif
         
+        @error('profile_picture')
+            $('#modal').modal('show');       
+        @enderror
+
         //profile picture
         $('#profile_pic').change(function(){
             let file = $("input[type=file]").get(0).files[0];

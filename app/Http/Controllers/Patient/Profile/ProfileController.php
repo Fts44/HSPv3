@@ -79,16 +79,52 @@ class ProfileController extends Controller
 
     public function update_pic(Request $request){
 
- 
-        $path = '/public/profile_picture/';
-        // $file = $request->file('profile_pic');
-        // $file_name = time().'_profile_pic'.'.'.$file->extension();
+        $user_details = DB::table('accounts')->select('profile_pic')->where('acc_id', Session::get('user_id'))->first();
 
-        // // echo $file_name;
-        // $upload = $file->storeAs($path, $file_name);
+        $rules = [
+            'profile_picture' => ['required']
+        ];
 
-        Storage::delete($path.'1660669921_profile_pic.png');
-        
+        $validator = validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+        else{
+
+            $path = '/public/profile_picture/';
+            $file = $request->file('profile_picture');
+            $file_name = Session::get('user_id').'_'.time().'.'.$file->extension();
+
+            try{
+                $upload = $file->storeAs($path, $file_name);
+            
+                DB::table('accounts')->where('acc_id', Session::get('user_id'))->update([
+                    'profile_pic' => $file_name,
+                ]);
+
+                if($user_details->profile_pic){
+                    Storage::delete($path.$user_details->profile_pic); 
+                }
+
+                $response = [
+                    'title' => 'Success!',
+                    'message' => 'Profile picture updated.',
+                    'icon' => 'success',
+                    'status' => 200
+                ];
+            }
+            catch(Exception $e){
+                $response = [
+                    'title' => 'Failed!',
+                    'message' => 'Profile picture not updated.'.$e,
+                    'icon' => 'error',
+                    'status' => 400
+                ];
+            }
+            
+            return redirect(route('PatientProfile'))->with('status', $response);
+        }
     }
 
     public function update_profile(Request $request){
@@ -169,11 +205,13 @@ class ProfileController extends Controller
         }
         else{
 
+            $user_details = $this->get_user_details();
+
             //gsuite and otp hereeeeeeeee
             $otp_status = true;
 
             
-            if($request->gsuite_email && $request->otp){              
+            if($request->gsuite_email && $request->otp && !$user_details->gsuite_email){              
                 $this->OTPController = new OTPController;
                 $otp_request = new Request([
                     'email'   => $request->gsuite_email,
@@ -216,10 +254,8 @@ class ProfileController extends Controller
             //gsuite and otp hereeeeeeeee
 
             try{
-                $result = DB::transaction(function() use ($request){
-                    //get user details
-                    $user_details = $this->get_user_details();
-
+                $result = DB::transaction(function() use ($request, $user_details){
+                    
                     //address
                         //for home
                         if($user_details->home_add_id){
