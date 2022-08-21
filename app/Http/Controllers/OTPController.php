@@ -26,11 +26,13 @@ class OTPController extends Controller
         if($request->msg_type == 'register'){
             
             if(str_contains($request->email,'@g.batstate-u.edu.ph')){
+                $request->merge(['gsuite_email' => $request->email]);
+
                 $rules = [
-                    'email' => ['required','unique:accounts,gsuite_email'],     
+                    'gsuite_email' => ['required','unique:accounts,gsuite_email'],     
                 ];
                 $message = [
-                    'email.unique' => 'Gsuite email already registered.'
+                    'gsuite_email.unique' => 'Gsuite email already registered.'
                 ];
             }   
             else{
@@ -46,11 +48,13 @@ class OTPController extends Controller
         else{
 
             if(str_contains($request->email,'@g.batstate-u.edu.ph')){
+                $request->merge(['gsuite_email' => $request->email]);
+                
                 $rules = [
-                    'email' => ['required','email','exists:accounts,gsuite_email'],     
+                    'gsuite_email' => ['required','email','exists:accounts,gsuite_email'],     
                 ];
                 $message = [
-                    'email.exists' => 'Gsuite email is not registered.'
+                    'gsuite_email.exists' => 'Gsuite email is not registered.'
                 ];
             }   
             else{

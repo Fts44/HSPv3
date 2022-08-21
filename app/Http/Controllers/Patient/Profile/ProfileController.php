@@ -130,9 +130,9 @@ class ProfileController extends Controller
     public function update_profile(Request $request){
 
         $rules = [
-            'sr_code' => ['required'],
-            'email' => ['required', 'email', new NotGsuiteRule],
-            'gsuite_email' => ['nullable', 'email', new GsuiteRule],
+            'sr_code' => ['required','unique:accounts,sr_code,'.Session::get('user_id').',acc_id'],
+            'email' => ['required', 'email', new NotGsuiteRule, 'unique:accounts,email,'.Session::get('user_id').',acc_id'],
+            'gsuite_email' => ['nullable', 'email', new GsuiteRule, 'unique:accounts,gsuite_email,'.Session::get('user_id').',acc_id'],
             'otp' => ['nullable','required_with:gsuite_email', 'min:4'],
             'first_name' => ['required'],
             'middle_name' => ['nullable'],
@@ -140,7 +140,7 @@ class ProfileController extends Controller
             'suffix_name' => ['nullable'],
             'gender' => ['required', 'in:male,female'],
             'civil_status' => ['required', 'in:single,married,widowed,separated,divorced'],
-            'contact' => ['required'],
+            'contact' => ['required','unique:accounts,contact,'.Session::get('user_id').',acc_id'],
             'home_province' => ['required'],
             'home_municipality' => ['required'],
             'home_barangay' => ['required'],

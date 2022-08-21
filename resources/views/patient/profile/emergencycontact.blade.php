@@ -20,10 +20,14 @@
                     <!-- Name -->
                     <div class="row mb-3">
                         
-                        <label for="emerg_fn" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             First Name:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="emerg_fn" id="emerg_fn">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="text" name="Father_firstname">
+                            <span class="text-danger">
+                                @error('Father_firstname')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                         <label for="emerg_mn" class="col-lg-3 mt-1">

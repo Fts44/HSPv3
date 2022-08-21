@@ -126,7 +126,7 @@
                     url: "{{ route('SendOTP') }}",
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        "email": email,
+                        "email" : email,
                         "msg_type": "recover",
                         "_token": "{{csrf_token()}}",
                     }),

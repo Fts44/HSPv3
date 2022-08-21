@@ -56,7 +56,7 @@
                         <label class="col-lg-3 mt-1">
                             Gsuite Email:
                             <input class="form-control" type="text" name="gsuite_email" id="gsuite_email" value="{{ old('gsuite_email', $user_details->gsuite_email) }}" {{ ($user_details->gsuite_email) ? 'disabled' : '' }}>
-                            <span class="text-danger" id="gsuite_email_error">
+                            <span class="text-danger error-message" id="gsuite_email_error">
                                 @error('gsuite_email')
                                     {{ $message }}
                                 @enderror
@@ -76,7 +76,7 @@
                                     </a>
                                 </div>
                             </div> 
-                            <span class="text-danger" id="otp_error">
+                            <span class="text-danger error-message" id="otp_error">
                                 @error('otp')
                                     {{ $message }}
                                 @enderror

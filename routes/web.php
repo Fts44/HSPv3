@@ -73,37 +73,38 @@ Route::prefix('')->group(function(){
 //patient routes
 Route::prefix('patient')->group(function(){
     // profile
-    Route::prefix('')->group(function(){
-        Route::get('',[PatientProfileController::class, 'index'])->name('PatientProfile');
-        Route::post('updatepic',[PatientProfileController::class, 'update_pic'])->name('UpdatePic');
-        Route::post('updateprofile', [PatientProfileController::class, 'update_profile'])->name('UpdateProfile');
-    });
- 
-    Route::prefix('emergencycontact')->group(function(){
-        Route::get('', [PatientEmergencyContactController::class, 'index'])->name('PatientEmergencyContact');
-    });
+        Route::prefix('')->group(function(){
+            Route::get('',[PatientProfileController::class, 'index'])->name('PatientProfile');
+            Route::post('updatepic',[PatientProfileController::class, 'update_pic'])->name('UpdatePic');
+            Route::post('updateprofile', [PatientProfileController::class, 'update_profile'])->name('UpdateProfile');
+        });
+    
+        Route::prefix('emergencycontact')->group(function(){
+            Route::get('', [PatientEmergencyContactController::class, 'index'])->name('PatientEmergencyContact');
+            Route::post('', [PatientEmergencyContactController::class, 'update_emergency_contact'])->name('UpdateEmergencyContact');
+        });
 
-    Route::prefix('medicalhistory')->group(function(){
-        Route::get('', [PatientMedicalHistoryController::class,'index'])->name('PatientMedicalHistory');
-    });
+        Route::prefix('medicalhistory')->group(function(){
+            Route::get('', [PatientMedicalHistoryController::class,'index'])->name('PatientMedicalHistory');
+        });
 
-    Route::prefix('familydetails')->group(function(){
-        Route::get('', [PatientFamilyDetailsController::class, 'index'])->name('PatientFamilyDetails');
-    });
+        Route::prefix('familydetails')->group(function(){
+            Route::get('', [PatientFamilyDetailsController::class, 'index'])->name('PatientFamilyDetails');
+        });
 
-    Route::prefix('password')->group(function(){
-        Route::get('', [PatientPasswordController::class, 'index'])->name('PatientPassword');
-    });
+        Route::prefix('password')->group(function(){
+            Route::get('', [PatientPasswordController::class, 'index'])->name('PatientPassword');
+        });
     // profile
 
     // documents
-    Route::prefix('uploads')->group(function(){
-        Route::get('',[PatientUploadsController::class, 'index'])->name('PatientUploads');
-    });
+        Route::prefix('uploads')->group(function(){
+            Route::get('',[PatientUploadsController::class, 'index'])->name('PatientUploads');
+        });
 
-    Route::prefix('prescriptions')->group(function(){
-        Route::get('',[PatientPrescriptionsController::class, 'index'])->name('PatientPrescriptions');
-    });
+        Route::prefix('prescriptions')->group(function(){
+            Route::get('',[PatientPrescriptionsController::class, 'index'])->name('PatientPrescriptions');
+        });
     // documents
 });
 //patient routes
