@@ -91,6 +91,7 @@ Route::prefix('patient')->group(function(){
 
         Route::prefix('familydetails')->group(function(){
             Route::get('', [PatientFamilyDetailsController::class, 'index'])->name('PatientFamilyDetails');
+            Route::post('', [PatientFamilyDetailsController::class, 'update_family_details'])->name('UpdateFamilyDetails');
         });
 
         Route::prefix('password')->group(function(){

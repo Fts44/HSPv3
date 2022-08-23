@@ -12,23 +12,23 @@ use Illuminate\Validation\Rules\RequiredIf;
 class MedicalHistoryController extends Controller
 {
     public function get_user_details(){
-        $user_details = DB::table('accounts')->where('acc_id', Session::get('user_id'))->first();
-        return $user_details;
+        return DB::table('accounts')->where('acc_id', Session::get('user_id'))->first();
     }
 
     public function index(){
-        $user_details = $this->get_user_details();
-        $mhpi_details = DB::table('medical_history_past_illness')->where('mhpi_id', $user_details->mhpi_id)->first();
-        $mhmi_details = DB::table('medical_history_medical_immunization')->where('mhmi_id', $user_details->mhmi_id)->first();
-        $mha_details = DB::table('medical_history_allergy')->where('mha_id', $user_details->mha_id)->first();
-        $mhp_details = DB::table('medical_history_pubertal')->where('mhp_id', $user_details->mhp_id)->first();
-        // echo json_encode($mphi_details);
+
+        $user_details = DB::table('accounts as acc')->where('acc.acc_id', Session::get('user_id'))
+            ->select('acc.gender', 'mhpi.*', 'mha.*', 'mhmi.*', 'mhp.*')
+            ->leftjoin('medical_history_past_illness as mhpi', 'acc.mhpi_id', 'mhpi.mhpi_id')
+            ->leftjoin('medical_history_allergy as mha', 'acc.mha_id', 'mha.mha_id')
+            ->leftjoin('medical_history_medical_immunization as mhmi', 'acc.mhmi_id', 'mhmi.mhmi_id')
+            ->leftjoin('medical_history_pubertal as mhp', 'acc.mhp_id', 'mhp.mhp_id')
+            ->first();
+      
+        // echo json_encode($user_details);
+
         return view('patient.profile.medicalhistory')->with([
-            'gender' => $user_details->gender,
-            'mhpi_details' => $mhpi_details,
-            'mhmi_details' => $mhmi_details,
-            'mha_details' => $mha_details,
-            'mhp_details' => $mhp_details
+            'user_details' => $user_details
         ]);
     }
 
@@ -76,7 +76,7 @@ class MedicalHistoryController extends Controller
             'pubertal_menarche' => [new RequiredIf($this->get_user_details()->gender == 'female'),'numeric'],
             'pubertal_lmp' => [new RequiredIf($this->get_user_details()->gender == 'female')],
             'pubertal_dysmenorhea' => [new RequiredIf($this->get_user_details()->gender == 'female')],
-            'pubertal_dysmenorhea_medicine' => [new RequiredIf($this->get_user_details()->gender == 'female')],
+            'pubertal_dysmenorhea_medicine' => ['required_if:immunization_hib,==,1'],
 
         ];
 
@@ -114,7 +114,7 @@ class MedicalHistoryController extends Controller
                 ]);
         }
         else{
-            $user_details = DB::table('accounts')->select('mhpi_id', 'mha_id', 'mhp_id', 'mhmi_id')->where('acc_id', Session::get('user_id'))->first();
+            $user_details = $this->get_user_details();
 
             try{
                 DB::transaction(function() use ($request, $user_details){
