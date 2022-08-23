@@ -254,7 +254,7 @@ class ProfileController extends Controller
             //gsuite and otp hereeeeeeeee
 
             try{
-                $result = DB::transaction(function() use ($request, $user_details){
+                DB::transaction(function() use ($request, $user_details){
                     
                     //address
                         //for home
@@ -352,7 +352,7 @@ class ProfileController extends Controller
                     'icon' => 'success',
                     'status' => 200
                 ];
-
+                
                 return redirect(route('PatientProfile'))->with('status', $response);
             }
             catch(Exception $e){

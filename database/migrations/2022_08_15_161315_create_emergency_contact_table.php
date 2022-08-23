@@ -18,9 +18,9 @@ class CreateEmergencyContactTable extends Migration
             $table->string('ec_firstname');
             $table->string('ec_middlename');
             $table->string('ec_lastname');
-            $table->string('ec_suffixname');
+            $table->string('ec_suffixname')->nullable();
             $table->string('ec_relationtopatient');
-            $table->string('ec_landline');
+            $table->string('ec_landline')->nullable();
             $table->string('ec_contact');
             $table->integer('biz_add_id')->unique();
         });
