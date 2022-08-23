@@ -16,15 +16,15 @@ class CreateMedicalHistoryPastIllnessTable extends Migration
         Schema::create('medical_history_past_illness', function (Blueprint $table) {
             $table->id('mhpi_id');
             $table->boolean('mhpi_hospitalization');
-            $table->string('mhpi_hospitalization_specify');
+            $table->string('mhpi_hospitalization_specify')->nullable();
             $table->boolean('mhpi_operation');
-            $table->string('mhpi_operation_specify');
+            $table->string('mhpi_operation_specify')->nullable();
             $table->boolean('mhpi_accident');
-            $table->string('mhpi_accident_specify');
+            $table->string('mhpi_accident_specify')->nullable();
             $table->boolean('mhpi_disability');
-            $table->string('mhpi_disability_specify');
+            $table->string('mhpi_disability_specify')->nullable();
             $table->boolean('mhpi_asthma');
-            $table->date('mhpi_asthma_last_attack');
+            $table->date('mhpi_asthma_last_attack')->nullable();
             $table->boolean('mhpi_diabetes');
             $table->boolean('mhpi_epilepsy');
             $table->boolean('mhpi_heart_disease');

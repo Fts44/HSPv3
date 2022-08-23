@@ -21,13 +21,13 @@ class CreateMedicalHistoryMedicalImmunizationTable extends Migration
             $table->boolean('mhmi_typhoid');
             $table->boolean('mhmi_varicella');
             $table->boolean('mhmi_hepa_b');
-            $table->integer('mhmi_hepa_b_doses');
+            $table->integer('mhmi_hepa_b_doses')->nullable();;
             $table->boolean('mhmi_dpt');
-            $table->integer('mhmi_dpt_doses');
+            $table->integer('mhmi_dpt_doses')->nullable();;
             $table->boolean('mhmi_opv');
-            $table->integer('mhmi_opv_doses');
+            $table->integer('mhmi_opv_doses')->nullable();;
             $table->boolean('mhmi_hib');
-            $table->integer('mhmi_hib_doses');
+            $table->integer('mhmi_hib_doses')->nullable();;
         });
     }
 

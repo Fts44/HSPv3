@@ -16,11 +16,11 @@ class CreateMedicalHistoryAllergyTable extends Migration
         Schema::create('medical_history_allergy', function (Blueprint $table) {
             $table->id('mha_id');
             $table->boolean('mha_food');
-            $table->string('mha_food_specify');
+            $table->string('mha_food_specify')->nullable();;
             $table->boolean('mha_medicine');
-            $table->string('mha_medicine_specify');
+            $table->string('mha_medicine_specify')->nullable();;
             $table->boolean('mha_others');
-            $table->string('mha_others_specify');
+            $table->string('mha_others_specify')->nullable();;
         });
     }
 

@@ -4,7 +4,6 @@ function clear_select(input, default_text){
         value: '',
         text: default_text
     }));
-
 }
 
 function ucwords(str){

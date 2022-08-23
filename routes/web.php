@@ -86,6 +86,7 @@ Route::prefix('patient')->group(function(){
 
         Route::prefix('medicalhistory')->group(function(){
             Route::get('', [PatientMedicalHistoryController::class,'index'])->name('PatientMedicalHistory');
+            Route::post('', [PatientMedicalHistoryController::class,'update_medical_history'])->name('UpdateMedicalHistory');
         });
 
         Route::prefix('familydetails')->group(function(){

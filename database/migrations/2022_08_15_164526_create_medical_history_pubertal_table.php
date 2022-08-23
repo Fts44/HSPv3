@@ -15,11 +15,11 @@ class CreateMedicalHistoryPubertalTable extends Migration
     {
         Schema::create('medical_history_pubertal', function (Blueprint $table) {
             $table->id('mhp_id');
-            $table->integer('mhp_male_age_on_set');
-            $table->integer('mhp_female_menarche');
-            $table->date('mhp_female_lmp');
-            $table->boolean('mhp_female_dysmenorhea');
-            $table->boolean('mhp_femaile_dysmenorhea_medicine');
+            $table->integer('mhp_male_age_on_set')->nullable();
+            $table->integer('mhp_female_menarche')->nullable();
+            $table->date('mhp_female_lmp')->nullable();
+            $table->boolean('mhp_female_dysmenorhea')->nullable();
+            $table->string('mhp_female_dysmenorhea_medicine')->nullable();
         });
     }
 
