@@ -76,7 +76,7 @@ class MedicalHistoryController extends Controller
             'pubertal_menarche' => [new RequiredIf($this->get_user_details()->gender == 'female'),'numeric'],
             'pubertal_lmp' => [new RequiredIf($this->get_user_details()->gender == 'female')],
             'pubertal_dysmenorhea' => [new RequiredIf($this->get_user_details()->gender == 'female')],
-            'pubertal_dysmenorhea_medicine' => ['required_if:immunization_hib,==,1'],
+            'pubertal_dysmenorhea_medicine' => [new RequiredIf($this->get_user_details()->gender == 'female' && $request->pubertal_dysmenorhea == '1')],
 
         ];
 
@@ -92,8 +92,8 @@ class MedicalHistoryController extends Controller
             'immunization_hepa_b_doses.required_if' => 'The hepa b doses is required.',
             'immunization_dpt_doses.required_if' => 'The dpt doses is required.',
             'immunization_opv_doses.required_if' => 'The opv doses is required.',
-            'immunization_hib_doses.required_if' => 'The hib doses is required.'
-
+            'immunization_hib_doses.required_if' => 'The hib doses is required.',
+            'pubertal_dysmenorhea_medicine' => 'The dysmenorhea medicine is required.'
         ];
 
         $validator = validator::make($request->all(), $rules, $messages);
@@ -105,7 +105,7 @@ class MedicalHistoryController extends Controller
                 'icon' => 'error',
                 'status' => 400
             ];
-
+            // echo json_encode($validator->messages());
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput($request->all())
@@ -191,7 +191,7 @@ class MedicalHistoryController extends Controller
 
                     //medical immunization
                         if($user_details->mhmi_id){
-                            $mhmi_details = DB::table('medical_history_medical_immunization')->where('mhmi_id',$user_details->mhmi_id)->first();
+                            // $mhmi_details = DB::table('medical_history_medical_immunization')->where('mhmi_id',$user_details->mhmi_id)->first();
                             // echo json_encode($mhmi_details);
                             DB::table('medical_history_medical_immunization')->update([
                                 'mhmi_bcg' => $request->immunization_bcg,

@@ -15,38 +15,57 @@
         <div class="card">
 
             <div class="card-body pt-3">
-                <form action="" method="">
-
+                <form action="{{ route('UpdatePatientPassword') }}" method="POST">
+                    @csrf
                     <div class="row mb-3">
                         
-                        <label for="new_pass" class="col-lg-3 mt-1">
+                        <label class="col-lg-3 mt-1">
                             New password:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="new_pass" id="new_pass">
-                            <span class="text-danger">Test</span>
+                            <input class="form-control" type="password" name="new_password" id="new_password" value="{{ old('new_password') }}">
+                            <span class="text-danger">
+                                @error('new_password')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
 
                     <div class="row mb-3">
                         
-                        <label for="new_cpass" class="col-lg-3 mt-1">
-                            Re-type password:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="new_cpass" id="new_cpass">
-                            <span class="text-danger">Test</span>
+                        <label class="col-lg-3 mt-1">
+                            Re-type new password:<span class="fr">*</span>
+                            <input class="form-control" type="password" name="retype_new_password" id="retype_new_password" value="{{ old('retype_new_password') }}">
+                            <span class="text-danger">
+                                @error('retype_new_password')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
 
                     <div class="row mb-3">
                         
-                        <label for="old_pass" class="col-lg-3 mt-1">
-                            Confirm password:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="old_pass" id="old_pass">
-                            <span class="text-danger">Test</span>
+                        <label class="col-lg-3 mt-1">
+                            Old password:<span class="fr">*</span>
+                            <input class="form-control" type="password" name="old_password" id="old_password" value="{{ old('old_password') }}">
+                            <span class="text-danger">
+                                @error('old_password')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </label>
 
                     </div>
 
+                    <div class="row mb-3">
+                        
+                        <label class="col-lg-3 mt-1">
+                            <input type="checkbox" id="showpassword"> Show password
+                        </label>
+
+                    </div>
                     
                     <div class="row mb-3">
                         <label class="col-lg-3">
@@ -66,5 +85,24 @@
 @endsection
 
 @push('script')
+    <script>
+        $(document).ready(function(){
+            @if(session('status'))  
+                @php 
+                    $status = (object)session('status');     
+                @endphp
+                swal('{{$status->title}}','{{$status->message}}','{{$status->icon}}');
+            @endif
 
+            $('#showpassword').click(function(){            
+                let input = $('#old_password, #new_password, #retype_new_password');
+                if(input.attr('type') === 'password'){
+                    input.attr('type','text');
+                }
+                else{
+                    input.attr('type','password');
+                }
+            });
+        });
+    </script>
 @endpush

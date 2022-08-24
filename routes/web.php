@@ -75,27 +75,28 @@ Route::prefix('patient')->group(function(){
     // profile
         Route::prefix('')->group(function(){
             Route::get('',[PatientProfileController::class, 'index'])->name('PatientProfile');
-            Route::post('updatepic',[PatientProfileController::class, 'update_pic'])->name('UpdatePic');
-            Route::post('updateprofile', [PatientProfileController::class, 'update_profile'])->name('UpdateProfile');
+            Route::post('updatepic',[PatientProfileController::class, 'update_pic'])->name('UpdatePatientPic');
+            Route::post('updateprofile', [PatientProfileController::class, 'update_profile'])->name('UpdatePatientProfile');
         });
     
         Route::prefix('emergencycontact')->group(function(){
             Route::get('', [PatientEmergencyContactController::class, 'index'])->name('PatientEmergencyContact');
-            Route::post('', [PatientEmergencyContactController::class, 'update_emergency_contact'])->name('UpdateEmergencyContact');
+            Route::post('', [PatientEmergencyContactController::class, 'update_emergency_contact'])->name('UpdatePatientEmergencyContact');
         });
 
         Route::prefix('medicalhistory')->group(function(){
             Route::get('', [PatientMedicalHistoryController::class,'index'])->name('PatientMedicalHistory');
-            Route::post('', [PatientMedicalHistoryController::class,'update_medical_history'])->name('UpdateMedicalHistory');
+            Route::post('', [PatientMedicalHistoryController::class,'update_medical_history'])->name('UpdatePatientMedicalHistory');
         });
 
         Route::prefix('familydetails')->group(function(){
             Route::get('', [PatientFamilyDetailsController::class, 'index'])->name('PatientFamilyDetails');
-            Route::post('', [PatientFamilyDetailsController::class, 'update_family_details'])->name('UpdateFamilyDetails');
+            Route::post('', [PatientFamilyDetailsController::class, 'update_family_details'])->name('UpdatePatientFamilyDetails');
         });
 
         Route::prefix('password')->group(function(){
             Route::get('', [PatientPasswordController::class, 'index'])->name('PatientPassword');
+            Route::post('', [PatientPasswordController::class, 'update_password'])->name('UpdatePatientPassword');
         });
     // profile
 

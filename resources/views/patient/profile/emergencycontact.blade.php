@@ -15,7 +15,7 @@
         <div class="card">
 
             <div class="card-body pt-3">
-                <form action="{{ route('UpdateEmergencyContact') }}" method="POST">
+                <form action="{{ route('UpdatePatientEmergencyContact') }}" method="POST">
                     @csrf
                     <!-- Name -->
                     <div class="row mb-3">

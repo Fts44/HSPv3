@@ -11,17 +11,22 @@ use Illuminate\Validation\Rules\RequiredIf;
 
 class FamilyDetailsController extends Controller
 {
-
     public function get_user_details(){
-        $user_details = DB::table('accounts')->where('acc_id', Session::get('user_id'))->first();
-        $family_details = DB::table('family_details')->where('fd_id', $user_details->fd_id)->first();
-        return $family_details;
+        return DB::table('accounts as acc')
+        ->leftjoin('family_details as fd', 'acc.fd_id', 'fd.fd_id')
+        ->leftjoin('family_illness_history as fih', 'fd.fih_id', 'fih.fih_id')
+        ->select('fd.*', 'fih.*')
+        ->where('acc_id', Session::get('user_id'))
+        ->first();
     }
 
     public function index(){
-
-        echo json_encode($this->get_user_details());
-        // return view('patient.profile.familydetails');
+        $user_details = $this->get_user_details();
+        
+        // echo json_encode($user_details);
+        return view('patient.profile.familydetails')->with([
+            'user_details' => $user_details
+        ]);
     }
 
     public function update_family_details(Request $request){
@@ -44,7 +49,7 @@ class FamilyDetailsController extends Controller
             'family_illness_history_cancer' => ['required'],
             'family_illness_history_hypertension' => ['required'],
             'family_illness_history_kidney_disease' => ['required'],
-            'family_illness_history_kidney_epilepsy' => ['required'],
+            'family_illness_history_epilepsy' => ['required'],
             'family_illness_history_others' => ['required'],
         ];
 
@@ -70,22 +75,107 @@ class FamilyDetailsController extends Controller
 
             if($user_details->fd_id){
 
+                DB::table('family_illness_history')->where('fih_id', $user_details->fih_id)->update([
+                    'fih_diabetes' => $request->family_illness_history_diabetes,
+                    'fih_heart_disease' => $request->family_illness_history_heart_disease,
+                    'fih_mental' => $request->family_illness_history_mental,
+                    'fih_cancer' => $request->family_illness_history_cancer,
+                    'fih_hypertension' => $request->family_illness_history_hypertension,
+                    'fih_kidney_disease' =>	 $request->family_illness_history_kidney_disease,
+                    'fih_epilepsy' =>  $request->family_illness_history_epilepsy,
+                    'fih_others' => $request->family_illness_history_others,
+                ]);
+
+                DB::table('family_details')->where('fd_id',$user_details->fd_id)->update([
+                    'fd_father_firstname' => $request->father_firstname,
+                    'fd_father_middlename' => $request->father_middlename,
+                    'fd_father_lastname' => $request->father_lastname,
+                    'fd_father_suffixname' => $request->father_suffixname,
+                    'fd_father_occupation' => $request->father_occupation,
+                    'fd_mother_firstname' =>  $request->mother_firstname,
+                    'fd_mother_middlename' =>  $request->mother_middlename,
+                    'fd_mother_lastname' =>  $request->mother_lastname,
+                    'fd_mother_suffixname' =>  $request->mother_suffixname,
+                    'fd_mother_occupation' =>  $request->mother_occupation,
+                    'fd_marital_status' => $request->marital_satus,
+                    'fih_id' => $user_details->fih_id
+                ]);
+
+                $response = [
+                    'title' => 'Success!',
+                    'message' => 'Family details updated.',
+                    'icon' => 'success',
+                    'status' => 200
+                ];
+
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput($request->all())
+                    ->with([
+                        'status' => $response
+                    ]);
             }
             else{
-                // $user_details->fd_id = DB::table('family_details')->insertGetId([
-                //     fd_father_firstname
-                //     fd_father_middlename
-                //     fd_father_lastname
-                //     fd_father_suffixname
-                //     fd_father_occupation
-                //     fd_mother_firstname
-                //     fd_mother_middlename
-                //     fd_mother_lastname
-                //     fd_mother_suffixname
-                //     fd_mother_occupation
-                //     fd_marital_status
 
-                // ]);
+                try{
+                    DB::transaction(function() use ($request, $user_details){
+
+                        $user_details->fih_id = DB::table('family_illness_history')->insertGetId([
+                            'fih_diabetes' => $request->family_illness_history_diabetes,
+                            'fih_heart_disease' => $request->family_illness_history_kidney_disease,
+                            'fih_mental' => $request->family_illness_history_mental,
+                            'fih_cancer' => $request->family_illness_history_cancer,
+                            'fih_hypertension' => $request->family_illness_history_hypertension,
+                            'fih_kidney_disease' =>	 $request->family_illness_history_kidney_disease,
+                            'fih_epilepsy' =>  $request->family_illness_history_epilepsy,
+                            'fih_others' => $request->family_illness_history_others,
+                        ]);
+
+                        $user_details->fd_id = DB::table('family_details')->insertGetId([
+                            'fd_father_firstname' => $request->father_firstname,
+                            'fd_father_middlename' => $request->father_middlename,
+                            'fd_father_lastname' => $request->father_lastname,
+                            'fd_father_suffixname' => $request->father_suffixname,
+                            'fd_father_occupation' => $request->father_occupation,
+                            'fd_mother_firstname' =>  $request->mother_firstname,
+                            'fd_mother_middlename' =>  $request->mother_middlename,
+                            'fd_mother_lastname' =>  $request->mother_lastname,
+                            'fd_mother_suffixname' =>  $request->mother_suffixname,
+                            'fd_mother_occupation' =>  $request->mother_occupation,
+                            'fd_marital_status' => $request->marital_satus,
+                            'fih_id' => $user_details->fih_id
+                        ]);
+
+                        DB::table('accounts')->where('acc_id', Session::get('user_id'))->update([
+                            'fd_id' => $user_details->fd_id
+                        ]);
+                    });
+
+                    $response = [
+                        'title' => 'Success!',
+                        'message' => 'Family details updated.',
+                        'icon' => 'success',
+                        'status' => 200
+                    ];
+
+                    return redirect(route('UpdatePatientFamilyDetails'))->with('status', $response);
+                }
+                catch(Exception $e){
+                    $response = [
+                        'title' => 'Failed!',
+                        'message' => 'Family details not updated.'.$e,
+                        'icon' => 'error',
+                        'status' => 400
+                    ];
+        
+                    return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput($request->all())
+                        ->with([
+                            'status' => $response
+                        ]);
+                }
+                
             }
         }
 

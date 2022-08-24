@@ -15,7 +15,7 @@
         <div class="card">
 
             <div class="card-body pt-3">
-                <form action="{{ route('UpdateProfile') }}" method="POST">
+                <form action="{{ route('UpdatePatientProfile') }}" method="POST">
                     @csrf
                     <div class="row mb-3">
                         <label class="col-lg-12 text-center">
@@ -489,7 +489,7 @@
                     <h5 class="modal-title" id="modal_title">Upload New Profile Picture</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('UpdatePic') }}" method="POST" id="form" enctype="multipart/form-data">
+                <form action="{{ route('UpdatePatientPic') }}" method="POST" id="form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body mb-4">
                         <div class="row">

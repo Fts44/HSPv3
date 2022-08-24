@@ -15,14 +15,14 @@
         <div class="card">
 
             <div class="card-body pt-3">
-                <form action="{{ route('UpdateFamilyDetails') }}" method="POST">
+                <form action="{{ route('UpdatePatientFamilyDetails') }}" method="POST">
                     @csrf
                     <!-- Father's Name -->
                     <div class="row mb-3">
                         
                         <label class="col-lg-3 mt-1">
                             Father's firstname:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="father_firstname" id="father_firstname">
+                            <input class="form-control" type="text" name="father_firstname" id="father_firstname" value="{{ old('father_firstname',$user_details->fd_father_firstname) }}">
                             <span class="text-danger">
                                 @error('father_firstname')
                                     {{ $message }}
@@ -32,7 +32,7 @@
 
                         <label class="col-lg-3 mt-1">
                             Father's middlename:
-                            <input class="form-control" type="text" name="father_middlename" id="father_middlename">
+                            <input class="form-control" type="text" name="father_middlename" id="father_middlename" value="{{ old('father_middlename',$user_details->fd_father_middlename) }}">
                             <span class="text-danger">
                                 @error('father_middlename')
                                     {{ $message }}
@@ -42,7 +42,7 @@
 
                         <label class="col-lg-3 mt-1">
                             Father's lastname:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="father_lastname" id="father_lastname">
+                            <input class="form-control" type="text" name="father_lastname" id="father_lastname" value="{{ old('father_lastname',$user_details->fd_father_lastname) }}">
                             <span class="text-danger">
                                 @error('father_lastname')
                                     {{ $message }}
@@ -52,7 +52,7 @@
 
                         <label class="col-lg-3 mt-1">
                             Father's suffixname: (Sr,Jr,I,II,...)
-                            <input class="form-control" type="text" name="father_suffixname" id="father_suffixname">
+                            <input class="form-control" type="text" name="father_suffixname" id="father_suffixname" value="{{ old('father_suffixname',$user_details->fd_father_suffixname) }}">
                             <span class="text-danger">
                                 @error('father_suffixname')
                                     {{ $message }}
@@ -67,7 +67,7 @@
 
                         <label for="father_occupation" class="col-lg-3 mt-1">
                             Father's Occupation:
-                            <input class="form-control" type="text" name="father_occupation" id="father_occupation">
+                            <input class="form-control" type="text" name="father_occupation" id="father_occupation" value="{{ old('father_occupation',$user_details->fd_father_occupation) }}">
                             <span class="text-danger">
                                 @error('father_occupation')
                                     {{ $message }}
@@ -82,7 +82,7 @@
                         
                         <label class="col-lg-3 mt-1">
                             Mothers's firstname:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="mother_firstname" id="mother_firstname">
+                            <input class="form-control" type="text" name="mother_firstname" id="mother_firstname" value="{{ old('mother_firstname',$user_details->fd_mother_firstname) }}">
                             <span class="text-danger">
                                 @error('mother_firstname')
                                     {{ $message }}
@@ -92,7 +92,7 @@
 
                         <label class="col-lg-3 mt-1">
                             Mothers's middlename:
-                            <input class="form-control" type="text" name="mother_middlename" id="mother_middlename">
+                            <input class="form-control" type="text" name="mother_middlename" id="mother_middlename" value="{{ old('mother_middlename',$user_details->fd_mother_middlename) }}">
                             <span class="text-danger">
                                 @error('mother_middlename')
                                     {{ $message }}
@@ -102,7 +102,7 @@
 
                         <label class="col-lg-3 mt-1">
                             Mothers's lastname:<span class="fr">*</span>
-                            <input class="form-control" type="text" name="mother_lastname" id="mother_lastname">
+                            <input class="form-control" type="text" name="mother_lastname" id="mother_lastname" value="{{ old('mother_lastname',$user_details->fd_mother_lastname) }}">
                             <span class="text-danger">
                                 @error('mother_lastname')
                                     {{ $message }}
@@ -112,7 +112,7 @@
 
                         <label class="col-lg-3 mt-1">
                             Mothers's suffixname: (I,II,...)
-                            <input class="form-control" type="text" name="mother_suffixname" id="mother_suffixname">
+                            <input class="form-control" type="text" name="mother_suffixname" id="mother_suffixname" value="{{ old('mother_suffixname',$user_details->fd_mother_suffixname) }}">
                             <span class="text-danger">
                                 @error('mother_suffixname')
                                     {{ $message }}
@@ -127,7 +127,7 @@
 
                         <label for="mother_occupation" class="col-lg-3 mt-1">
                             Mother's Occupation:
-                            <input class="form-control" type="text" name="mother_occupation" id="mother_occupation">
+                            <input class="form-control" type="text" name="mother_occupation" id="mother_occupation" value="{{ old('mother_occupation',$user_details->fd_mother_occupation) }}">
                             <span class="text-danger">
                                 @error('mother_occupation')
                                     {{ $message }}
@@ -139,9 +139,9 @@
                             Parent's marital status:
                             <select name="marital_satus" id="marital_satus" class="form-select">
                                 <option value="">--- choose ---</option>
-                                <option value="married">Married</option>
-                                <option value="divorced">Divorced</option>
-                                <option value="separated">Separated</option>
+                                <option value="married" {{ (old('marital_satus',$user_details->fd_marital_status)=='married') ? 'selected' : '' }}>Married</option>
+                                <option value="divorced" {{ (old('marital_satus',$user_details->fd_marital_status)=='divorced') ? 'selected' : '' }}>Divorced</option>
+                                <option value="separated" {{ (old('marital_satus',$user_details->fd_marital_status)=='separated') ? 'selected' : '' }}>Separated</option>
                             </select>
                             <span class="text-danger">
                                 @error('marital_satus')
@@ -158,66 +158,66 @@
                         <label for="family_illness_history_diabetes" class="col-lg-2 mt-1">
                             Diabetes:
                             <select name="family_illness_history_diabetes" id="family_illness_history_diabetes" class="form-select">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="0" {{ (old('family_illness_history_diabetes',$user_details->fih_diabetes)=='0') ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ (old('family_illness_history_diabetes',$user_details->fih_diabetes)=='1') ? 'selected' : '' }}>Yes</option>
                             </select>
                         </label>
 
                         <label for="family_illness_history_heart_disease" class="col-lg-2 mt-1">
                             Heart Disease:
                             <select name="family_illness_history_heart_disease" id="family_illness_history_heart_disease" class="form-select">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="0" {{ (old('family_illness_history_heart_disease',$user_details->fih_heart_disease)=='0') ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ (old('family_illness_history_heart_disease',$user_details->fih_heart_disease)=='1') ? 'selected' : '' }}>Yes</option>
                             </select>
                         </label>
 
                         <label for="family_illness_history_mental" class="col-lg-2 mt-1">
                             Mental:
                             <select name="family_illness_history_mental" id="family_illness_history_mental" class="form-select">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="0" {{ (old('family_illness_history_mental',$user_details->fih_mental)=='0') ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ (old('family_illness_history_mental',$user_details->fih_mental)=='1') ? 'selected' : '' }}>Yes</option>
                             </select>
                         </label>
 
-                        <label for="family_illness_history_cancer" class="col-lg-2 mt-1">
+                        <label class="col-lg-2 mt-1">
                             Cancer:
                             <select name="family_illness_history_cancer" id="family_illness_history_cancer" class="form-select">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="0" {{ (old('family_illness_history_cancer',$user_details->fih_cancer)=='0') ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ (old('family_illness_history_cancer',$user_details->fih_cancer)=='1') ? 'selected' : '' }}>Yes</option>
                             </select>
                         </label>
 
                         <label for="" class="col-lg-4"></label>
 
-                        <label for="family_illness_history_hypertension" class="col-lg-2 mt-1">
+                        <label class="col-lg-2 mt-1">
                             Hypertension:
                             <select name="family_illness_history_hypertension" id="family_illness_history_hypertension" class="form-select">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="0" {{ (old('family_illness_history_hypertension',$user_details->fih_hypertension)=='0') ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ (old('family_illness_history_hypertension',$user_details->fih_hypertension)=='1') ? 'selected' : '' }}>Yes</option>
                             </select>
                         </label>
 
-                        <label for="family_illness_history_kidney_disease" class="col-lg-2 mt-1">
+                        <label class="col-lg-2 mt-1">
                             Kidney Disease:
                             <select name="family_illness_history_kidney_disease" id="family_illness_history_kidney_disease" class="form-select">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="0" {{ (old('family_illness_history_kidney_disease',$user_details->fih_kidney_disease)=='0') ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ (old('family_illness_history_kidney_disease',$user_details->fih_kidney_disease)=='1') ? 'selected' : '' }}>Yes</option>
                             </select>
                         </label>
 
-                        <label for="family_illness_history_kidney_epilepsy" class="col-lg-2 mt-1">
+                        <label class="col-lg-2 mt-1">
                             Epilepsy:
-                            <select name="family_illness_history_kidney_epilepsy" id="family_illness_history_kidney_epilepsy" class="form-select">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                            <select name="family_illness_history_epilepsy" id="family_illness_history_epilepsy" class="form-select">
+                                <option value="0" {{ (old('family_illness_history_epilepsy',$user_details->fih_epilepsy)=='0') ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ (old('family_illness_history_epilepsy',$user_details->fih_epilepsy)=='1') ? 'selected' : '' }}>Yes</option>
                             </select>
                         </label>
 
-                        <label for="family_illness_history_others" class="col-lg-2 mt-1">
+                        <label class="col-lg-2 mt-1">
                             Others:
                             <select name="family_illness_history_others" id="family_illness_history_others" class="form-select">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="0" {{ (old('family_illness_history_others',$user_details->fih_others)=='0') ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ (old('family_illness_history_others',$user_details->fih_others)=='1') ? 'selected' : '' }}>Yes</option>
                             </select>
                         </label>
                     </div>

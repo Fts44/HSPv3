@@ -15,7 +15,7 @@
         <div class="card">
 
             <div class="card-body pt-3">
-                <form action="{{ route('UpdateMedicalHistory') }}" method="POST">
+                <form action="{{ route('UpdatePatientMedicalHistory') }}" method="POST">
                     @csrf
                     <label class="col-lg-12" style="font-weight: 600;">Past Illness:</label>
                     <!-- Hosptalization, Operation, Accident -->
