@@ -123,6 +123,8 @@ Route::prefix('admin')->group(function(){
 
         Route::prefix('patient')->group(function(){
             Route::get('', [AdminUserPatientController::class, 'index'])->name('AdminUserPatient');
+            Route::get('/{id}', [AdminUserPatientController::class, 'view_patient_details'])->name('AdminViewPatientDetails');
+            Route::get('updateaccountstatus/{id}',[AdminUserPatientController::class, 'update_account_status'])->name('AdminUpdatePatientAccountStatus');
         });
         
         Route::prefix('personnel')->group(function(){

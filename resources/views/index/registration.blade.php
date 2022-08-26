@@ -22,9 +22,12 @@
                     </div>
                     
                     <div id="email_error" class="error-message text-danger px-3" style="font-size: 14px;">
-                    @error('email')
-                        {{ $message }}
-                    @enderror
+                        @error('email')
+                            {{ $message }}
+                        @enderror
+                    </div>
+
+                    <div id="gsuite_email_error" class="error-message text-danger px-3" style="font-size: 14px;">
                     </div>
 
                     <div class="form-control">

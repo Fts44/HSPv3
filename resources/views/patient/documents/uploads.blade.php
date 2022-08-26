@@ -17,7 +17,9 @@
             <div class="card-body px-4">
 
                 <h5 class="card-title">Uploads</h5>
-                
+                <a href="#" class="btn btn-secondary btn-sm" style="float: right; margin-top: -2.5rem;" data-bs-toggle="modal" data-bs-target="#modal">
+                    <i class="bi bi-plus-lg"></i>          
+                </a>
                 <table id="datatable" class="table table-bordered" style="width: 100%;">
                     <thead class="table-light">
                         <th scope="col">ID</th>

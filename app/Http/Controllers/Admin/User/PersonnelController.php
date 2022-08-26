@@ -12,4 +12,5 @@ class PersonnelController extends Controller
 
         return view('admin.user.personnel');
     }
+    
 }

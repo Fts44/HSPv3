@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     @stack('title')
 
-    <!-- logo -->
-    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    <!-- tab icon -->
+	<link rel="icon" href="{{ asset('image/logo.png') }}">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <!-- bootstrap only -->

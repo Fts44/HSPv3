@@ -4,12 +4,126 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class PatientController extends Controller
 {
     public function index(){
 
+        $patients = DB::table('accounts as acc')
+            ->leftjoin('grade_level as gl', 'acc.gl_id', 'gl.gl_id')
+            ->leftjoin('department as dept', 'acc.dept_id', 'dept.dept_id')
+            ->leftjoin('program as prog', 'acc.prog_id', 'prog.prog_id')
+            ->where('position', 'patient')
+            ->where('acc.gl_id', '!=', null)
+            ->where('acc.dept_id', '!=', null)
+            ->where('acc.prog_id', '!=', null)
+            ->where('acc.fd_id', '!=', null)
+            ->get();
 
-        return view('admin.user.patient');
+        // echo json_encode($patients);
+
+        return view('admin.user.patient')->with(
+            'patients', $patients
+        );
+    }
+
+    public function view_patient_details($id){
+        
+        $patient_details = DB::table('accounts as acc')
+            ->select(
+                'acc.*', 'gl.*', 'dept.*', 'prog.*', 
+
+                'ec.*', 'mhpi.*', 'mha.*', 'mhmi.*', 'mhp.*',
+                'fd.*', 'fih.*',
+                'ecadd.prov_code as ec_prov_code', 'ecadd.mun_code as ec_mun_code', 'ecadd.brgy_code as ec_brgy_code',
+                'ecadd_rp.prov_name as ec_prov_name', 'ecadd_rm.mun_name as ec_mun_name', 'ecadd_rb.brgy_name as ec_brgy_name',
+                
+                'hadd.prov_code as home_prov_code', 'hadd.mun_code as home_mun', 'hadd.brgy_code as home_brgy',
+                'hadd_rp.prov_name as home_prov_name', 'hadd_rm.mun_name as home_mun_name', 'hadd_rb.brgy_name as home_brgy_name',
+
+                'badd.prov_code as home_prov_code', 'badd.mun_code as home_mun', 'badd.brgy_code as home_brgy',
+                'badd_rp.prov_name as birth_prov_name', 'badd_rm.mun_name as birth_mun_name', 'badd_rb.brgy_name as birth_brgy_name',
+
+                'dadd.prov_code as dorm_prov_code', 'dadd.mun_code as dorm_mun', 'dadd.brgy_code as dorm_brgy',
+                'dadd_rp.prov_name as dorm_prov_name', 'dadd_rm.mun_name as dorm_mun_name', 'dadd_rb.brgy_name as dorm_brgy_name'
+            )
+            ->leftjoin('grade_level as gl', 'acc.gl_id', 'gl.gl_id')
+            ->leftjoin('department as dept', 'acc.dept_id', 'dept.dept_id')
+            ->leftjoin('program as prog', 'acc.prog_id', 'prog.prog_id')
+
+            ->leftjoin('emergency_contact as ec', 'acc.ec_id', 'ec.ec_id')
+
+            ->leftjoin('medical_history_past_illness as mhpi', 'acc.mhpi_id', 'mhpi.mhpi_id')
+            ->leftjoin('medical_history_allergy as mha', 'acc.mha_id', 'mha.mha_id')
+            ->leftjoin('medical_history_medical_immunization as mhmi', 'acc.mhmi_id', 'mhmi.mhmi_id')
+            ->leftjoin('medical_history_pubertal as mhp', 'acc.mhp_id', 'mhp.mhp_id')
+
+            ->leftjoin('family_details as fd', 'acc.fd_id', 'fd.fd_id')
+            ->leftjoin('family_illness_history as fih', 'fd.fih_id', 'fih.fih_id')
+
+            ->leftjoin('address as ecadd', 'ec.biz_add_id', 'ecadd.add_id')
+            ->leftjoin('province as ecadd_rp', 'ecadd.prov_code', 'ecadd_rp.prov_code')
+            ->leftjoin('municipality as ecadd_rm', 'ecadd.mun_code', 'ecadd_rm.mun_code')
+            ->leftjoin('barangay as ecadd_rb', 'ecadd.brgy_code', 'ecadd_rb.brgy_code')
+
+            ->leftjoin('address as hadd', 'acc.home_add_id', 'hadd.add_id')
+            ->leftjoin('province as hadd_rp', 'hadd.prov_code', 'hadd_rp.prov_code')
+            ->leftjoin('municipality as hadd_rm', 'hadd.mun_code', 'hadd_rm.mun_code')
+            ->leftjoin('barangay as hadd_rb', 'hadd.brgy_code', 'hadd_rb.brgy_code')
+
+            ->leftjoin('address as badd', 'acc.birth_add_id', 'badd.add_id')
+            ->leftjoin('province as badd_rp', 'badd.prov_code', 'badd_rp.prov_code')
+            ->leftjoin('municipality as badd_rm', 'badd.mun_code', 'badd_rm.mun_code')
+            ->leftjoin('barangay as badd_rb', 'badd.brgy_code', 'badd_rb.brgy_code')
+
+            ->leftjoin('address as dadd', 'acc.birth_add_id', 'dadd.add_id')
+            ->leftjoin('province as dadd_rp', 'dadd.prov_code', 'dadd_rp.prov_code')
+            ->leftjoin('municipality as dadd_rm', 'dadd.mun_code', 'dadd_rm.mun_code')
+            ->leftjoin('barangay as dadd_rb', 'dadd.brgy_code', 'dadd_rb.brgy_code')
+
+            ->where('acc_id', $id)
+            ->first();
+        
+        // echo json_encode($patient_details);
+
+        return view('admin.user.viewpatientdetails')->with('patient_details', $patient_details);
+    }
+
+    public function update_account_status($id){
+        $user_details = DB::table('accounts')->where('acc_id', $id)->first();
+
+        if($user_details->is_verified){
+            $user_details->is_verified = 0;
+        }
+        else{
+            $user_details->is_verified = 1;
+        }
+
+        try{
+            DB::table('accounts')->where('acc_id', $id)->update([
+                'is_verified' => $user_details->is_verified
+            ]);
+
+            $response = [
+                'title' => 'Success!',
+                'message' => 'Status updated.',
+                'icon' => 'success',
+                'status' => 200
+            ];    
+
+            echo json_encode($response);
+        }
+        catch(Exception $e){
+            $response = [
+                'title' => 'Failed!',
+                'message' => 'Status not updated.',
+                'icon' => 'error',
+                'status' => 400
+            ];  
+            echo json_encode($response);
+        }
     }
 }

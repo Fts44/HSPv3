@@ -16,28 +16,33 @@
 
             <div class="card-body px-4">
 
-                <h5 class="card-title">test</h5>
-                
+                <h5 class="card-title">Patient test</h5>
+
                 <table id="datatable" class="table table-bordered" style="width: 100%;">
                     <thead class="table-light">
-                        <th scope="col">ID</th>
-                        <th scope="col">Physician</th>
-                        <th scope="col">File</th>
-                        <th scope="col">Date Upload</th>
+                        <th scope="col">SR-Code</th>
+                        <th scope="col">Fullname</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Classification</th>
+                        <th scope="col">Grade</th>
+                        <th scope="col">Program</th>
                         <th scope="col">Action</th>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Dr. Joseph E. Calma</td>
-                            <td>prescription.pdf</td>
-                            <td>August 15, 2022</td>
-                            <td>
-                                <a class="btn btn-primary btn-sm" href="">
-                                    <i class="bi bi-eye"></i> 
-                                    View
-                                </a> 
-                            </td>
+                            @foreach($patients as $patient)
+                                <td>{{ $patient->sr_code }}</td>
+                                <td>{{ $patient->firstname." ".($patient->middlename ? $patient->middlename[0].'.' : '')." ".$patient->lastname }}</td>
+                                <td>{{ $patient->contact }}</td>
+                                <td>{{ ucwords($patient->classification) }}</td>
+                                <td>{{ ucwords($patient->gl_name) }}</td>
+                                <td>{{ $patient->dept_code."-".$patient->prog_code }}</td>
+                                <td>
+                                    <a href="{{ route('AdminViewPatientDetails',['id'=>$patient->acc_id]) }}" class="btn btn-sm btn-secondary">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                </td>
+                            @endforeach
                         </tr>
                     </tbody>
                 </table>

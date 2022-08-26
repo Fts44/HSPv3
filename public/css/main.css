@@ -5,6 +5,16 @@
 :root {
     scroll-behavior: smooth;
   }
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #899bbd;
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
 
   input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
