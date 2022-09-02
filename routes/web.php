@@ -30,11 +30,14 @@ use Illuminate\Support\Facades\Route;
 // patients controllers
 
 // admin controllers
+    use App\Http\Controllers\Admin\Configuration\Inventory\EquipmentController as AdminConfigurationInventoryEquipment;
 
     use App\Http\Controllers\Admin\User\PatientController as AdminUserPatientController;
     use App\Http\Controllers\Admin\User\PersonnelController as AdminUserPersonnelController;
 
     use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+
+    use App\Http\Controllers\Admin\Inventory\EquipmentController as AdminInventoryEquipmentController;
 // admin controllers
 
 //global routes
@@ -140,6 +143,30 @@ Route::prefix('admin')->group(function(){
         });
     });
     //users
+
+    Route::prefix('inventory')->group(function(){
+
+        Route::prefix('equipment')->group(function(){
+            Route::get('', [AdminInventoryEquipmentController::class, 'index'])->name('AdminInventoryEquipment');
+        });
+
+    });
+
+    Route::prefix('configuration')->group(function(){
+
+        Route::prefix('equipment')->group(function(){
+
+            Route::prefix('name')->group(function(){
+                Route::get('', [AdminConfigurationInventoryEquipment::class, 'index_name'])->name('AdminConfigurationEquipmentName');
+                Route::post('', [AdminConfigurationInventoryEquipment::class, 'insert_name'])->name('AdminConfigruationInsertEquipmentName');
+                Route::post('update/{id}', [AdminConfigurationInventoryEquipment::class, 'update_name'])->name('AdminConfigruationUpdateEquipmentName');
+                Route::get('delete/{id}', [AdminConfigurationInventoryEquipment::class, 'delete_name'])->name('AdminConfigurationDeleteEquipmentName');
+            });
+
+            
+        });
+
+    });
 });
 //admin routes
 
