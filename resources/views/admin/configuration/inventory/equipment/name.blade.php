@@ -7,7 +7,7 @@
 @section('content')
 <main id="main" class="main">
 
-    <x-admin.configuration.inventory.equipment-pagetitle activeTitle="Brand"></x-admin.configuration.inventory.equipment-pagetitle>
+    <x-admin.configuration.inventory.equipment-pagetitle activeTitle="name"></x-admin.configuration.inventory.equipment-pagetitle>
     <!-- Document Page Title -->
     @if(session()->has('status'))
         @php $status = (object)session('status') @endphp

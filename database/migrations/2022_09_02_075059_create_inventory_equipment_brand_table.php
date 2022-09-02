@@ -18,6 +18,12 @@ class CreateInventoryEquipmentBrandTable extends Migration
             $table->string('ieb_brand');
             $table->boolean('ieb_status');
         });
+
+        DB::table('inventory_equipment_brand')->insert([
+            'ieb_id' => '1',
+            'ieb_brand' => 'none',
+            'ieb_status' => '1'
+        ]);
     }
 
     /**

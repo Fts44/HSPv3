@@ -156,6 +156,12 @@ Route::prefix('admin')->group(function(){
 
         Route::prefix('equipment')->group(function(){
 
+            Route::prefix('item')->group(function(){
+                Route::get('', [AdminConfigurationInventoryEquipment::class, 'index_item'])->name('AdminConfigurationEquipmentItem');
+                Route::post('', [AdminConfigurationInventoryEquipment::class, 'insert_item'])->name('AdminConfigruationInsertEquipmentItem');
+                Route::post('update/{id}', [AdminConfigurationInventoryEquipment::class, 'update_item'])->name('AdminConfigruationUpdateEquipmentItem');
+            });
+
             Route::prefix('name')->group(function(){
                 Route::get('', [AdminConfigurationInventoryEquipment::class, 'index_name'])->name('AdminConfigurationEquipmentName');
                 Route::post('', [AdminConfigurationInventoryEquipment::class, 'insert_name'])->name('AdminConfigruationInsertEquipmentName');
@@ -163,7 +169,26 @@ Route::prefix('admin')->group(function(){
                 Route::get('delete/{id}', [AdminConfigurationInventoryEquipment::class, 'delete_name'])->name('AdminConfigurationDeleteEquipmentName');
             });
 
-            
+            Route::prefix('brand')->group(function(){
+                Route::get('', [AdminConfigurationInventoryEquipment::class, 'index_brand'])->name('AdminConfigurationEquipmentBrand');
+                Route::post('', [AdminConfigurationInventoryEquipment::class, 'insert_brand'])->name('AdminConfigruationInsertEquipmentBrand');
+                Route::post('update/{id}', [AdminConfigurationInventoryEquipment::class, 'update_brand'])->name('AdminConfigruationUpdateEquipmentBrand');
+                Route::get('delete/{id}', [AdminConfigurationInventoryEquipment::class, 'delete_brand'])->name('AdminConfigurationDeleteEquipmentBrand');
+            });
+
+            Route::prefix('type')->group(function(){
+                Route::get('', [AdminConfigurationInventoryEquipment::class, 'index_type'])->name('AdminConfigurationEquipmentType');
+                Route::post('', [AdminConfigurationInventoryEquipment::class, 'insert_type'])->name('AdminConfigruationInsertEquipmentType');
+                Route::post('update/{id}', [AdminConfigurationInventoryEquipment::class, 'update_type'])->name('AdminConfigruationUpdateEquipmentType');
+                Route::get('delete/{id}', [AdminConfigurationInventoryEquipment::class, 'delete_type'])->name('AdminConfigurationDeleteEquipmentType');
+            });
+
+            Route::prefix('place')->group(function(){
+                Route::get('', [AdminConfigurationInventoryEquipment::class, 'index_place'])->name('AdminConfigurationEquipmentPlace');
+                Route::post('', [AdminConfigurationInventoryEquipment::class, 'insert_place'])->name('AdminConfigruationInsertEquipmentPlace');
+                Route::post('update/{id}', [AdminConfigurationInventoryEquipment::class, 'update_place'])->name('AdminConfigruationUpdateEquipmentPlace');
+                Route::get('delete/{id}', [AdminConfigurationInventoryEquipment::class, 'delete_place'])->name('AdminConfigurationDeleteEquipmentPlace');
+            });
         });
 
     });

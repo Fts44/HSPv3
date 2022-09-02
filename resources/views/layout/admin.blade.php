@@ -26,8 +26,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     
     <!-- sweet alert modal -->
-	<!-- <script src="{{ url('js/swal.js') }}"></script> -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="{{ url('js/swal.js') }}"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <!-- main css -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     @stack('css')

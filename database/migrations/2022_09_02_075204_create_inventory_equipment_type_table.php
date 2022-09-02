@@ -18,6 +18,12 @@ class CreateInventoryEquipmentTypeTable extends Migration
             $table->string('iet_type');
             $table->boolean('iet_status');
         });
+
+        DB::table('inventory_equipment_type')->insert([
+            'iet_id' => '1',
+            'iet_type' => 'none',
+            'iet_status' => '1'
+        ]);
     }
 
     /**

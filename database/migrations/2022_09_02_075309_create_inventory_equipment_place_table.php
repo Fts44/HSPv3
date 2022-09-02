@@ -18,6 +18,12 @@ class CreateInventoryEquipmentPlaceTable extends Migration
             $table->string('iep_place');
             $table->boolean('iep_status');
         });
+
+        DB::table('inventory_equipment_place')->insert([
+            'iep_id' => '1',
+            'iep_place' => 'none',
+            'iep_status' => '1'
+        ]);
     }
 
     /**
