@@ -7,9 +7,14 @@
 @section('content')
 <main id="main" class="main">
 
-    <x-patient.profile-pagetitle></x-patient.profile-pagetitle>
-    <!-- End Page Title -->
-
+    <div class="pagetitle mb-3">
+        <h1>Settings</h1>
+        <nav>
+            <ol class="breadcrumb" style="--bs-breadcrumb-divider: '|';">
+                <li class="breadcrumb-item"><a href="{{ route('PatientPassword') }}">Password</a></li>
+            </ol>
+        </nav>
+    </div>
     <section class="section profile">
 
         <div class="card">

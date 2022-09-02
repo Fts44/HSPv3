@@ -153,12 +153,21 @@ class ProfileController extends Controller
             'grade_level' => ['nullable','required_unless:classification,school personnel'],
             'department' => ['nullable','required_unless:classification,school personnel'],
             'program' => ['nullable','required_unless:classification,school personnel,teacher'],
+            'weight' => ['nullable', 'numeric'],
+            'height' => ['nullable', 'numeric'],
+            'blood_type' => ['nullable'],
             'dormitory_province' => ['nullable'],
             'dormitory_municipality' => ['required_with:dormitory_province'],
             'dormitory_barangay' => ['required_with:dormitory_municipality']
         ];
 
-        $validator = validator::make($request->all(), $rules);
+        $messages = [
+            'grade_level.required_unless' => 'The grade level field is required for teacher and student.',
+            'department.required_unless' => 'The department field is required for teacher and student.',
+            'program.required_unless' => 'The program field is required for student.',
+        ];
+
+        $validator = validator::make($request->all(), $rules, $messages);
 
         session()->flashInput($request->input());//return all of the input
         $populate = new PopulateSelect;
@@ -342,6 +351,9 @@ class ProfileController extends Controller
                         'gl_id' => $request->grade_level,
                         'dept_id' => $request->department,
                         'prog_id' => $request->program,
+                        'weight' => $request->weight,
+                        'height' => $request->height,
+                        'blood_type' => $request->blood_type,
                         'dorm_add_id' => $user_details->dorm_add_id
                     ]);
                 });

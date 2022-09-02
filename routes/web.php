@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 // global controllers
     use App\Http\Controllers\MailerController as MailerController;
     use App\Http\Controllers\OTPController as OTPController;
+    use App\Http\Controllers\Documents as Documents;
 
     //index
     use App\Http\Controllers\Index\LoginController as Login;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Patient\Profile\EmergencyContactController as PatientEmergencyContactController;
     use App\Http\Controllers\Patient\Profile\MedicalHistoryController as PatientMedicalHistoryController;
     use App\Http\Controllers\Patient\Profile\FamilyDetailsController as PatientFamilyDetailsController;
+    use App\Http\Controllers\Patient\Profile\AssessmentDiagnosisController as PatientAssessmentDiagnosisController;
     use App\Http\Controllers\Patient\Profile\PasswordController as PatientPasswordController;
 
     // documents
@@ -94,6 +96,11 @@ Route::prefix('patient')->group(function(){
             Route::post('', [PatientFamilyDetailsController::class, 'update_family_details'])->name('UpdatePatientFamilyDetails');
         });
 
+        Route::prefix('assessmentdiagnosis')->group(function(){
+            Route::get('', [PatientAssessmentDiagnosisController::class, 'index'])->name('PatientAssessmentDiagnosis');
+            Route::post('', [PatientAssessmentDiagnosisController::class, 'update_assessment_diagnosis'])->name('UpdatePatientAssessmentDiagnosis');
+        });
+
         Route::prefix('password')->group(function(){
             Route::get('', [PatientPasswordController::class, 'index'])->name('PatientPassword');
             Route::post('', [PatientPasswordController::class, 'update_password'])->name('UpdatePatientPassword');
@@ -103,6 +110,7 @@ Route::prefix('patient')->group(function(){
     // documents
         Route::prefix('uploads')->group(function(){
             Route::get('',[PatientUploadsController::class, 'index'])->name('PatientUploads');
+            Route::post('',[PatientUploadsController::class, 'upload'])->name('PatientUploads');
         });
 
         Route::prefix('prescriptions')->group(function(){
@@ -135,4 +143,4 @@ Route::prefix('admin')->group(function(){
 });
 //admin routes
 
-
+Route::get('view/{pd_id}', [Documents::class, 'view'])->name('ViewDocument');

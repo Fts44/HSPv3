@@ -7,7 +7,7 @@
 @section('content')
 <main id="main" class="main">
 
-    <x-patient.profile-pagetitle></x-patient.profile-pagetitle>
+    <x-patient.profile-pagetitle activeTitle="MedicalHistory"></x-patient.profile-pagetitle>
     <!-- End Page Title -->
 
     <section class="section profile">
@@ -606,7 +606,6 @@
 @endsection
 
 @push('script')
-<script src="{{ asset('js/select.js') }}"></script>
 <script src="{{ asset('js/input.js') }}"></script>
 <script>
 

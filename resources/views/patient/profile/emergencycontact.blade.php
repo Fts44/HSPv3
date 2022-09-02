@@ -7,7 +7,7 @@
 @section('content')
 <main id="main" class="main">
 
-    <x-patient.profile-pagetitle></x-patient.profile-pagetitle>
+    <x-patient.profile-pagetitle activeTitle="Emergency"></x-patient.profile-pagetitle>
     <!-- End Page Title -->
 
     <section class="section profile">

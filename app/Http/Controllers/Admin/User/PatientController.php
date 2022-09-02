@@ -87,9 +87,16 @@ class PatientController extends Controller
             ->where('acc_id', $id)
             ->first();
         
+            $documents = DB::table('patient_document as pd')
+                ->leftjoin('document_type as dt', 'pd.dt_id', 'dt.dt_id')
+                ->where('acc_id', $id)
+                ->get();
         // echo json_encode($patient_details);
 
-        return view('admin.user.viewpatientdetails')->with('patient_details', $patient_details);
+        return view('admin.user.viewpatientdetails')->with([
+            'patient_details' => $patient_details,
+            'documents' => $documents
+        ]);
     }
 
     public function update_account_status($id){

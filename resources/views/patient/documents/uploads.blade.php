@@ -29,23 +29,23 @@
                         <th scope="col">Action</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Covid Insurance</td>
-                            <td>123123123.pdf</td>
-                            <td>August 15, 2022</td>
-                            <td>
-                                <a class="btn btn-primary btn-sm" href="">
-                                    <i class="bi bi-eye"></i> 
-                                    View
-                                </a>
-                                <a class="btn btn-danger btn-sm" href="">
-                                    <i class="bi bi-eraser"></i>
-                                    Delete
-                                </a>
-                                
-                            </td>
-                        </tr>
+                        @foreach($uploads as $doc)
+                            <tr>
+                                <td>{{ $doc->pd_id }}</td>
+                                <td>{{ $doc->dt_name }}</td>
+                                <td>{{ $doc->file_name }}</td>
+                                <td>{{ date_format(date_create($doc->date),'F d, y g:h a') }}</td>
+                                <td>
+                                    <a href="{{ route('ViewDocument', ['pd_id' => $doc->pd_id ]) }}" target="_blank" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-eraser"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
 
@@ -64,7 +64,7 @@
                     <h5 class="modal-title" id="modal_title">Upload New Document</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="POST" id="form" enctype="multipart/form-data">
+                <form action="{{ route('PatientUploads') }}" method="POST" id="form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body mb-4">
                         <div class="row">
@@ -72,7 +72,9 @@
                                 <label for="" class="col-form-label col-lg-12">Document Type<span class="fr">*</span></label>
                                 <select class="form-select form-select" name="document_type" id="">
                                     <option value="">--- choose document type ---</option>
-                                    
+                                    @foreach($document_type as $type)
+                                        <option value="{{ $type->dt_id }}">{{ $type->dt_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <span class="text-danger" id="file_error">
@@ -109,4 +111,28 @@
 
     <!-- datatable js -->
     <script src="{{ asset('js/datatable.js') }}"></script>
+    <script>
+        @if(session('status'))  
+            @php 
+                $status = json_decode(session('status'));                      
+            @endphp
+            swal('{{$status->title}}','{{$status->message}}','{{$status->icon}}');
+        @endif
+        $(document).ready(function(){
+            $('#file').change(function(){
+                let MAX_FILE_SIZE = 5 * 1024 * 1024;
+                let fileSize = this.files[0].size;
+                if (fileSize > MAX_FILE_SIZE) {
+                    $('#file_error').html("File must no be greater than 5mb!");
+                    $(this).val('');
+                } else {
+                    $('#file_error').html("");
+                }
+            });
+            @if($errors->any())
+                $('#modal').modal('show');
+            @endif
+            
+        });
+    </script>
 @endpush

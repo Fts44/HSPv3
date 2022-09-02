@@ -101,7 +101,7 @@ class MedicalHistoryController extends Controller
         if($validator->fails()){
             $response = [
                 'title' => 'Failed!',
-                'message' => 'Medical history updated.',
+                'message' => 'Medical history is not updated.',
                 'icon' => 'error',
                 'status' => 400
             ];

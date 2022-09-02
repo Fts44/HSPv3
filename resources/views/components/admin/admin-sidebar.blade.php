@@ -12,10 +12,23 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="" id="sidebar_message">
-                    <i class="bi bi-capsule-pill"></i>
-                    <span>Medicine Inventory</span>
+                <a class="nav-link collapsed" href="#" id="sidebar_dashboard" data-bs-target="#inventory-nav" data-bs-toggle="collapse" >
+                    <i class="bi bi-boxes"></i>
+                    <span>Inventory</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="inventory-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="">
+                            <i class="bi bi-circle"></i><span>Medicine</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="bi bi-circle"></i><span>Equipment</span>
+                        </a>
+                    </li>      
+                </ul>
             </li>
 
             <li class="nav-item">

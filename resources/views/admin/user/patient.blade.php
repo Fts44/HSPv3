@@ -29,21 +29,21 @@
                         <th scope="col">Action</th>
                     </thead>
                     <tbody>
+                    @foreach($patients as $patient)
                         <tr>
-                            @foreach($patients as $patient)
-                                <td>{{ $patient->sr_code }}</td>
-                                <td>{{ $patient->firstname." ".($patient->middlename ? $patient->middlename[0].'.' : '')." ".$patient->lastname }}</td>
-                                <td>{{ $patient->contact }}</td>
-                                <td>{{ ucwords($patient->classification) }}</td>
-                                <td>{{ ucwords($patient->gl_name) }}</td>
-                                <td>{{ $patient->dept_code."-".$patient->prog_code }}</td>
-                                <td>
-                                    <a href="{{ route('AdminViewPatientDetails',['id'=>$patient->acc_id]) }}" class="btn btn-sm btn-secondary">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
-                                </td>
-                            @endforeach
+                            <td>{{ $patient->sr_code }}</td>
+                            <td>{{ $patient->firstname." ".($patient->middlename ? $patient->middlename[0].'.' : '')." ".$patient->lastname }}</td>
+                            <td>{{ $patient->contact }}</td>
+                            <td>{{ ucwords($patient->classification) }}</td>
+                            <td>{{ ucwords($patient->gl_name) }}</td>
+                            <td>{{ $patient->dept_code."-".$patient->prog_code }}</td>
+                            <td>
+                                <a href="{{ route('AdminViewPatientDetails',['id'=>$patient->acc_id]) }}" class="btn btn-sm btn-secondary">
+                                    <i class="bi bi-eye"></i> View
+                                </a>
+                            </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
 

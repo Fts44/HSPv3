@@ -28,7 +28,7 @@
 
                         <!-- patient details -->
                             <label class="form-control border-0 pt-0 px-0 mt-3 d-flex justify-content-center">
-                                <a id="view_emergency_contact" class="btn btn-sm btn-secondary" title="Emergency contact">
+                                <a id="view_emergency_contact" class="btn btn-sm btn-secondary" title="Emergency contact" data-bs-toggle="modal" data-bs-target="#patient_emergency_contact">
                                     <i class="bi bi-telephone"></i>
                                 </a>
                                 &nbsp;
@@ -178,7 +178,22 @@
                                                 <th scope="col">Action</th>
                                             </thead>
                                             <tbody>
-                                                
+                                                @foreach($documents as $doc)
+                                                    <tr>
+                                                        <td>{{ $doc->pd_id }}</td>
+                                                        <td>{{ $doc->file_name }}</td>
+                                                        <td>Uploaded by patient</td>
+                                                        <td>{{ date_format(date_create($doc->date),'F d, y g:h a') }}</td>
+                                                        <td>
+                                                            <a href="{{ route('ViewDocument', ['pd_id' => $doc->pd_id ]) }}" target="_blank" class="btn btn-primary btn-sm">
+                                                                <i class="bi bi-eye"></i>
+                                                            </a>
+                                                            <a href="" class="btn btn-danger btn-sm">
+                                                                <i class="bi bi-eraser"></i>
+                                                            </a>  
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                 </div>
@@ -198,7 +213,6 @@
                                             <th scope="col">Time In</th>
                                             <th scope="col">Time Out</th>
                                             <th scope="col">Purpose</th>
-                                            <th scope="col">Action</th>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -207,7 +221,6 @@
                                                 <td>10:30 am</td>
                                                 <td>11:00 am</td>
                                                 <td>BP</td>
-                                                <td>view</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -224,7 +237,7 @@
     </section>
 
     <div class="modal fade" id="patient_emergency_contact" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal_title" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modal_title">{{$patient_details->firstname."'"}}s Emergency Contact</h5>
@@ -233,13 +246,31 @@
                 
                 <div class="modal-body mb-4">
                     
+                    <label for="" class="form-control border-0">
+                        Name: {{ $patient_details->ec_firstname." ".$patient_details->ec_middlename." ".$patient_details->ec_lastname." ".$patient_details->ec_suffixname }}
+                    </label>
                     
+                    <label for="" class="form-control border-0">
+                        Relation to patient: {{ $patient_details->ec_relationtopatient }}
+                    </label>
+
+                    <label for="" class="form-control border-0">
+                        Bussiness Address: {{ $patient_details->ec_brgy_name.", ".$patient_details->ec_mun_name.", ".$patient_details->ec_prov_name }}
+                    </label>
+
+                    <label for="" class="form-control border-0">
+                        Contact: {{ $patient_details->ec_contact }}
+                    </label>
+
+                    <label for="" class="form-control border-0">
+                        Landline: {{ $patient_details->ec_landline }}
+                    </label>
                 </div>
 
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="submit_button">Add</button>
-                </div>
+                </div> -->
 
             </div>    
         </div>
@@ -261,7 +292,7 @@
     <script>
 
         $(document).ready(function(){
-            $('#student_health_records').modal('show');
+            // $('#student_health_records').modal('show');
             datatable_class('#table_transaction');
             datatable_class('#table_records');
             

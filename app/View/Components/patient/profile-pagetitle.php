@@ -11,9 +11,9 @@ class profile-pagetitle extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($activeTitle)
     {
-        //
+        $this->activeTitle = $activeTitle;
     }
 
     /**

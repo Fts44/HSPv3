@@ -7,7 +7,7 @@
 @section('content')
 <main id="main" class="main">
 
-    <x-patient.profile-pagetitle></x-patient.profile-pagetitle>
+    <x-patient.profile-pagetitle activeTitle="Personal"></x-patient.profile-pagetitle>
     <!-- End Page Title -->
 
     <section class="section profile">
@@ -167,7 +167,7 @@
 
                         <label class="col-lg-3 mt-1">
                             Contact Number:<span class="fr">*</span>
-                            <input class="form-control" type="tel" name="contact" value="{{ old('contact',$user_details->contact) }}">
+                            <input class="form-control" type="number" name="contact" value="{{ old('contact',$user_details->contact) }}">
                             <span class="text-danger">
                                 @error('contact')
                                     {{ $message }}
@@ -398,6 +398,51 @@
                             </select>
                             <span class="text-danger">
                                 @error('program')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </label>
+
+                    </div>
+
+                    <!-- Grade, Department, Program -->
+                    <div class="row mb-3">
+
+                        <label class="col-lg-3 mt-1">
+                            Height in meter:
+                            <input type="number" step=".01" class="form-control" name="height" value="{{ old('height', $user_details->height) }}">
+                            <span class="text-danger">
+                                @error('height')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </label>
+
+                        <label class="col-lg-3 mt-1">
+                            Weight in kg:
+                            <input type="number" step=".01" class="form-control" name="weight" value="{{ old('weight', $user_details->weight) }}">
+                            <span class="text-danger">
+                                @error('weight')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </label>
+
+                        <label class="col-lg-3 mt-1">
+                            Blood Type:
+                            <select name="blood_type" id="blood_type" class="form-select">
+                                <option value="">--- choose ---</option>
+                                <option value="a positive"  {{ (old('blood_type', $user_details->blood_type)=='a positive') ? 'selected' : '' }}>A Positive</option>
+                                <option value="a negative"  {{ (old('blood_type', $user_details->blood_type)=='a negative') ? 'selected' : '' }}>A Negative</option>
+                                <option value="ab positive" {{ (old('blood_type', $user_details->blood_type)=='ab positive') ? 'selected' : '' }}>AB Positive</option>
+                                <option value="ab negative" {{ (old('blood_type', $user_details->blood_type)=='ab negative') ? 'selected' : '' }}>AB Negative</option>
+                                <option value="b positive"  {{ (old('blood_type', $user_details->blood_type)=='b positive') ? 'selected' : '' }}>B Positive</option>
+                                <option value="b negative"  {{ (old('blood_type', $user_details->blood_type)=='b negative') ? 'selected' : '' }}>B Negative</option>
+                                <option value="o positive"  {{ (old('blood_type', $user_details->blood_type)=='o positive') ? 'selected' : '' }}>O Positive</option>
+                                <option value="o negative"  {{ (old('blood_type', $user_details->blood_type)=='o negative') ? 'selected' : '' }}>O Negative</option>
+                            </select>
+                            <span class="text-danger">
+                                @error('blood_type')
                                     {{ $message }}
                                 @enderror
                             </span>

@@ -74,11 +74,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('PatientPassword') }}">
-                        <i class="bi bi-circle"></i><span>Update Password</span>
+                    <a href="{{ route('PatientAssessmentDiagnosis') }}">
+                        <i class="bi bi-circle"></i><span>Assessment Diagnosis</span>
                     </a>
                 </li>
             </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('PatientPassword') }}" id="sidebar_dashboard">
+                <i class="bi bi-gear"></i>
+                <span>Password</span>
+            </a>
         </li>
     </li>
 
