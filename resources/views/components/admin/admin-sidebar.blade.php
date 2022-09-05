@@ -47,16 +47,17 @@
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="inventory-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                
+                <li>
+                    <a href="{{ route('AdminInventoryEquipmentAll') }}">
+                        <i class="bi bi-circle"></i><span>Equipment</span>
+                    </a>
+                </li>      
                 <li>
                     <a href="">
                         <i class="bi bi-circle"></i><span>Medicine</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('AdminInventoryEquipment') }}">
-                        <i class="bi bi-circle"></i><span>Equipment</span>
-                    </a>
-                </li>      
             </ul>
         </li>
 
@@ -68,15 +69,15 @@
             </a>
             <ul id="configuration-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
+                    <a href="{{ route('AdminConfigurationEquipmentItem') }}">
+                        <i class="bi bi-circle"></i><span>Inventory Equipment</span>
+                    </a>
+                </li>  
+                <li>
                     <a href="">
                         <i class="bi bi-circle"></i><span>Inventory Medicine</span>
                     </a>
-                </li>
-                <li>
-                    <a href="{{ route('AdminConfigurationEquipmentName') }}">
-                        <i class="bi bi-circle"></i><span>Inventory Equipment</span>
-                    </a>
-                </li>      
+                </li>     
             </ul>
         </li>
     </ul>

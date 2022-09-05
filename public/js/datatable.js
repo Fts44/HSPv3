@@ -1,13 +1,15 @@
 //set datatable
 const datatable = $('#datatable').DataTable({
     rowReorder: {
-    selector: 'td:nth-child(2)'
+        selector: 'td:nth-child(2)'
     },
+    
     responsive: true,
     scrollX: true,
     processing: true,
     dom: 'lfrtipB',
     "lengthMenu": [10, 25, 50, 100],
+    pageLength: 10,
     buttons: [
         'csv', 'excel',
         {
@@ -42,8 +44,9 @@ function datatable_class(table_id){
     //set datatable
     let datatableClass = $(table_id).DataTable({
         rowReorder: {
-        selector: 'td:nth-child(2)'
+            selector: 'td:nth-child(2)'
         },
+        pageLength: 10,
         responsive: true,
         scrollX: true,
         processing: true,

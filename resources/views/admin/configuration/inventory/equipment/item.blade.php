@@ -53,7 +53,7 @@
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-sm" onclick="update('{{ $item->ieid_id }}','{{ $item->ien_id }}','{{ $item->ieid_unit }}','{{ $item->iet_id }}','{{ $item->ieb_id }}', '{{ $item->ieid_category }}', '{{ $item->ieid_status }}')"><i class="bi bi-pencil"></i></a>
-                                <a class="btn btn-danger btn-sm" href="" onclick="return delete_confirmation('{{ $item->ieb_brand }}','{{ route('AdminConfigurationDeleteEquipmentBrand', ['id' => $item->ieb_id]) }}');"><i class="bi bi-eraser"></i></a>
+                                <a class="btn btn-danger btn-sm" href="" onclick="return delete_confirmation('{{ $item->ien_name }}','{{ route('AdminConfigurationDeleteEquipmentItem', ['id' => $item->ieid_id]) }}');"><i class="bi bi-eraser"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -213,11 +213,11 @@
             $('#modal').modal('show'); 
         }
 
-        function delete_confirmation(brand, href){
+        function delete_confirmation(item, href){
             event.preventDefault();
             swal({
                 title: "Are you sure?",
-                text: "Your about to delete "+brand+"!",
+                text: "Your about to delete "+item+"!",
                 icon: "warning",
                 buttons: ["Cancel", "Yes"],
                 dangerMode: true,
@@ -241,7 +241,7 @@
                         $('#modal_title').html('Add Equipment Item Details');
                         $('#submit_button').html('Add');
                     @elseif($status->action=='Update')
-                        $('#form').attr('action', "{{ route('AdminConfigruationUpdateEquipmentBrand', ['id' => $status->ieid_id]) }}");
+                        $('#form').attr('action', "{{ route('AdminConfigruationUpdateEquipmentItem', ['id' => $status->ieid_id]) }}");
                         $('#modal_title').html('Update Equipment Item Details');
                         $('#submit_button').html('Update');
                     @endif

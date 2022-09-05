@@ -46,7 +46,7 @@ class EquipmentController extends Controller
 
         if($validator->fails()){
             $response = [
-                'title' => 'Success!',
+                'title' => 'Error!',
                 'message' => 'Equipment item not added.',
                 'icon' => 'error',
                 'status' => 400,
@@ -156,7 +156,33 @@ class EquipmentController extends Controller
             }
         }
     }
+
+    public function delete_item($id){
+        try{
+            DB::table('inventory_equipment_item_details')->where('ieid_id', $id)->delete();
+
+            $response = [
+                'title' => 'Success!',
+                'message' => 'Equipment name deleted',
+                'icon' => 'success',
+                'status' => 200
+            ];
+
+            return redirect(route('AdminConfigurationEquipmentItem'))->with('status', $response);
+        }
+        catch(Exception $e){
+            $response = [
+                'title' => 'Error!',
+                'message' => 'Equipment name not deleted'.$e,
+                'icon' => 'error',
+                'status' => 400
+            ];
+
+            return redirect(route('AdminConfigurationEquipmentItem'))->with('status', $response);
+        }
+    }
 //item
+
 //Name
     public function index_name(){
         $ie_names = DB::table('inventory_equipment_name')->get();

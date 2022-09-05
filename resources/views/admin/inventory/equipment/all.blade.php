@@ -1,13 +1,13 @@
 @extends('layout.admin')
 
 @push('title')
-    <title>User Patient</title>
+    <title>Inventory Equipment</title>
 @endpush
 
 @section('content')
 <main id="main" class="main">
 
-    <x-admin.inventory.equipment-pagetitle activeTitle="Equipment"></x-admin.inventory.equipment-pagetitle>
+    <x-admin.inventory.equipment-pagetitle activeTitle="All"></x-admin.inventory.equipment-pagetitle>
     <!-- Document Page Title -->
 
     <section class="section mt-2">

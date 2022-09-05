@@ -1,19 +1,19 @@
 <?php
 
-namespace App\View\Components\admin\configuration;
+namespace App\View\Components\admin\inventory;
 
 use Illuminate\View\Component;
 
-class inventory-pagetitle extends Component
+class equipment-pagetitle extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($activeTitle)
     {
-        //
+        $this->activeTitle = $activeTitle;
     }
 
     /**
@@ -23,6 +23,6 @@ class inventory-pagetitle extends Component
      */
     public function render()
     {
-        return view('components.admin.configuration.inventory-pagetitle');
+        return view('components.admin.inventory.equipment-pagetitle');
     }
 }
