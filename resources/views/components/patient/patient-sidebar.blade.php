@@ -84,6 +84,13 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('PatientPassword') }}" id="sidebar_dashboard">
                 <i class="bi bi-gear"></i>
+                <span style="font-size: 14px;">VaccinationInsurance</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('PatientPassword') }}" id="sidebar_dashboard">
+                <i class="bi bi-gear"></i>
                 <span>Password</span>
             </a>
         </li>

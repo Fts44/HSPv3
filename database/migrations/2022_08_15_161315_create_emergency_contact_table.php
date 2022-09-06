@@ -16,7 +16,7 @@ class CreateEmergencyContactTable extends Migration
         Schema::create('emergency_contact', function (Blueprint $table) {
             $table->id('ec_id');
             $table->string('ec_firstname');
-            $table->string('ec_middlename');
+            $table->string('ec_middlename')->nullable();
             $table->string('ec_lastname');
             $table->string('ec_suffixname')->nullable();
             $table->string('ec_relationtopatient');

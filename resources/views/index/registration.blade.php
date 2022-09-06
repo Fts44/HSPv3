@@ -158,6 +158,7 @@
                         "_token": "{{csrf_token()}}",
                     }),
                     success: function(response){
+                        $('.error-message').html('');
                         response = JSON.parse(response);
                         console.log(response);
                         $('.lbl_loading').addClass('d-none');
@@ -168,7 +169,6 @@
                             });
                         }
                         else{
-                            $('.error-message').html('');
                             swal(response.title, response.message, response.icon);
                         }
                     },

@@ -28,6 +28,9 @@ class CreateAccountsTable extends Migration
             $table->string('civil_status')->nullable();
             $table->string('religion')->nullable();
             $table->string('classification')->nullable();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('blood_type')->nullable();
             $table->string('position')->nullable();
             $table->string('profile_pic')->nullable();
             $table->string('password');

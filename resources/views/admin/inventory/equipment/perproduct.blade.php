@@ -24,14 +24,14 @@
             <div class="card-body px-4">
 
                 <h5 class="card-title">Items</h5>
-                <a href="#" class="btn btn-secondary btn-sm" style="float: right; margin-top: -2.5rem;" data-bs-toggle="modal" data-bs-target="#modal">
+                <a id="add" href="#" class="btn btn-secondary btn-sm" style="float: right; margin-top: -2.5rem;" data-bs-toggle="modal" data-bs-target="#modal">
                     <i class="bi bi-plus-lg"></i>          
                 </a>
                 <table id="datatable" class="table table-bordered" style="width: 100%;">
                     <thead class="table-light">
                         <th scope="col">ID</th>
-                        <th scope="col">Quantity</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Qty</th>
                         <th scope="col">Place</th>
                         <th scope="col">Condition</th>
                         <th scope="col">Date</th>
@@ -41,12 +41,17 @@
                         @foreach($inventory_items as $item)
                         <tr>
                             <td>{{ $item->iei_id }}</td>
+                            <td>
+                               <span style="font-weight: 600; color: #444444;">Name: </span>{{ $item->ien_name }} <br>
+                               <span style="font-weight: 600; color: #444444;">Type: </span>{{ $item->iet_type }} <br>
+                               <span style="font-weight: 600; color: #444444;">Brand: </span>{{ $item->ieb_brand }} <br>
+                            </td>
                             <td>{{ $item->iei_qty.' '.$item->ieid_unit }}</td>
-                            <td>{{ $item->ien_name.(($item->iet_type=='none') ? ' ' : ', '.$item->iet_type ).(($item->ieb_brand=='none') ? '' : ' ('.$item->ieb_brand.')') }}</td> 
                             <td>{{ $item->iep_place }}</td>
                             <td>{{ $item->iei_condition }}</td>
                             <td>{{ $item->iei_date_added }}</td>
                             <td>
+                                <button class="btn btn-secondary btn-sm"  onclick="copy('{{ $item->ieid_id }}', '{{ $item->iei_qty }}', '{{ $item->iei_condition }}', '{{ $item->iep_id }}')"><i class="bi bi-link-45deg"></i></button>
                                 <button class="btn btn-primary btn-sm" onclick="update('{{ $item->iei_id }}','{{ $item->ieid_id }}', '{{ $item->iei_qty }}', '{{ $item->iei_date_added }}', '{{ $item->iei_condition }}', '{{ $item->iep_id }}')"><i class="bi bi-pencil"></i></button>
                                 <button class="btn btn-danger btn-sm" onclick="return delete_confirmation('{{ $item->ien_name.(($item->iet_type!='none') ? ', '.$item->iet_type : ' ' ).(($item->ieb_brand!='none') ? ' ('.$item->ieb_brand.')' : '') }}', '{{ route('AdminInventoryDeleteEquipmentPerProduct', ['id' => $item->iei_id]) }}');"><i class="bi bi-eraser"></i></button>
                             </td>
@@ -161,6 +166,17 @@
             $('.error').html('');
         }
 
+        function copy(item, qty, condition, place){
+            clear();
+            // var url = "{{ route('AdminInventoryUpdateEquipmentPerProduct', ['id'=>'id']) }}";
+            // $('#form').attr('action', url.replace('id', id));
+            $('#item').val(item);
+            $('#quantity').val(qty);
+            $('#condition').val(condition);
+            $('#place').val(place);
+            $('#modal').modal('show'); 
+        }
+
         function update(id, item, qty, date_added, condition, place){
             clear();
             var url = "{{ route('AdminInventoryUpdateEquipmentPerProduct', ['id'=>'id']) }}";
@@ -212,6 +228,7 @@
             
             $('#add').click(function(){
                 clear();
+                console.log('test');
                 $('#form').attr('action', "{{ route('AdminInventoryEquipmentPerProduct') }}");
                 $('#modal_title').html('Add Equipment Item');
                 $('#submit_button').html('Add');
