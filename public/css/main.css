@@ -7,11 +7,10 @@
   }
   ::-webkit-scrollbar {
     -webkit-appearance: none;
-    width: 10px;
+    width: 8px;
   }
   
   ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
     background-color: #899bbd;
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
   }
@@ -47,13 +46,13 @@ input[type=number]::-webkit-outer-spin-button {
   }
   
   h1, h2, h3, h4, h5, h6 {
-   font-family: "Nunito", sans-serif;
+   font-family: "Tahoma", sans-serif;
   }
   /*--------------------------------------------------------------
   # Main
   --------------------------------------------------------------*/
   #main {
-   font-family:'Nunito', sans-serif;
+    font-family:'Tahoma', sans-serif;
     margin-top: 55px;
     padding: 20px 14px;
     transition: all 0.3s;
@@ -69,9 +68,9 @@ input[type=number]::-webkit-outer-spin-button {
   # Page Title
   --------------------------------------------------------------*/
   .pagetitle h1 {
-    font-family:'Montserrat', sans-serif;
+    font-family:'Tahoma', sans-serif;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0;
     color: #012970;
   }
@@ -228,6 +227,7 @@ input[type=number]::-webkit-outer-spin-button {
   .card {
     margin-bottom: 30px;
     border: none;
+    border-left: #919191 solid 3px;
     border-radius: 5px;
     box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
   }
@@ -240,12 +240,12 @@ input[type=number]::-webkit-outer-spin-button {
   }
   
   .card-title {
-   font-family: "Montserrat", sans-serif;
+   font-family: "Tahoma", sans-serif;
     margin-top: 1.5rem;
     display: flex;
     justify-content: center;
     font-size: 19px;
-    font-weight: 600;
+    font-weight: 500;
     color: #012970;
   }
   .card-title span {
@@ -315,7 +315,7 @@ input[type=number]::-webkit-outer-spin-button {
   /* Breadcrumbs */
   .breadcrumb {
     font-size: 15px;
-    font-family: "Nunito", sans-serif;
+    font-family: "Tahoma", sans-serif;
     color: #899bbd;
     font-weight: 500;
     margin-bottom: 0px;
@@ -578,7 +578,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 235px;
     z-index: 996;
     transition: all 0.3s;
-    padding: 20px;
+    padding: 8px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #aab7cf transparent;
@@ -857,7 +857,7 @@ input[type=number]::-webkit-outer-spin-button {
   }
  
   .dataTables_wrapper {
-   font-family: "Nunito", sans-serif;
+   font-family: "Tahoma", sans-serif;
    font-size: 15px;
    }
    .dataTables_wrapper .dt-buttons {
@@ -875,7 +875,7 @@ input[type=number]::-webkit-outer-spin-button {
   float: right;
 }
    th{
-    font-family: "Montserrat", sans-serif;
+    font-family: "Tahoma", sans-serif;
      font-weight: 600;
   }
   

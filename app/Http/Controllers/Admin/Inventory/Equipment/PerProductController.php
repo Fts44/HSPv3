@@ -139,7 +139,7 @@ class PerProductController extends Controller
                 
                 $response = [
                     'title' => 'Success!',
-                    'message' => 'Equipment item updtestated.',
+                    'message' => 'Equipment item updated.',
                     'icon' => 'success',
                     'status' => 200
                 ];    

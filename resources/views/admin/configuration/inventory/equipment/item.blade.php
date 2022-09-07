@@ -53,7 +53,7 @@
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-sm" onclick="update('{{ $item->ieid_id }}','{{ $item->ien_id }}','{{ $item->ieid_unit }}','{{ $item->iet_id }}','{{ $item->ieb_id }}', '{{ $item->ieid_category }}', '{{ $item->ieid_status }}')"><i class="bi bi-pencil"></i></a>
-                                <a class="btn btn-danger btn-sm" href="" onclick="return delete_confirmation('{{ $item->ien_name }}','{{ route('AdminConfigurationDeleteEquipmentItem', ['id' => $item->ieid_id]) }}');"><i class="bi bi-eraser"></i></a>
+                                <button class="btn btn-danger btn-sm" {{ ($item->iei_id!=null) ? 'disabled' : '' }} onclick="return delete_confirmation('{{ $item->ien_name }}','{{ route('AdminConfigurationDeleteEquipmentItem', ['id' => ($item->iei_id!=null) ? 'id' : $item->ieid_id]) }}');"><i class="bi bi-eraser"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -82,7 +82,7 @@
                             <select class="form-select" name="name" id="name">
                                 <option value="">--- choose ---</option>
                                 @foreach($ien_names as $name)
-                                    <option value="{{ $name->ien_id }}" {{ (old('name')==$name->ien_id) ? 'selected' : '' }}>{{ $name->ien_name }}</option>
+                                    <option value="{{ $name->ien_id }}" {{ ($name->ien_status==0) ? 'hidden' : '' }} {{ (old('name')==$name->ien_id) ? 'selected' : '' }}>{{ $name->ien_name }}</option>
                                 @endforeach 
                             </select>
                             <span class="text-danger error">
@@ -113,9 +113,9 @@
                                 <option value="">--- choose ---</option>
                                 <option value="1" {{ (old('type')=='1') ? 'selected' : '' }}>none</option>
                                 @foreach($iet_types as $type)
-                                    @if($type->iet_id!='1' && $type->iet_type!='none')
-                                        <option value="{{ $type->iet_id }}" {{ (old('type')==$type->iet_id) ? 'selected' : '' }}>{{ $type->iet_type }}</option>
-                                    @endif
+                                    @if($type->iet_type != 'none')
+                                        <option value="{{ $type->iet_id }}" {{ ($type->iet_status==0) ? 'hidden' : '' }} {{ (old('type')==$type->iet_id) ? 'selected' : '' }}>{{ $type->iet_type }}</option>
+                                    @endif        
                                 @endforeach 
                             </select>
                             <span class="text-danger error">
@@ -131,9 +131,9 @@
                                 <option value="">--- choose ---</option>
                                 <option value="1" {{ (old('brand')=='1') ? 'selected' : '' }}>none</option>
                                 @foreach($ieb_brands as $brand)
-                                    @if($brand->ieb_id!='1' && $brand->ieb_brand!='none')
-                                        <option value="{{ $brand->ieb_id }}" {{ (old('brand')==$brand->ieb_id) ? 'selected' : '' }}>{{ $brand->ieb_brand }}</option>
-                                    @endif
+                                    @if($brand->ieb_brand != 'none')
+                                        <option value="{{ $brand->ieb_id }}" {{($brand->ieb_status==0) ? 'hidden' : '' }} {{ (old('brand')==$brand->ieb_id) ? 'selected' : '' }}>{{ $brand->ieb_brand }}</option>
+                                    @endif        
                                 @endforeach 
                             </select>
                             <span class="text-danger error">

@@ -19,18 +19,44 @@
 
     <section class="section">
 
-        <div class="card" id="card-table">
-
-            <div class="card-body px-4">
-
-                <h5 class="card-title">Table here</h5>
-                
-                
-
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card px-4 py-4">
+                    <h5 class="card-title flex-row justify-content-start m-0">
+                        Registered Patient:
+                    </h5>
+                    <span class="mt-0">{{ number_format($registered_patient) }}</span>
+                </div>
             </div>
 
-        </div>
+            <div class="col-lg-3">
+                <div class="card px-4 py-4">
+                    <h5 class="card-title flex-row justify-content-start m-0">
+                        Registered Employee:
+                    </h5>
+                    <span class="mt-0">{{ number_format($registered_employee) }}</span>
+                </div>
+            </div>
 
+            <div class="col-lg-3">
+                <div class="card px-4 py-4">
+                    <h5 class="card-title flex-row justify-content-start m-0">
+                        Total Equipments:
+                    </h5>
+                    <span class="mt-0">{{ number_format($total_equipments) }}</span>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card px-4 py-4">
+                    <h5 class="card-title flex-row justify-content-start m-0">
+                        Medicine Available:
+                    </h5>
+                    <span class="mt-0">{{ number_format($total_equipments) }}</span>
+                </div>
+            </div>
+        </div>
+    
     </section>
 
 </main>

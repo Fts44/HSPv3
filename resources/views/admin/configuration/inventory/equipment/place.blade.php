@@ -51,7 +51,7 @@
                             @else
                                 <td>
                                     <a class="btn btn-primary btn-sm" onclick="update('{{ $item->iep_id }}','{{ $item->iep_place }}','{{ $item->iep_status }}')"><i class="bi bi-pencil"></i></a>
-                                    <a class="btn btn-danger btn-sm" href="" onclick="return delete_confirmation('{{ $item->iep_place }}','{{ route('AdminConfigurationDeleteEquipmentPlace', ['id' => $item->iep_id]) }}');"><i class="bi bi-eraser"></i></a>
+                                    <button class="btn btn-danger btn-sm" {{ ($item->iei_id!=null) ? 'disabled' : '' }} onclick="return delete_confirmation('{{ $item->iep_place }}','{{ route('AdminConfigurationDeleteEquipmentPlace', ['id' => ($item->iei_id) ? 'id' : $item->iep_id]) }}');"><i class="bi bi-eraser"></i></button>
                                 </td>
                             @endif
                         </tr>

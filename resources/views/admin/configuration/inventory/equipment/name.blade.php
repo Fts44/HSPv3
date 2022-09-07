@@ -45,7 +45,7 @@
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-sm" onclick="update('{{ $item->ien_id }}','{{ $item->ien_name }}','{{ $item->ien_status }}')"><i class="bi bi-pencil"></i></a>
-                                <a class="btn btn-danger btn-sm" href="" onclick="return delete_confirmation('{{ $item->ien_name }}','{{ route('AdminConfigurationDeleteEquipmentName', ['id' => $item->ien_id]) }}');"><i class="bi bi-eraser"></i></a>
+                                <button class="btn btn-danger btn-sm" {{ ($item->ieid_id!=null) ? 'disabled' : '' }} href="" onclick="return delete_confirmation('{{ $item->ien_name }}','{{ route('AdminConfigurationDeleteEquipmentName', ['id' => ($item->ieid_id!=null) ? 'id' : $item->ien_id]) }}');"><i class="bi bi-eraser"></i></button>
                             </td>
                         </tr>
                     @endforeach

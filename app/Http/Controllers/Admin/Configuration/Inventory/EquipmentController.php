@@ -12,10 +12,12 @@ class EquipmentController extends Controller
 //item 
     public function index_item(){
         $ieid_details = DB::table('inventory_equipment_item_details as ieid')
-            ->select('ieid.*', 'ien.*', 'iet.*', 'ieb.*')
+            ->select('ieid.*', 'ien.*', 'iet.*', 'ieb.*', 'iei.iei_id')
             ->leftjoin('inventory_equipment_name as ien', 'ieid.ien_id', 'ien.ien_id')
             ->leftjoin('inventory_equipment_type as iet', 'ieid.iet_id', 'iet.iet_id')
             ->leftjoin('inventory_equipment_brand as ieb', 'ieid.ieb_id', 'ieb.ieb_id')
+            ->leftjoin('inventory_equipment_item as iei', 'ieid.ieid_id', 'iei.ieid_id')
+            ->groupBy('ieid.ieid_id')
             ->get();
         $ien_names = DB::table('inventory_equipment_name')->orderBy('ien_name', 'ASC')->get();
         $iet_types = DB::table('inventory_equipment_type')->orderBy('iet_type', 'ASC')->get();
@@ -185,8 +187,12 @@ class EquipmentController extends Controller
 
 //Name
     public function index_name(){
-        $ie_names = DB::table('inventory_equipment_name')->get();
-        
+        $ie_names = DB::table('inventory_equipment_name as ien')
+        ->select('ien.*', 'ieid.ieid_id')
+        ->leftjoin('inventory_equipment_item_details as ieid', 'ien.ien_id', 'ieid.ien_id')
+        ->groupBy('ien.ien_id')
+        ->get();
+        // echo json_encode($ie_names);
         return view('admin.configuration.inventory.equipment.name')->with([
             'ie_names' => $ie_names
         ]);
@@ -330,8 +336,12 @@ class EquipmentController extends Controller
 
 //Brand
     public function index_brand(){
-        $ie_brands = DB::table('inventory_equipment_brand')->get();
-
+        $ie_brands = DB::table('inventory_equipment_brand as ieb')
+        ->select('ieb.*', 'ieid.ieid_id')
+        ->leftjoin('inventory_equipment_item_details as ieid', 'ieb.ieb_id', 'ieid.ieb_id')
+        ->groupBy('ieb.ieb_id')
+        ->get();
+        // echo json_encode($ie_brands);
         return view('admin.configuration.inventory.equipment.brand')->with([
             'ie_brands' => $ie_brands
         ]);
@@ -475,8 +485,12 @@ class EquipmentController extends Controller
 
 //Type
     public function index_type(){
-        $ie_types = DB::table('inventory_equipment_type')->get();
-
+        $ie_types = DB::table('inventory_equipment_type as iet')
+        ->select('iet.*', 'ieid.ieid_id')
+        ->leftjoin('inventory_equipment_item_details as ieid', 'iet.iet_id', 'ieid.iet_id')
+        ->groupBy('iet.iet_id')
+        ->get();
+        // echo json_encode($ie_types);
         return view('admin.configuration.inventory.equipment.type')->with([
             'ie_types' => $ie_types
         ]);
@@ -620,8 +634,12 @@ class EquipmentController extends Controller
 
 //place
     public function index_place(){
-        $ie_places = DB::table('inventory_equipment_place')->get();
-
+        $ie_places = DB::table('inventory_equipment_place as iep')
+            ->select('iep.*', 'iei_id')
+            ->leftjoin('inventory_equipment_item as iei', 'iep.iep_id', 'iei.iep_id')
+            ->groupBy('iep.iep_id')
+            ->get();
+        // echo json_encode($ie_places);
         return view('admin.configuration.inventory.equipment.place')->with([
             'ie_places' => $ie_places
         ]);

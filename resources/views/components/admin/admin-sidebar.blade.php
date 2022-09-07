@@ -5,26 +5,26 @@
         <li class="nav-item">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="" id="sidebar_message">
+                <a class="nav-link collapsed" href="{{ route('AdminDashboard') }}" id="sidebar_dashboard">
                     <i class="bi bi-columns-gap"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="" id="sidebar_message">
+                <a class="nav-link collapsed" href="" id="sidebar_patient_uploads">
                     <i class="bi bi-filetype-doc"></i>
                     <span>Patient Uploads</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" id="sidebar_dashboard" data-bs-target="#user-nav" data-bs-toggle="collapse" >
+                <a class="nav-link collapsed" href="#" id="sidebar_accounts" data-bs-target="#accounts-nav" data-bs-toggle="collapse" >
                     <i class="bi bi-people"></i>
                     <span>Accounts</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <ul id="accounts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('AdminUserPatient') }}">
                             <i class="bi bi-circle"></i><span>Patient</span>
@@ -41,7 +41,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" id="sidebar_dashboard" data-bs-target="#inventory-nav" data-bs-toggle="collapse" >
+            <a class="nav-link collapsed" href="#" id="sidebar_inventory" data-bs-target="#inventory-nav" data-bs-toggle="collapse" >
                 <i class="bi bi-boxes"></i>
                 <span>Inventory</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
@@ -62,7 +62,27 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" id="sidebar_dashboard" data-bs-target="#configuration-nav" data-bs-toggle="collapse" >
+            <a class="nav-link collapsed" href="#" id="sidebar_reports" data-bs-target="#reports-nav" data-bs-toggle="collapse" >
+                <i class="bi bi-files-alt"></i>
+                <span>Reports</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="reports-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Inventory Equipment</span>
+                    </a>
+                </li>  
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Inventory Medicine</span>
+                    </a>
+                </li>     
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" id="sidebar_configuration" data-bs-target="#configuration-nav" data-bs-toggle="collapse" >
                 <i class="bi bi-gear"></i>
                 <span>Configuration</span>
                 <i class="bi bi-chevron-down ms-auto"></i>

@@ -42,13 +42,27 @@
                         <tr>
                             <td>{{ $item->iei_id }}</td>
                             <td>
-                               <span style="font-weight: 600; color: #444444;">Name: </span>{{ $item->ien_name }} <br>
-                               <span style="font-weight: 600; color: #444444;">Type: </span>{{ $item->iet_type }} <br>
-                               <span style="font-weight: 600; color: #444444;">Brand: </span>{{ $item->ieb_brand }} <br>
+                               <span>NAME: </span>{{ $item->ien_name }} <br>
+                               <span>TYPE: </span>{{ $item->iet_type }} <br>
+                               <span>BRAND: </span>{{ $item->ieb_brand }} <br>
                             </td>
                             <td>{{ $item->iei_qty.' '.$item->ieid_unit }}</td>
                             <td>{{ $item->iep_place }}</td>
-                            <td>{{ $item->iei_condition }}</td>
+                            <td>
+                                <span class="badge 
+                                @if($item->iei_condition=='Very Good')
+                                    bg-success
+                                @elseif($item->iei_condition=='Good')
+                                    bg-primary
+                                @elseif($item->iei_condition=='Fair')
+                                    bg-secondary
+                                @elseif($item->iei_condition=='Poor')
+                                    bg-warning
+                                @else
+                                    bg-danger
+                                @endif
+                                ">{{ $item->iei_condition }}</span>
+                            </td>
                             <td>{{ $item->iei_date_added }}</td>
                             <td>
                                 <button class="btn btn-secondary btn-sm"  onclick="copy('{{ $item->ieid_id }}', '{{ $item->iei_qty }}', '{{ $item->iei_condition }}', '{{ $item->iep_id }}')"><i class="bi bi-link-45deg"></i></button>
@@ -82,7 +96,7 @@
                             <select name="item" id="item" class="form-select">
                                 <option value="">--- choose ---</option>
                                 @foreach($item_details as $item)
-                                    <option value="{{ $item->ien_id }}" {{ (old('item')==$item->ien_id) ? 'selected' : '' }}>{{ $item->ien_name.(($item->iet_type!='none') ? ", ".$item->iet_type : ' ' ).(($item->ieb_brand!='none') ? " (".$item->ieb_brand.")" : '') }}</option>
+                                    <option value="{{ $item->ieid_id }}" {{($item->ieid_status==0) ? 'hidden' : '' }} {{ (old('item')==$item->ien_id) ? 'selected' : '' }}>{{ $item->ien_name.(($item->iet_type!='none') ? ", ".$item->iet_type : ' ' ).(($item->ieb_brand!='none') ? " (".$item->ieb_brand.")" : '') }}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger error">
@@ -135,7 +149,7 @@
                                 <option value="">--- choose ---</option>
                                 <option value="1" {{ (old('place')=='1') ? 'selected' : '' }}>none</option>
                                 @foreach($places as $item)
-                                    <option value="{{ $item->iep_id }}" {{ (old('place')==$item->iep_id) ? 'selected' : '' }}>{{ $item->iep_place }}</option>
+                                    <option value="{{ $item->iep_id }}" {{ ($item->iep_status) ? '' : 'hidden' }} {{ (old('place')==$item->iep_id) ? 'selected' : '' }}>{{ $item->iep_place }}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger error">
@@ -185,6 +199,7 @@
             $('#quantity').val(qty);
             $('#date_added').val(date_added);
             $('#condition').val(condition);
+            // $("#place option[value="+place+"]").attr('hidden', false);
             $('#place').val(place);
             $('#modal_title').html('Update Item Details');
             $('#submit_button').html('Update');
