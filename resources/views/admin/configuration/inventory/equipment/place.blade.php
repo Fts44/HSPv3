@@ -28,7 +28,7 @@
                 <a href="#" id="add" class="btn btn-secondary btn-sm" style="float: right; margin-top: -2.5rem;">
                     <i class="bi bi-plus-lg"></i>          
                 </a>
-                <table id="datatable" class="table table-bordered" style="width: 100%;">
+                <table id="table_equipment_place" class="table table-bordered" style="width: 100%;">
                     <thead class="table-light">
                         <th scope="col">ID</th>
                         <th scope="col">Place</th>
@@ -149,6 +149,15 @@
         }
 
         $(document).ready(function(){
+
+            datatable_class('#table_equipment_place');
+
+            $('#hamburgerMenu').click(function(){
+                setTimeout(function() { 
+                    redraw_datatable_class('#table_equipment_place');
+                }, 300);
+            });
+
             $('.alert').delay(5000).fadeOut('slow');
             @if($errors->any())
                 @if(session('status'))

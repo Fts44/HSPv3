@@ -235,7 +235,7 @@
                                 <label for="mhpi_hospitalization">Hospitalization:</label>
                             </td>
                             <td colspan="6">
-                                <input type="text" style="border-left: none;border-right: none;border-top: none; width: 100%;" name="mhpi_hospitalization_specify" value=" {{ ($patientDetails->mhpi_hospitalization) ? $patientDetails->mhpi_hospitalization_specify : '' }}">
+                                <input type="text" style="border-left: none;border-right: none;border-top: none; width: 100%;" name="mhpi_hospitalization_specify" value="{{ ($patientDetails->mhpi_hospitalization) ? $patientDetails->mhpi_hospitalization_specify : '' }}">
                             </td>
                         </tr>
                         <!-- heart disease, mumps, operation -->

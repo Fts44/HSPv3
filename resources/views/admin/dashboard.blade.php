@@ -5,6 +5,12 @@
 @endpush
 
 @section('content')
+
+<style>
+    .card {
+        border-right: #919191 solid 3px;
+    }
+</style>
 <main id="main" class="main">
 
     <div class="pagetitle mb-3">

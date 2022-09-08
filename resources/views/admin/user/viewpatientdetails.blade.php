@@ -19,13 +19,6 @@
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" style="overflow-y: visible; overflow-x: hidden; height: 70vh;">
 
                         <img src="{{ ($patient_details->profile_pic) ? asset('storage/profile_picture/'.$patient_details->profile_pic) : asset('storage/default_avatar.png') }}" alt="Patient picture" class="p-2" style="width: 200px; height: 190px; border: 1px solid;">
-
-                        <!-- <style>
-                            label.form-control {
-                                
-                            }
-                        </style> -->
-
                         <!-- patient details -->
                             <label class="form-control border-0 pt-0 px-0 mt-3 d-flex justify-content-center">
                                 <a id="view_emergency_contact" class="btn btn-sm btn-secondary" title="Emergency contact" data-bs-toggle="modal" data-bs-target="#patient_emergency_contact">
@@ -38,14 +31,14 @@
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0 mt-3">
-                                <span class="fw-bold">Account Status:</span>
+                                <span class="fw-bold">Account Status:</span><br>
                                 <a id="UpdateAccountStatus" class="badge bg-{{ ($patient_details->is_verified) ? 'success' : 'danger' }}" style="cursor: pointer;" data-toggle="tooltip" title="Change Account Status">
-                                    {{ ($patient_details->is_verified) ? 'verified' : 'not verified' }}
+                                    {{ ($patient_details->is_verified) ? 'Verified' : 'Not Verified' }}
                                 </a>
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">SR-Code:</span> 
+                                <span class="fw-bold">SR-Code:</span><br>
                                 {{ $patient_details->sr_code }}
                             </label>
 
@@ -55,12 +48,12 @@
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Gender:</span>
+                                <span class="fw-bold">Gender:</span><br>
                                 {{ ucwords($patient_details->gender) }}
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Contact:</span>
+                                <span class="fw-bold">Contact:</span><br>
                                 {{ $patient_details->contact }}
                             </label>
 
@@ -75,22 +68,22 @@
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Classification:</span> 
+                                <span class="fw-bold">Classification:</span><br>
                                 {{ ucwords($patient_details->classification) }}
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Grade:</span> 
+                                <span class="fw-bold">Grade:</span><br>
                                 {{ ($patient_details->gl_name) ? ucwords($patient_details->gl_name) : 'none' }}
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Department:</span> 
+                                <span class="fw-bold">Department:</span><br>
                                 {{ ($patient_details->dept_code) ? ucwords($patient_details->dept_code) : 'none' }}
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Program:</span> 
+                                <span class="fw-bold">Program:</span><br>
                                 {{ ($patient_details->prog_code) ? ucwords($patient_details->prog_code) : 'none' }}
                             </label>
 
@@ -100,22 +93,22 @@
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Civil Status:</span> 
+                                <span class="fw-bold">Civil Status:</span><br>
                                 {{ ucwords($patient_details->civil_status) }}
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Religion:</span> 
+                                <span class="fw-bold">Religion:</span><br>
                                 {{ ucwords($patient_details->religion) }}
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Birthdate:</span> 
+                                <span class="fw-bold">Birthdate:</span><br>
                                 {{ date_format(date_create($patient_details->birthdate),'M d, Y') }}
                             </label>
 
                             <label class="form-control border-0 pt-0 px-0">
-                                <span class="fw-bold">Age:</span>
+                                <span class="fw-bold">Age:</span><br>
                                 @php 
                                     $date = new DateTime($patient_details->birthdate);
                                     $now = new DateTime();
@@ -146,7 +139,7 @@
                             <li class="nav-item">
                                 <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#records">Records</button>
                             </li>
-
+                            
                             <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#transaction">Transaction</button>
                             </li>
@@ -165,6 +158,7 @@
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="records_dropdown" style="max-height: 50vh; overflow-y: scroll;">
                                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#student_health_records">Student Health</a></li>
+                                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#global_modal_form_shr">Student Health</a></li>
                                             <li><a class="dropdown-item" href="#">Pre-Employment</a></li>
                                         </ul>
                                     </div>
@@ -277,6 +271,7 @@
     </div>
 
     <x-student_health_record :patient_details="$patient_details"/>
+    <x-modal.form.student_health_record :patientDetails="$patient_details"/>
 </main>
 
     

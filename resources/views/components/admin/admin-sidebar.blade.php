@@ -69,7 +69,7 @@
             </a>
             <ul id="reports-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="">
+                    <a href="{{ route('AdminReportEquipment') }}">
                         <i class="bi bi-circle"></i><span>Inventory Equipment</span>
                     </a>
                 </li>  

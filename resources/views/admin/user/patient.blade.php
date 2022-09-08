@@ -61,4 +61,17 @@
 
     <!-- datatable js -->
     <script src="{{ asset('js/datatable.js') }}"></script>
+
+    <script>
+        $(document).ready(function(){
+            datatable_class('#datatable');
+
+            $('#hamburgerMenu').click(function(){
+                setTimeout(function() { 
+                    redraw_datatable_class('#datatable');
+                }, 300);
+            });
+        });
+    </script>
+   
 @endpush

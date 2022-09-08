@@ -5,7 +5,7 @@
 :root {
     scroll-behavior: smooth;
   }
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 8px;
   }
@@ -13,7 +13,7 @@
   ::-webkit-scrollbar-thumb {
     background-color: #899bbd;
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-  }
+  } */
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -227,8 +227,7 @@ input[type=number]::-webkit-outer-spin-button {
   .card {
     margin-bottom: 30px;
     border: none;
-    border-left: #919191 solid 3px;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
   }
   
@@ -862,7 +861,7 @@ input[type=number]::-webkit-outer-spin-button {
    }
    .dataTables_wrapper .dt-buttons {
     float:none;  
-    display: flex;
+    display: inline-block;
   }
 
   .dataTables_length { 

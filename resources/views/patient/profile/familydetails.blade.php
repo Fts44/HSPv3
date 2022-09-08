@@ -19,9 +19,10 @@
                     @csrf
                     <!-- Father's Name -->
                     <div class="row mb-3">
-                        
+                        <label for="" class="col-lg-12" style="font-weight: 600;">Father's Details:</label>
+
                         <label class="col-lg-3 mt-1">
-                            Father's firstname:<span class="fr">*</span>
+                            Firstname:<span class="fr">*</span>
                             <input class="form-control" type="text" name="father_firstname" id="father_firstname" value="{{ old('father_firstname',$user_details->fd_father_firstname) }}">
                             <span class="text-danger">
                                 @error('father_firstname')
@@ -31,7 +32,7 @@
                         </label>
 
                         <label class="col-lg-3 mt-1">
-                            Father's middlename:
+                            Middlename:
                             <input class="form-control" type="text" name="father_middlename" id="father_middlename" value="{{ old('father_middlename',$user_details->fd_father_middlename) }}">
                             <span class="text-danger">
                                 @error('father_middlename')
@@ -41,7 +42,7 @@
                         </label>
 
                         <label class="col-lg-3 mt-1">
-                            Father's lastname:<span class="fr">*</span>
+                            Lastname:<span class="fr">*</span>
                             <input class="form-control" type="text" name="father_lastname" id="father_lastname" value="{{ old('father_lastname',$user_details->fd_father_lastname) }}">
                             <span class="text-danger">
                                 @error('father_lastname')
@@ -51,7 +52,7 @@
                         </label>
 
                         <label class="col-lg-3 mt-1">
-                            Father's suffixname: (Sr,Jr,I,II,...)
+                            Suffixname: (Sr,Jr,I,II,...)
                             <input class="form-control" type="text" name="father_suffixname" id="father_suffixname" value="{{ old('father_suffixname',$user_details->fd_father_suffixname) }}">
                             <span class="text-danger">
                                 @error('father_suffixname')
@@ -66,7 +67,7 @@
                     <div class="row mb-3">
 
                         <label for="father_occupation" class="col-lg-3 mt-1">
-                            Father's Occupation:
+                            Occupation:<span class="fr">*</span>
                             <input class="form-control" type="text" name="father_occupation" id="father_occupation" value="{{ old('father_occupation',$user_details->fd_father_occupation) }}">
                             <span class="text-danger">
                                 @error('father_occupation')
@@ -79,9 +80,9 @@
 
                     <!-- Mothers's Name -->
                     <div class="row mb-3">
-                        
+                        <label for="" class="col-lg-12" style="font-weight: 600;">Mother's Details:</label>
                         <label class="col-lg-3 mt-1">
-                            Mothers's firstname:<span class="fr">*</span>
+                            Firstname:<span class="fr">*</span>
                             <input class="form-control" type="text" name="mother_firstname" id="mother_firstname" value="{{ old('mother_firstname',$user_details->fd_mother_firstname) }}">
                             <span class="text-danger">
                                 @error('mother_firstname')
@@ -91,7 +92,7 @@
                         </label>
 
                         <label class="col-lg-3 mt-1">
-                            Mothers's middlename:
+                            Middlename:
                             <input class="form-control" type="text" name="mother_middlename" id="mother_middlename" value="{{ old('mother_middlename',$user_details->fd_mother_middlename) }}">
                             <span class="text-danger">
                                 @error('mother_middlename')
@@ -101,7 +102,7 @@
                         </label>
 
                         <label class="col-lg-3 mt-1">
-                            Mothers's lastname:<span class="fr">*</span>
+                            Lastname:<span class="fr">*</span>
                             <input class="form-control" type="text" name="mother_lastname" id="mother_lastname" value="{{ old('mother_lastname',$user_details->fd_mother_lastname) }}">
                             <span class="text-danger">
                                 @error('mother_lastname')
@@ -111,7 +112,7 @@
                         </label>
 
                         <label class="col-lg-3 mt-1">
-                            Mothers's suffixname: (I,II,...)
+                            Suffixname: (I,II,...)
                             <input class="form-control" type="text" name="mother_suffixname" id="mother_suffixname" value="{{ old('mother_suffixname',$user_details->fd_mother_suffixname) }}">
                             <span class="text-danger">
                                 @error('mother_suffixname')
@@ -126,7 +127,7 @@
                     <div class="row mb-3">
 
                         <label for="mother_occupation" class="col-lg-3 mt-1">
-                            Mother's Occupation:
+                            Occupation:<span class="fr">*</span>
                             <input class="form-control" type="text" name="mother_occupation" id="mother_occupation" value="{{ old('mother_occupation',$user_details->fd_mother_occupation) }}">
                             <span class="text-danger">
                                 @error('mother_occupation')
@@ -135,8 +136,11 @@
                             </span>
                         </label>
 
+                    </div>
+
+                    <div class="row mb-3">
                         <label for="marital_satus" class="col-lg-3 mt-1">
-                            Parent's marital status:
+                            Parent's marital status:<span class="fr">*</span>
                             <select name="marital_satus" id="marital_satus" class="form-select">
                                 <option value="">--- choose ---</option>
                                 <option value="married" {{ (old('marital_satus',$user_details->fd_marital_status)=='married') ? 'selected' : '' }}>Married</option>
@@ -149,7 +153,6 @@
                                 @enderror
                             </span>
                         </label>
-
                     </div>
                   
                     <div class="row mb-3">

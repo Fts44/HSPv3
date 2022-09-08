@@ -149,6 +149,14 @@
         }
 
         $(document).ready(function(){
+            datatable_class('#datatable');
+
+            $('#hamburgerMenu').click(function(){
+                setTimeout(function() { 
+                    redraw_datatable_class('#datatable');
+                }, 300);
+            });
+
             $('.alert').delay(5000).fadeOut('slow');
             @if($errors->any())
                 @if(session('status'))
