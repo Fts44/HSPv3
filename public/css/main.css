@@ -44,6 +44,14 @@ input[type=number]::-webkit-outer-spin-button {
   #datatable td {
     white-space:nowrap;
   }
+
+  table a.btn-sm, table button.btn-sm {
+    font-size: 14px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
   
   h1, h2, h3, h4, h5, h6 {
    font-family: "Tahoma", sans-serif;
@@ -68,7 +76,7 @@ input[type=number]::-webkit-outer-spin-button {
   # Page Title
   --------------------------------------------------------------*/
   .pagetitle h1 {
-    font-family:'Tahoma', sans-serif;
+    font-family:'Nunito', sans-serif;
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 0;
@@ -239,13 +247,13 @@ input[type=number]::-webkit-outer-spin-button {
   }
   
   .card-title {
-   font-family: "Tahoma", sans-serif;
+    font-family: "Nunito", sans-serif;
     margin-top: 1.5rem;
     display: flex;
     justify-content: center;
-    font-size: 19px;
-    font-weight: 500;
-    color: #012970;
+    font-size: 17px;
+    font-weight: 600;
+    color: #444444;
   }
   .card-title span {
     color: #899bbd;
@@ -314,7 +322,7 @@ input[type=number]::-webkit-outer-spin-button {
   /* Breadcrumbs */
   .breadcrumb {
     font-size: 15px;
-    font-family: "Tahoma", sans-serif;
+    font-family: "Nunito", sans-serif;
     color: #899bbd;
     font-weight: 500;
     margin-bottom: 0px;
@@ -645,7 +653,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: #4154f1;
     transition: 0.3;
     background: #f6f9ff;
-    padding: 10px 15px;
+    padding: 10px 10px;
     border-radius: 4px;
   }
   .sidebar-nav .nav-link i {
@@ -857,7 +865,7 @@ input[type=number]::-webkit-outer-spin-button {
  
   .dataTables_wrapper {
    font-family: "Tahoma", sans-serif;
-   font-size: 15px;
+   font-size: 14px;
    }
    .dataTables_wrapper .dt-buttons {
     float:none;  
@@ -874,8 +882,10 @@ input[type=number]::-webkit-outer-spin-button {
   float: right;
 }
    th{
-    font-family: "Tahoma", sans-serif;
+    font-size: 14px;
+    font-family: "Nunito", sans-serif;
      font-weight: 600;
+     color: #444444;
   }
   
    .fr{

@@ -10,6 +10,9 @@
     .card {
         border-right: #919191 solid 3px;
     }
+    .card-title{
+        font-weight: 500;
+    }
 </style>
 <main id="main" class="main">
 

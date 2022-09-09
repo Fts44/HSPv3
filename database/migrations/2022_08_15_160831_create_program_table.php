@@ -19,6 +19,15 @@ class CreateProgramTable extends Migration
             $table->string('prog_name');
             $table->string('dept_id');
         });
+
+        DB::table('program')->insert([
+            [
+                'prog_id' => '1',
+                'prog_code' => 'BSIT',
+                'prog_name' =>  'BS Information Technology',
+                'dept_id' => '1'
+            ]
+        ]);
     }
 
     /**

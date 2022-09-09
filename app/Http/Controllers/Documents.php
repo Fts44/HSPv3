@@ -11,11 +11,14 @@ class Documents extends Controller
 
         $doc_details = DB::table('patient_document')->where('pd_id',$pd_id)->first();
 
-        if(str_contains($doc_details->file_name,'.pdf')){
+        if(str_contains($doc_details->pd_sys_filename,'.pdf')){
             return view('ViewPDF', compact('doc_details'));
         }
-        else{
+        else if(str_contains($doc_details->pd_sys_filename,'.jpg')){
             return view('ViewImage', compact('doc_details'));
+        }
+        else{
+            echo "Unsupported File!";
         }
     }
 }

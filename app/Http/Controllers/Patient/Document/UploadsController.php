@@ -11,10 +11,13 @@ use Illuminate\Support\Facades\Session;
 class UploadsController extends Controller
 {
     public function index(){
-        $document_type = DB::table('document_type')->get();
+        $document_type = DB::table('document_type')
+            ->where('dt_id', '>', '2')
+            ->get();
         $uploads = DB::table('patient_document as pd')
         ->leftjoin('document_type as dt', 'pd.dt_id', 'dt.dt_id')
         ->where('acc_id', Session::get('user_id'))
+        ->where('dt.dt_id', '>', '2')
         ->get();
         // echo json_encode($document_type);
         return view('patient.documents.uploads')
@@ -57,7 +60,8 @@ class UploadsController extends Controller
 
                 DB::table('patient_document')->insert([
                     'dt_id' => $request->document_type,
-                    'file_name' => $file_name,
+                    'pd_filename' => $request->file('file')->getClientOriginalName(),
+                    'pd_sys_filename' => $file_name,
                     'acc_id' => $id
                 ]);
 

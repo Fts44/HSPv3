@@ -78,6 +78,18 @@ function datatable_class(table_id){
    
 }
 
+function datatable_no_btn_class(table_class){
+    let datatableClass = $(table_class).DataTable({
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        pageLength: 10,
+        responsive: true,
+        scrollX: true,
+        processing: true
+    });
+}
+
 function redraw_datatable_class(table_class){
     let table = $(table_class).DataTable();
     table.columns.adjust().draw();

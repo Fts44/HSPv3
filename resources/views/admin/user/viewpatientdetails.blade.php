@@ -175,9 +175,9 @@
                                                 @foreach($documents as $doc)
                                                     <tr>
                                                         <td>{{ $doc->pd_id }}</td>
-                                                        <td>{{ $doc->file_name }}</td>
+                                                        <td>{{ $doc->pd_filename }}</td>
                                                         <td>Uploaded by patient</td>
-                                                        <td>{{ date_format(date_create($doc->date),'F d, y g:h a') }}</td>
+                                                        <td>{{ date_format(date_create($doc->pd_date),'F d, y g:h a') }}</td>
                                                         <td>
                                                             <a href="{{ route('ViewDocument', ['pd_id' => $doc->pd_id ]) }}" target="_blank" class="btn btn-primary btn-sm">
                                                                 <i class="bi bi-eye"></i>

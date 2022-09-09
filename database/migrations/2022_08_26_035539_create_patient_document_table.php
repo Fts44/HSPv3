@@ -15,9 +15,10 @@ class CreatePatientDocumentTable extends Migration
     {
         Schema::create('patient_document', function (Blueprint $table) {
             $table->id('pd_id');
-            $table->string('file_name');
-            $table->dateTime('date')->default(DB::raw('CURRENT_TIMESTAMP'));  
-            $table->boolean('verified')->default(0);
+            $table->string('pd_filename');
+            $table->string('pd_sys_filename');
+            $table->dateTime('pd_date')->default(DB::raw('CURRENT_TIMESTAMP'));  
+            $table->boolean('pd_verified_status')->default(0);
             $table->integer('dt_id');
             $table->integer('acc_id');
         });

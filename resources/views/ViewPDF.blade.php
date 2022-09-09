@@ -8,7 +8,7 @@
 </head>
 <body style="height: 100%; width: 100%; overflow: hidden;">
     <embed style="position:absolute; left: 0; top: 0;" width="100%" height="100%" 
-    src="{{ asset('storage/documents/'.$doc_details->dt_id.'/'.$doc_details->file_name) }}" 
+    src="{{ asset('storage/documents/'.$doc_details->dt_id.'/'.$doc_details->pd_sys_filename) }}" 
     type="application/pdf">
 </body>
 </body>

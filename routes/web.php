@@ -130,7 +130,19 @@ Route::prefix('patient')->group(function(){
     //vaccination insurance
         Route::prefix('vaccinationinsurance')->group(function(){
             Route::get('', [PatientVaccinationInsuranceController::class, 'index'])->name('PatientVaccinationInsurance');
-        });
+            Route::post('', [PatientVaccinationInsuranceController::class, 'update_vaxstatus_insurance'])->name('UpdatePatientVaccinationInsurance');
+
+            Route::prefix('dosedetails')->group(function(){
+                Route::post('insert', [PatientVaccinationInsuranceController::class, 'insert_vax_dose'])->name('InsertPatientVaccinationDoseDetails');
+                Route::post('update/{id}', [PatientVaccinationInsuranceController::class, 'update_vax_dose'])->name('UpdatePatientVaccinationDoseDetails');
+                Route::get('delete/{id}', [PatientVaccinationInsuranceController::class, 'delete_vax_dose'])->name('DeletePatientVaccinationDoseDetails');
+            });
+
+            Route::prefix('insurancedetails')->group(function(){
+                Route::post('insert', [PatientVaccinationInsuranceController::class, 'insert_insurance'])->name('InsertPatientInsuranceDetails');
+                Route::get('delete/{id}', [PatientVaccinationInsuranceController::class, 'delete_insurance'])->name('DeletePatientInsuranceDetails');
+            });
+        }); 
     //vaccination insurance
 });
 //patient routes

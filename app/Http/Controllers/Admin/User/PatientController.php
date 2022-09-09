@@ -17,10 +17,10 @@ class PatientController extends Controller
             ->leftjoin('department as dept', 'acc.dept_id', 'dept.dept_id')
             ->leftjoin('program as prog', 'acc.prog_id', 'prog.prog_id')
             ->where('position', 'patient')
-            ->where('acc.gl_id', '!=', null)
-            ->where('acc.dept_id', '!=', null)
-            ->where('acc.prog_id', '!=', null)
-            ->where('acc.fd_id', '!=', null)
+            // ->where('acc.gl_id', '!=', null)
+            // ->where('acc.dept_id', '!=', null)
+            // ->where('acc.prog_id', '!=', null)
+            // ->where('acc.fd_id', '!=', null)
             ->get();
 
         // echo json_encode($patients);

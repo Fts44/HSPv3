@@ -19,6 +19,15 @@ class CreateDepartmentTable extends Migration
             $table->string('dept_name');
             $table->integer('gl_id');
         });
+
+        DB::table('department')->insert([
+            [
+                'dept_id' => '1',
+                'dept_code' => 'CICS',
+                'dept_name' => 'College of Informatics and Computing Sciences',
+                'gl_id' => '4'
+            ],
+        ]);
     }
 
     /**

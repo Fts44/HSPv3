@@ -17,6 +17,18 @@ class CreateDocumentTypeTable extends Migration
             $table->id('dt_id');
             $table->string('dt_name');
         });
+
+        DB::table('document_type')->insert([
+            [
+                'dt_id' => '1',
+                'dt_name' => 'Covid VaxCert'
+            ],
+            [
+                'dt_id' => '2',
+                'dt_name' => 'Covid Insurance'
+            ]
+        ]);
+        
     }
 
     /**

@@ -49,6 +49,7 @@ class CreateAccountsTable extends Migration
             $table->integer('mhp_id')->nullable()->unique();
             $table->integer('mhmi_id')->nullable()->unique();
             $table->integer('ad_id')->nullable()->unique();
+            $table->integer('vs_id')->nullable()->unique();
         });
     }
 
