@@ -99,7 +99,7 @@
                                 @foreach($user_dose_details as $dose)
                                     <tr>
                                         <td>{{ $dose->vdd_dose_number }}</td>
-                                        <td>{{ $dose->vdd_date }}</td>
+                                        <td>{{ date_format(date_create($dose->vdd_date),'F d, Y') }}</td>
                                         <td>{{ $dose->vdd_brand }}</td>
                                         <td>{{ $dose->vdd_lot_number }}</td>
                                         <td>{{ $dose->mun_name.", ".$dose->prov_name }}</td>
@@ -145,7 +145,7 @@
                                         <td>{{ $num++ }}</td>
                                         <td>{{ $doc->dt_name }}</td>
                                         <td>{{ $doc->pd_filename }}</td>
-                                        <td>{{ $doc->pd_date }}</td>
+                                        <td>{{ date_format(date_create($doc->pd_date),'F d, Y') }}</td>
                                         <td>
                                             <span class="badge {{ ($doc->pd_verified_status) ? 'bg-success' : 'bg-secondary' }}">{{ ($doc->pd_verified_status) ? 'Verified' : 'Not Verified' }}</span>
                                         </td>

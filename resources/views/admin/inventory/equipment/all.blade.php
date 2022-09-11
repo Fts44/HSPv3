@@ -20,7 +20,7 @@
                 <h5 class="card-title">Equipment Summary</h5>
                 <table id="datatable" class="table table-bordered" style="width: 100%;">
                     <thead class="table-light">
-                        <th scope="col">Cat</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Description</th>
                         <th scope="col">Place</th>
                         <th scope="col">Total Quantity</th>

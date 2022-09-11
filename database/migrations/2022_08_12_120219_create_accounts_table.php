@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
 
 class CreateAccountsTable extends Migration
 {
@@ -51,6 +52,11 @@ class CreateAccountsTable extends Migration
             $table->integer('ad_id')->nullable()->unique();
             $table->integer('vs_id')->nullable()->unique();
         });
+
+        DB::table('accounts')->insert([
+            'sr_code' => 'admin',
+            'password' => Hash::make('Calma@123')
+        ]);
     }
 
     /**

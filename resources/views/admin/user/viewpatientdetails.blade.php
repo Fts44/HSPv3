@@ -287,7 +287,8 @@
     <script>
 
         $(document).ready(function(){
-            // $('#student_health_records').modal('show');
+
+            $('#global_modal_form_shr').modal('show');
             datatable_class('#table_transaction');
             datatable_class('#table_records');
             

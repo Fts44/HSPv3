@@ -20,7 +20,7 @@
                 <a href="#" class="btn btn-secondary btn-sm" style="float: right; margin-top: -2.5rem;" data-bs-toggle="modal" data-bs-target="#modal">
                     <i class="bi bi-plus-lg"></i>          
                 </a>
-                <table id="datatable" class="table table-bordered" style="width: 100%;">
+                <table id="table_uploads" class="table table-bordered" style="width: 100%;">
                     <thead class="table-light">
                         <th scope="col">ID</th>
                         <th scope="col">Document Type</th>
@@ -118,7 +118,10 @@
             @endphp
             swal('{{$status->title}}','{{$status->message}}','{{$status->icon}}');
         @endif
+        
         $(document).ready(function(){
+            datatable_no_btn_class('#table_uploads');
+
             $('#file').change(function(){
                 let MAX_FILE_SIZE = 5 * 1024 * 1024;
                 let fileSize = this.files[0].size;
