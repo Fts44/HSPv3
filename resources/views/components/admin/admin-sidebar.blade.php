@@ -12,10 +12,28 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="" id="sidebar_patient_uploads">
-                    <i class="bi bi-filetype-doc"></i>
-                    <span>Patient Uploads</span>
+                <a class="nav-link collapsed" href="#" id="sidebar_transaciton" data-bs-target="#transaction-nav" data-bs-toggle="collapse" >
+                    <i class="bi bi-clock"></i>
+                    <span>Transaction</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="transaction-nav" class="nav-content collapse" data-bs-parent="#transaction-nav">
+                    <li>
+                        <a href="{{ route('AdminTransactionToday') }}">
+                            <i class="bi bi-circle"></i><span>Today</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="bi bi-circle"></i><span>View All</span>
+                        </a>
+                    </li> 
+                    <li>
+                        <a href="">
+                            <i class="bi bi-circle"></i><span>Attendance Codes</span>
+                        </a>
+                    </li>      
+                </ul>
             </li>
 
             <li class="nav-item">

@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Patient\Profile\AssessmentDiagnosisController as PatientAssessmentDiagnosisController;
     use App\Http\Controllers\Patient\Profile\PasswordController as PatientPasswordController;
     
+    //attendance
+    use App\Http\Controllers\Patient\AttendanceController as PatientAttendanceController;
+
     // documents
     use App\Http\Controllers\Patient\Document\UploadsController as PatientUploadsController;
     use App\Http\Controllers\Patient\Document\PrescriptionsController as PatientPrescriptionsController;
@@ -33,6 +36,10 @@ use Illuminate\Support\Facades\Route;
 // patients controllers
 
 // admin controllers
+    use App\Http\Controllers\Admin\Transaction\TodayController as AdminTransactionTodayController;
+
+    use App\Http\Controllers\Admin\Transaction\AttendanceCodeController as AdminAttendanceCodeController;
+
     use App\Http\Controllers\Admin\Configuration\Inventory\EquipmentController as AdminConfigurationInventoryEquipmentController;
 
     use App\Http\Controllers\Admin\User\PatientController as AdminUserPatientController;
@@ -116,6 +123,13 @@ Route::prefix('patient')->group(function(){
         });
     // profile
 
+    //attendance
+    Route::prefix('attendance')->group(function(){
+        Route::get('', [PatientAttendanceController::class, 'index'])->name('PatientAttendance');
+        Route::post('', [PatientAttendanceController::class, 'insert'])->name('PatientAttendanceInsert');
+    });
+    //attendance
+
     // documents
         Route::prefix('uploads')->group(function(){
             Route::get('',[PatientUploadsController::class, 'index'])->name('PatientUploads');
@@ -152,6 +166,18 @@ Route::prefix('admin')->group(function(){
 
     //dashboard
     Route::get('', [AdminDashboardController::class, 'index'])->name('AdminDashboard');
+
+    // transaction
+    Route::prefix('transaction')->group(function(){
+        Route::prefix('today')->group(function(){
+            Route::get('', [AdminTransactionTodayController::class, 'index'])->name('AdminTransactionToday');
+        });
+        
+        Route::prefix('attendancecode')->group(function(){
+            Route::get('newcode/{date}', [AdminAttendanceCodeController::class, 'get_new_code'])->name('AdminGetNewAttendanceCode');
+        });
+    });
+    // transaction
 
     //users
     Route::prefix('users')->group(function(){
@@ -193,6 +219,7 @@ Route::prefix('admin')->group(function(){
         Route::get('equipment', [AdminReportEquipmentController::class, 'index'])->name('AdminReportEquipment');
     });
     // reports
+
     // configuration
     Route::prefix('configuration')->group(function(){
 

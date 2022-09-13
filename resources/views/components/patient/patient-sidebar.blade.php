@@ -27,6 +27,13 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('PatientAttendance') }}" id="sidebar_dashboard">
+                <i class="bi bi-clock"></i>
+                <span>Attendance</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link collapsed" href="#" id="sidebar_user_documents"  data-bs-target="#document-nav" data-bs-toggle="collapse" >
                 <i class="bi bi-filetype-doc"></i>
                 <span>Documents</span>

@@ -1,5 +1,5 @@
 <div class="modal fade" id="global_modal_form_shr" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal_title" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="font-size: 15px;">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" style="font-size: 15px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal_title">Student Health Record</h5>
@@ -310,7 +310,7 @@
                     </fieldset>
                     <!-- allergy -->
                     <fieldset class="border border-secondary mt-2" style="border-radius: 5px;">
-                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Allergy:</legend>
+                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Allergy</legend>
                         <div class="row px-2 pb-2">
                             <label class="col-lg-3">
                                 Food:
@@ -353,7 +353,7 @@
                     </fieldset>
                     <!-- immunization -->
                     <fieldset class="border border-secondary mt-2" style="border-radius: 5px;">
-                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Allergy:</legend>
+                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Immunization</legend>
                         <div class="row px-2 pb-2">
                             <label class="col-lg-3 mt-1">
                                 BCG:
@@ -444,7 +444,7 @@
                     </fieldset>
 
                     <fieldset class="border border-secondary mt-2" style="border-radius: 5px;">
-                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Pubertal:</legend>
+                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Pubertal</legend>
                         <div class="row px-2 pb-2">
                             <div class="col-lg-6 mt-1">
                                 Male:
@@ -485,7 +485,7 @@
                     </fieldset>    
                     
                     <fieldset class="border border-secondary mt-2" style="border-radius: 5px;">
-                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Family History:</legend>
+                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Family History</legend>
                         <div class="row px-2 pb-2">
                             <label class="col-lg-3 mt-1">
                                 Diabetes:
@@ -603,7 +603,7 @@
                     </fieldset>
 
                     <fieldset class="border border-secondary mt-2" style="border-radius: 5px;">
-                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Physical Examination:</legend>
+                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Physical Examination</legend>
                         <div class="row px-2 pb-2">
                             <label class="col-lg-3 mt-1">
                                 Weight:
@@ -659,7 +659,7 @@
                             </label>
                         </div>
                         <div class="row px-2 pb-2">
-                            <label class="col-lg-12 mt-2 text-danger" style="font-size: 14px; font-weight: 600;">If no or not normal, describe only the abnormal findings in the space below.</label>
+                            <label class="col-lg-12 mt-2 text-danger" style="font-size: 15px;">If no or not normal, describe only the abnormal findings in the space below.</label>
                             
                             <label class="col-lg-3 mt-1">
                                 General Survey:
@@ -772,7 +772,7 @@
                     </fieldset>
 
                     <fieldset class="border border-secondary mt-2" style="border-radius: 5px;">
-                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Assesment Diagnosi:</legend>
+                        <legend  class="float-none w-auto px-1" style="font-weight: 600; font-size: 15px; margin-left: 5px;">Assesment Diagnosis</legend>
                         <div class="row px-2 pb-2">
                             <label class="col-lg-4">
                                 Drinking?
