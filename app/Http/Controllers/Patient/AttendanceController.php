@@ -66,6 +66,8 @@ class AttendanceController extends Controller
                 return redirect()->back()
                 ->withErrors([
                     'code' => 'The code is invalid.',
+                ])
+                ->with([
                     'form' => 'time_in'
                 ])
                 ->withInput($request->all());
@@ -84,7 +86,8 @@ class AttendanceController extends Controller
                         ->withErrors($validator)
                         ->withInput($request->all())
                         ->with([
-                            'status' => $response
+                            'status' => $response,
+                            'form' => 'time_in'
                         ]);
                 }
                 else{
@@ -111,7 +114,8 @@ class AttendanceController extends Controller
                                     ->withErrors($validator)
                                     ->withInput($request->all())
                                     ->with([
-                                        'status' => $response
+                                        'status' => $response,
+                                        'form' => 'time_in'
                                     ]);
                             }
                             else{

@@ -229,7 +229,7 @@
             @if($errors->any())     
                 @if(session('form')=='time_in')
                     $('#time_in').modal('show');
-                @else
+                @elseif(session('form')=='time_out')
                     $('#time_out').modal('show');
                     $('#time_out_form').attr('action', "{{ route('PatientAttendanceTimeOut', ['id' => Session('trans_id')]) }}")
                 @endif
