@@ -126,7 +126,8 @@ Route::prefix('patient')->group(function(){
     //attendance
     Route::prefix('attendance')->group(function(){
         Route::get('', [PatientAttendanceController::class, 'index'])->name('PatientAttendance');
-        Route::post('', [PatientAttendanceController::class, 'insert'])->name('PatientAttendanceInsert');
+        Route::post('timein', [PatientAttendanceController::class, 'time_in'])->name('PatientAttendanceTimeIn');
+        Route::post('timeout/{id}', [PatientAttendanceController::class, 'time_out'])->name('PatientAttendanceTimeOut');
     });
     //attendance
 

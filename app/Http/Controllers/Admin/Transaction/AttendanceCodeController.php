@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 class AttendanceCodeController extends Controller
 {
     public function get_todays_code(){
+        // change the date in xampp php.ini instead of using this line of code
+        // date_default_timezone_set('Asia/Manila');
+
         $todays_code = DB::table('attendance_code')
             ->where('ac_date', date("Y-m-d"))
             ->first();

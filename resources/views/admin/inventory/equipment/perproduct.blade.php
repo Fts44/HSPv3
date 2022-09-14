@@ -176,7 +176,7 @@
     <script>
         function clear(){
             $('#item, #place, #condition').val('');
-            $('#date_added').val("{{ date('Y-m-d', strtotime('+1 day')) }}");
+            $('#date_added').val("{{ date('Y-m-d') }}");
             $('.error').html('');
         }
 
