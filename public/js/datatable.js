@@ -43,11 +43,7 @@
 function datatable_class(table_id){
     //set datatable
     let datatableClass = $(table_id).DataTable({
-        rowReorder: {
-            selector: 'td:nth-child(2)'
-        },
         pageLength: 10,
-        responsive: true,
         scrollX: true,
         processing: true,
         dom: 'lfrtipB',

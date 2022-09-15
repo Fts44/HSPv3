@@ -61,10 +61,16 @@ class PopulateSelectController extends Controller
     }
 
     public function program($dept_id){
-        $programs = DB::table('program')
-        ->orderBy('prog_code','ASC')
-        ->where('dept_id', $dept_id)->get();
-
+        if($dept_id=="all"){
+            $programs = DB::table('program')
+            ->orderBy('prog_code','ASC')
+            ->get();
+        }
+        else{
+            $programs = DB::table('program')
+            ->orderBy('prog_code','ASC')
+            ->where('dept_id', $dept_id)->get();
+        }
         return $programs;
     }
 

@@ -903,6 +903,10 @@ input[type=number]::-webkit-outer-spin-button {
     color: #444444;
    }
 
+   .form-control input[readonly] {
+    background-color: white;
+  }
+
    label{
     color: #444444;
    }

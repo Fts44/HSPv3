@@ -127,6 +127,7 @@ class AttendanceController extends Controller
                                     'trans_program' => (($user_details->prog_code) ? $user_details->prog_code : '' ),
                                     'trans_classification' => $user_details->classification,
                                     'trans_purpose' => $request->purpose,
+                                    'trans_purpose_specify' => $request->specify_purpose,
                                     'acc_id' => Session::get('user_id')
                                 ]);
     

@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 
     //populate select
     use App\Http\Controllers\PopulateSelectController as PopulateSelectController;
+
+    //Forms
+    use App\Http\Controllers\Forms\StudentHealthRecordController as StudentHealthRecordController;
 // global controllers
 
 // patients controllers
@@ -264,6 +267,11 @@ Route::prefix('admin')->group(function(){
 
     });
     // configuration
+
+    //forms
+    Route::prefix('forms')->group(function(){
+        Route::post('studenthealthrecord', [StudentHealthRecordController::class, 'insert'])->name('StudentHealthRecordInsert');
+    });
 });
 //admin routes
 

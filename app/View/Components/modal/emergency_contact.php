@@ -1,20 +1,19 @@
 <?php
 
-namespace App\View\Components\modal\form;
+namespace App\View\Components\modal;
 
 use Illuminate\View\Component;
 
-class student_health_record extends Component
+class emergency_contact extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($patientDetails, $programs)
+    public function __construct($patientDetails)
     {
         $this->patientDetails = $patientDetails;
-        $this->programs = $programs;
     }
 
     /**
@@ -24,6 +23,6 @@ class student_health_record extends Component
      */
     public function render()
     {
-        return view('components.modal.form.student_health_record');
+        return view('components.modal.emergency_contact');
     }
 }

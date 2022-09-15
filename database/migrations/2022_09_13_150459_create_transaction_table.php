@@ -24,6 +24,7 @@ class CreateTransactionTable extends Migration
             $table->string('trans_program')->nullable();
             $table->string('trans_classification')->nullable();
             $table->string('trans_purpose');
+            $table->string('trans_purpose_specify')->nullable();
             $table->string('trans_result')->nullable();
             $table->integer('acc_id');
         });

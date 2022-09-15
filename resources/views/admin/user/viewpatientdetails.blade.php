@@ -13,7 +13,7 @@
     <section class="section">
 
         <div class="row">
-
+            <!-- patient details -->
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" style="overflow-y: visible; overflow-x: hidden; height: 70vh;">
@@ -131,6 +131,7 @@
                 </div>
             </div>
 
+            <!-- patient past transac -->
             <div class="col-lg-9 px-1">
                 <div class="card">
                     <div class="card-body pt-1">
@@ -157,8 +158,7 @@
                                             <i class="bi bi-plus-lg"></i>          
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="records_dropdown" style="max-height: 50vh; overflow-y: scroll;">
-                                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#student_health_records">Student Health</a></li>
-                                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#global_modal_form_shr">Student Health</a></li>
+                                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal_form_shr">Student Health</a></li>
                                             <li><a class="dropdown-item" href="#">Pre-Employment</a></li>
                                         </ul>
                                     </div>
@@ -230,48 +230,8 @@
 
     </section>
 
-    <div class="modal fade" id="patient_emergency_contact" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal_title" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal_title">{{$patient_details->firstname."'"}}s Emergency Contact</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                
-                <div class="modal-body mb-4">
-                    
-                    <label for="" class="form-control border-0">
-                        Name: {{ $patient_details->ec_firstname." ".$patient_details->ec_middlename." ".$patient_details->ec_lastname." ".$patient_details->ec_suffixname }}
-                    </label>
-                    
-                    <label for="" class="form-control border-0">
-                        Relation to patient: {{ $patient_details->ec_relationtopatient }}
-                    </label>
-
-                    <label for="" class="form-control border-0">
-                        Bussiness Address: {{ $patient_details->ec_brgy_name.", ".$patient_details->ec_mun_name.", ".$patient_details->ec_prov_name }}
-                    </label>
-
-                    <label for="" class="form-control border-0">
-                        Contact: {{ $patient_details->ec_contact }}
-                    </label>
-
-                    <label for="" class="form-control border-0">
-                        Landline: {{ $patient_details->ec_landline }}
-                    </label>
-                </div>
-
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="submit_button">Add</button>
-                </div> -->
-
-            </div>    
-        </div>
-    </div>
-
-    <x-student_health_record :patient_details="$patient_details"/>
-    <x-modal.form.student_health_record :patientDetails="$patient_details"/>
+    @include('modal.emergency_contact')
+    @include('modal.form.student_health_record')
 </main>
 
     
@@ -288,36 +248,36 @@
 
         $(document).ready(function(){
 
-            $('#global_modal_form_shr').modal('show');
+            $('#modal_form_shr').modal('show');
             datatable_class('#table_transaction');
             datatable_class('#table_records');
             
-                $('#test').click(function(){
-                    document.title = "Student Health Record - {{$patient_details->sr_code}}";
-                    $('.student_record_body').printThis({
-                        debug: false,                       // show the iframe for debugging
-                        importCSS: true,                    // import parent page css
-                        importStyle: true,                  // import style tags
-                        printContainer: true,               // print outer container/$.selector
-                        loadCSS: "",                        // path to additional css file - use an array [] for multiple
-                        pageTitle: "Student Health Record - {{$patient_details->sr_code}}",                      // add title to print page
-                        removeInline: false,                // remove inline styles from print elements
-                        removeInlineSelector: "*",          // custom selectors to filter inline styles. removeInline must be true
-                        printDelay: 1000,                   // variable print delay
-                        header: null,                       // prefix to html
-                        footer: null,                       // postfix to html
-                        base: false,                        // preserve the BASE tag or accept a string for the URL
-                        formValues: true,                   // preserve input/form values
-                        canvas: true,                       // copy canvas content
-                        doctypeString: '<!DOCTYPE html>',   // enter a different doctype for older markup
-                        removeScripts: false,               // remove script tags from print content
-                        copyTagClasses: true,               // copy classes from the html & body tag
-                        copyTagStyles: true,                // copy styles from html & body tag (for CSS Variables)
-                        beforePrintEvent: null,             // callback function for printEvent in iframe
-                        beforePrint: null,                  // function called before iframe is filled
-                        afterPrint: null                    // function called before iframe is removed
-                    });
-                });
+                // $('#test').click(function(){
+                //     document.title = "Student Health Record - {{$patient_details->sr_code}}";
+                //     $('.student_record_body').printThis({
+                //         debug: false,                       // show the iframe for debugging
+                //         importCSS: true,                    // import parent page css
+                //         importStyle: true,                  // import style tags
+                //         printContainer: true,               // print outer container/$.selector
+                //         loadCSS: "",                        // path to additional css file - use an array [] for multiple
+                //         pageTitle: "Student Health Record - {{$patient_details->sr_code}}",                      // add title to print page
+                //         removeInline: false,                // remove inline styles from print elements
+                //         removeInlineSelector: "*",          // custom selectors to filter inline styles. removeInline must be true
+                //         printDelay: 1000,                   // variable print delay
+                //         header: null,                       // prefix to html
+                //         footer: null,                       // postfix to html
+                //         base: false,                        // preserve the BASE tag or accept a string for the URL
+                //         formValues: true,                   // preserve input/form values
+                //         canvas: true,                       // copy canvas content
+                //         doctypeString: '<!DOCTYPE html>',   // enter a different doctype for older markup
+                //         removeScripts: false,               // remove script tags from print content
+                //         copyTagClasses: true,               // copy classes from the html & body tag
+                //         copyTagStyles: true,                // copy styles from html & body tag (for CSS Variables)
+                //         beforePrintEvent: null,             // callback function for printEvent in iframe
+                //         beforePrint: null,                  // function called before iframe is filled
+                //         afterPrint: null                    // function called before iframe is removed
+                //     });
+                // });
             //table redraw
                 $('.nav-tabs').click(function(){
                     setTimeout(function() { 

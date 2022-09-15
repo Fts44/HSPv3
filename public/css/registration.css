@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Tahoma', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: #001a1a;
 }
 
@@ -50,14 +50,17 @@ section.side {
     display: flex;
 }
 
+
+.registration-container [type=password]{
+    font-family: 'Tahoma', 'sans-serif';
+}
+
 .title {
     font-size: 1.5rem;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 600;
+    font-weight: bold;
     text-align: center;
     letter-spacing: 1px;
 }
-
 
 .separator {
     width: 150px;

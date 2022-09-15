@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\PopulateSelectController as PopulateSelect;
 
 class PatientController extends Controller
 {
+
     public function index(){
 
         $patients = DB::table('accounts as acc')
@@ -91,11 +93,16 @@ class PatientController extends Controller
                 ->leftjoin('document_type as dt', 'pd.dt_id', 'dt.dt_id')
                 ->where('acc_id', $id)
                 ->get();
+
+            $populate = new PopulateSelect;
+            $provinces = $populate->province();
+            $programs = $populate->program("all");
         // echo json_encode($patient_details);
 
         return view('admin.user.viewpatientdetails')->with([
             'patient_details' => $patient_details,
-            'documents' => $documents
+            'documents' => $documents,
+            'programs' => $programs
         ]);
     }
 
