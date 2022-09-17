@@ -4,15 +4,158 @@ namespace App\Http\Controllers\Forms;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class StudentHealthRecordController extends Controller
 {
     public function insert(Request $request){
 
-        return redirect()->back()
-                ->withErrors([
-                    'shr_srcode' => 'test'
-                ])
+        $rules = [
+            'shr_med' => ['required'],
+            'shr_srcode' => ['required'],
+            'shr_program' => ['required'],
+            'shr_profile_pic' => ['nullable'],
+            'shr_firstname' => ['required'],
+            'shr_middlename' => ['required'],
+            'shr_lastname' => ['required'],
+            'shr_suffixname' => ['nullable'],
+            'shr_home_address' => ['required'],
+            'shr_dorm_address' => ['nullable'],
+            'shr_gender' => ['required'],
+            'shr_age' => ['required'],
+            'shr_civil_status' => ['required'],
+            'shr_religion' => ['required'],
+            'shr_contact' => ['required'],
+            'shr_date_of_birth' => ['required'],
+            'shr_place_of_birth' => ['required'],
+            'shr_emergency_firstname' => ['required'],
+            'shr_emergency_middlename' => ['nullable'],
+            'shr_emergency_lastname' => ['required'],
+            'shr_emergency_suffixname' => ['nullable'],
+            'shr_emergenccy_business_address' => ['required'],
+            'shr_emergency_relation_to_patient' => ['required'],
+            'shr_emergency_landline' => ['nullable'],
+            'shr_emergency_contact' => ['required'],
+            'shr_past_illness_asthma' => ['required'],
+            'shr_past_illness_asthma_last_attack' => ['required_if:shr_past_illness_asthma,"==",1'],
+            'shr_past_illness_heart_disease' => [],
+            'shr_past_illness_hypertension' => [],
+            'shr_past_illness_epilepsy' => [],
+            'shr_past_illness_diabetes' => [],
+            'shr_past_illness_thyroid_problem' => [],
+            'shr_past_illness_measles' => [],
+            'shr_past_illness_mumps' => [],
+            'shr_past_illness_varicella' => [],
+            'shr_past_illness_hospitalization' => [],
+            'shr_past_illness_hospitalization_specify' => [],
+            'shr_past_illness_operation' => [],
+            'shr_past_illness_operation_specify' => [],
+            'shr_past_illness_accident' => [],
+            'shr_past_illness_accident_specify' => [],
+            'shr_past_illness_disability' => [],
+            'shr_past_illness_disability_specify' => [],
+            'shr_allergy_food' => [],
+            'shr_allergy_food_specify' => [],
+            'shr_allergy_medicine' => [],
+            'shr_allergy_medicine_specify' => [],
+            'shr_allergy_others' => [],
+            'shr_allergy_others_specify' => [],
+            'shr_immunization_bcg' => [],
+            'shr_immunization_mmr' => [],
+            'shr_immunization_hepa_a' => [],
+            'shr_immunization_typhoid' => [],
+            'shr_immunization_varicella' => [],
+            'shr_immunization_hepa_b' => [],
+            'shr_immunization_hepa_b_doses' => [],
+            'shr_immunization_dpt' => [],
+            'shr_immunization_dpt_doses' => [],
+            'shr_immunization_opv' => [],
+            'shr_immunization_opv_doses' => [],
+            'shr_immunization_hib' => [],
+            'shr_immunization_hib_doses' => [],
+            'shr_female_menarche' => [],
+            'shr_female_lmp' => [],
+            'shr_gender_dysmenorhea' => [],
+            'shr_gender_dysmenorhea_medicine' => [],
+            'shr_family_history_diabetes' => [],
+            'shr_family_history_heart_disease' => [],
+            'shr_family_history_mental_illness' => [],
+            'shr_family_history_cancer' => [],
+            'shr_family_history_hypertension' => [],
+            'shr_family_history_kidney_disease' => [],
+            'shr_family_history_epilepsy' => [],
+            'shr_family_history_others' => [],
+            'shr_fathers_firstname' => [],
+            'shr_fathers_middlename' => [],
+            'shr_fathers_lastname' => [],
+            'shr_fathers_suffixname' => [],
+            'shr_fathers_occupation' => [],
+            'shr_mothers_firstname' => [],
+            'shr_mothers_middlename' => [],
+            'shr_mothers_lastname' => [],
+            'shr_mothers_suffixname' => [],
+            'shr_mothers_occupation' => [],
+            'shr_marital_status' => [],
+            'shr_weight' => [],
+            'shr_height' => [],
+            'shr_bmi' => [],
+            'shr_temperature' => [],
+            'shr_hr' => [],
+            'shr_bp' => [],
+            'shr_vision' => [],
+            'shr_hearing' => [],
+            'shr_blood_type' => [],
+            'shr_chest_xray_result' => [],
+            'shr_chest_xray_result_date' => [],
+            'shr_general_survey' => [],
+            'shr_general_survey_findings' => [],
+            'shr_skin' => [],
+            'shr_skin_findings' => [],
+            'shr_eye_ears_nose' => [],
+            'shr_eye_ears_nose_findings' => [],
+            'shr_teeth_gums' => [],
+            'shr_teeth_gums_findings' => [],
+            'shr_neck' => [],
+            'shr_neck_findings' => [],
+            'shr_heart' => [],
+            'shr_heart_findings' => [],
+            'shr_chest_lungs' => [],
+            'shr_abdomen' => [],
+            'shr_abdomen_findings' => [],
+            'shr_musculoskeletal' => [],
+            'shr_musculoskeletal_findings' => [],
+            'shr_assessment_diagnosis_drinking' => [],
+            'shr_assessment_diagnosis_drinking_how_much' => [],
+            'shr_assessment_diagnosis_how_often' => [],
+            'shr_assessment_diagnosis_smoking' => [],
+            'shr_assessment_diagnosis_smoking_sticks_per_day' => [],
+            'shr_assessment_diagnosis_smoking_since_when' => [],
+            'shr_assessment_diagnosis_drug_use' => [],
+            'shr_assessment_diagnosis_drug_kind' => [],
+            'shr_assessment_diagnosis_regular_use' => [],
+            'shr_assessment_driving' => [],
+            'shr_assessment_driving_specify' => [],
+            'shr_assessment_driving_with_license' => [],
+            'shr_assessment_diagnosis_abuse' => [],
+            'shr_assessment_diagnosis_abuse_specify' => [],
+        ];
+    
+        $validator = validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $response = [
+                'title' => 'Error!',
+                'message' => 'Student Health Record not added.',
+                'icon' => 'error',
+                'status' => 400,
+                'action' => 'Add'
+            ];    
+            return redirect()->back()
+                ->with('status', $response)
+                ->withErrors($validator)
                 ->withInput($request->all());
+        }
     }
 }

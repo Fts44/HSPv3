@@ -38,7 +38,7 @@ class PatientController extends Controller
             ->select(
                 'acc.*', 'gl.*', 'dept.*', 'prog.*', 
 
-                'ec.*', 'mhpi.*', 'mha.*', 'mhmi.*', 'mhp.*',
+                'ec.*', 'mhpi.*', 'mha.*', 'mhmi.*', 'mhp.*', 'ad.*',
                 'fd.*', 'fih.*',
                 'ecadd.prov_code as ec_prov_code', 'ecadd.mun_code as ec_mun_code', 'ecadd.brgy_code as ec_brgy_code',
                 'ecadd_rp.prov_name as ec_prov_name', 'ecadd_rm.mun_name as ec_mun_name', 'ecadd_rb.brgy_name as ec_brgy_name',
@@ -85,6 +85,8 @@ class PatientController extends Controller
             ->leftjoin('province as dadd_rp', 'dadd.prov_code', 'dadd_rp.prov_code')
             ->leftjoin('municipality as dadd_rm', 'dadd.mun_code', 'dadd_rm.mun_code')
             ->leftjoin('barangay as dadd_rb', 'dadd.brgy_code', 'dadd_rb.brgy_code')
+
+            ->leftjoin('assessment_diagnosis as ad', 'acc.ad_id', 'ad.ad_id')
 
             ->where('acc_id', $id)
             ->first();
